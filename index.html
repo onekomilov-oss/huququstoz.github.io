@@ -1,24 +1,213 @@
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="logo-wrap">
-      <img src="images/huquq.jpg" alt="Huquq Ustoz logo" class="logo-img">
-      <span class="logo-text">Huquq Ustoz</span>
-    </div>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huquq Ustoz</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <div class="social-links">
-      <a href="https://instagram.com/huququstoz" target="_blank" class="social-icon" aria-label="Instagram">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="2" y="2" width="20" height="20" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="https://t.me/huququstoz" target="_blank" class="social-icon" aria-label="Telegram">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 2 11 13"/>
-          <path d="M22 2 15 22l-4-9-9-4Z"/>
-        </svg>
-      </a>
+  body {
+    background: #0a0a0f;
+    color: #f5f5f7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+    padding: 18px 0;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #a78bfa, #6366f1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 14px;
+  }
+
+  .social-icon {
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    transition: all 0.25s ease;
+  }
+
+  .social-icon:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-color: transparent;
+    transform: translateY(-2px);
+  }
+
+  /* HERO / ABOUT */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+  }
+
+  .hero-label {
+    color: #a78bfa;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero p {
+    color: #9ca3af;
+    font-size: 1.1rem;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CTA */
+  .cta-row {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: #f5f5f7;
+  }
+
+  .btn-outline:hover {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.08);
+  }
+
+  /* FOOTER */
+  .site-footer {
+    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    padding: 28px 0;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo-text">Huquq Ustoz</div>
+      <div class="social-links">
+        <a href="https://instagram.com/huququstoz" target="_blank" class="social-icon" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://t.me/huququstoz" target="_blank" class="social-icon" aria-label="Telegram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2 11 13"/>
+            <path d="M22 2 15 22l-4-9-9-4Z"/>
+          </svg>
+        </a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-label">Men haqimda</div>
+      <h1>Zokirjon — xalqaro huquq yoʻnalishida taʼlim oluvchi huquqshunos</h1>
+      <p>
+        Xalqaro huquq boʻyicha taʼlim olayotgan boʻlib, huquqiy savodxonlikni oshirish,
+        fuqarolarning huquq va majburiyatlari, xalqaro shartnomalar hamda Oʻzbekiston
+        qonunchiligidagi dolzarb mavzular haqida sodda va tushunarli tarzda maʼlumot ulashaman.
+        Maqsadim — murakkab huquqiy tushunchalarni har bir kishi uchun oson va foydali qilib yetkazish.
+      </p>
+      <div class="cta-row">
+        <a href="https://t.me/huququstoz" target="_blank" class="btn btn-primary">Telegram kanalga qoʻshiling</a>
+        <a href="https://instagram.com/huququstoz" target="_blank" class="btn btn-outline">Instagram sahifasi</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    © 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
+  </footer>
+
+</body>
+</html>
