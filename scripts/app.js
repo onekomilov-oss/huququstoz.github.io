@@ -87,7 +87,7 @@ function initQuiz() {
     
     const q = currentQuestions[currentQIndex];
     
-    // Variantli va Ha/Yo'q savollari uchun tekshirish
+    // Variantli va Ha/Yo'q savollarini xavfsiz taqqoslash
     if (q.turi === 'variant') {
       if (parseInt(selectedOption) === parseInt(q.tugri)) userScore++;
     } else if (q.turi === 'boolean') {
@@ -149,16 +149,6 @@ function initAdmin() {
   renderAdminCategories();
   initBioForm();
 
-  document.getElementById('q-type-select')?.addEventListener('change', (e) => {
-    if (e.target.value === 'variant') {
-      document.getElementById('variant-inputs').style.display = 'block';
-      document.getElementById('boolean-inputs').style.display = 'none';
-    } else {
-      document.getElementById('variant-inputs').style.display = 'none';
-      document.getElementById('boolean-inputs').style.display = 'block';
-    }
-  });
-
   // Toifa Qo'shish
   document.getElementById('add-cat-btn')?.addEventListener('click', () => {
     const input = document.getElementById('cat-name-input');
@@ -171,7 +161,7 @@ function initAdmin() {
     renderAdminCategories();
   });
 
-  // Savol Qo'shish (Tugmachalardan qiymat olish)
+  // Savol Qo'shish
   document.getElementById('add-q-btn')?.addEventListener('click', () => {
     const cat = document.getElementById('admin-cat-select').value;
     const qText = document.getElementById('q-text-input').value.trim();
@@ -192,23 +182,33 @@ function initAdmin() {
       newQ.variantlar = vars;
       newQ.tugri = correctIdx;
     } else {
-      // Radio tugmadan 'true' yoki 'false' ni tanlab olish
       const selectedBoolRadio = document.querySelector('input[name="boolAnsRadio"]:checked');
       newQ.tugri = selectedBoolRadio ? (selectedBoolRadio.value === 'true') : true;
     }
 
     quizData[cat].push(newQ);
     
-    // Formalarni tozalash va reset qilish
+    // Formalarni tozalash va standart holatga keltirish
     document.getElementById('q-text-input').value = '';
     document.querySelectorAll('.v-inp').forEach(i => i.value = '');
     
-    // Radio tugmalarni boshlang'ich holatga qaytarish
+    // Variantlar uchun A-ni tanlangan holatga qaytarish
     const defaultRadio = document.querySelector('input[name="correctVariant"][value="0"]');
-    if (defaultRadio) defaultRadio.checked = true;
+    if (defaultRadio) {
+      defaultRadio.checked = true;
+      if (typeof window.markCorrect === 'function') {
+        window.markCorrect(0);
+      }
+    }
 
+    // Ha/Yo'q uchun "Ha"ni tanlangan holatga qaytarish
     const defaultBoolRadio = document.querySelector('input[name="boolAnsRadio"][value="true"]');
-    if (defaultBoolRadio) defaultBoolRadio.checked = true;
+    if (defaultBoolRadio) {
+      defaultBoolRadio.checked = true;
+      if (typeof window.markCorrectBool === 'function') {
+        window.markCorrectBool(true);
+      }
+    }
 
     renderAdminCategories();
     alert('Savol muvaffaqiyatli qo\'shildi!');
@@ -245,9 +245,17 @@ function renderAdminCategories() {
     quizData[cat].forEach((q, idx) => {
       const item = document.createElement('div');
       item.className = 'q-item';
+      item.style.display = 'flex';
+      item.style.justifyContent = 'space-between';
+      item.style.alignItems = 'center';
+      item.style.background = '#1f2937';
+      item.style.padding = '8px 12px';
+      item.style.marginBottom = '6px';
+      item.style.borderRadius = '6px';
+      
       item.innerHTML = `
-        <span>${idx + 1}. ${q.savol} (${q.turi === 'boolean' ? 'Ha/Yo\'q' : 'Variantli'})</span>
-        <button class="btn btn-danger" onclick="deleteQ('${cat}', ${idx})">O'chirish</button>
+        <span style="font-size:14px; color:#e2e8f0;">${idx + 1}. ${q.savol} (${q.turi === 'boolean' ? 'Ha/Yo\'q' : 'Variantli'})</span>
+        <button class="btn btn-danger" style="background:#ef4444; padding:4px 10px; font-size:12px;" onclick="deleteQ('${cat}', ${idx})">O'chirish</button>
       `;
       box.appendChild(item);
     });
