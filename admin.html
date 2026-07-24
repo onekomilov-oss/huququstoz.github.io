@@ -1,94 +1,121 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Huquq Ustoz | Admin Panel</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Stylesheet yo'llari to'g'rilandi -->
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/admin.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Huquq Ustoz</title>
+<link rel="icon" type="image/jpeg" href="huquq.jpg">
+<style>
+*{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; }
+body{ background:#0f172a; color:white; min-height:100vh; display:flex; flex-direction:column; }
+header{ position:sticky; top:0; background:#111827; padding:15px 0; border-bottom:1px solid #333; z-index:10; }
+.container{ width:90%; max-width:1100px; margin:auto; }
+.nav{ display:flex; justify-content:space-between; align-items:center; }
+.logo{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+.logo img{ width:55px; height:55px; border-radius:50%; object-fit:cover; }
+.logo h2{ color:#a855f7; font-size:24px; }
+.logout-btn{ background:#ef4444; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:bold; }
+
+main{ flex:1; padding:40px 0; }
+.admin-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.card{ background:#111827; border:1px solid #333; border-radius:12px; padding:25px; margin-bottom:20px; }
+.card h2{ color:#a855f7; margin-bottom:15px; font-size:20px; border-bottom:1px solid #333; padding-bottom:10px; }
+
+.form-group{ margin-bottom:15px; }
+.form-group label{ display:block; margin-bottom:5px; color:#cbd5e1; font-size:14px; }
+input, select{ width:100%; padding:10px; background:#1f2937; border:1px solid #444; color:white; border-radius:8px; outline:none; }
+input:focus, select:focus{ border-color:#a855f7; }
+
+.btn{ padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer; border:none; color:white; transition:.3s; }
+.btn-primary{ background:#7c3aed; }
+.btn-primary:hover{ background:#6d28d9; }
+.btn-danger{ background:#ef4444; padding:5px 10px; font-size:12px; }
+
+.q-item{ background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+
+footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9ca3af; margin-top:auto; }
+
+@media(max-width:768px){
+  .admin-grid{ grid-template-columns:1fr; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="logo" href="index.html">
-        <img src="huquq.jpg" alt="Huquq Ustoz Logo">
-        <h2>Huquq Ustoz</h2>
-      </a>
-      <div class="social">
-        <a href="index.html">Bosh sahifa</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="admin.html" class="active">Admin Panel</a>
-      </div>
-    </div>
-  </header>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">
+      <img src="huquq.jpg" alt="Huquq Ustoz Logo">
+      <h2>Huquq Ustoz Admin</h2>
+    </a>
+    <button class="logout-btn" id="logout-btn">Chiqish</button>
+  </div>
+</header>
 
-  <main class="admin-container">
-    <h1>Admin Panel</h1>
-
-    <div class="admin-section">
-      <h2>Yangi Toifa Qo'shish</h2>
-      <div class="form-group">
-        <input type="text" id="new-category-name" placeholder="Toifa nomini kiriting">
-        <button class="btn btn-primary" onclick="addNewCategory()">Toifa Qo'shish</button>
-      </div>
-    </div>
-
-    <div class="admin-section">
-      <h2>Yangi Savol Qo'shish</h2>
-      <div class="form-group">
-        <select id="category-select">
-          <option value="" disabled selected>Toifa tanlang</option>
-        </select>
-        <input type="text" id="new-question-text" placeholder="Savol matnini kiriting">
-        <select id="question-type">
-          <option value="variant">Variantli savol</option>
-          <option value="boolean">Ha/Yoq savol</option>
-        </select>
-        <div id="variants-container">
-          <input type="text" class="variant-input" placeholder="Variant A">
-          <input type="text" class="variant-input" placeholder="Variant B">
-          <input type="text" class="variant-input" placeholder="Variant C">
-          <input type="text" class="variant-input" placeholder="Variant D">
+<main class="container">
+  <div class="admin-grid">
+    <div>
+      <div class="card">
+        <h2>Yangi Toifa Qo'shish</h2>
+        <div class="form-group">
+          <input type="text" id="cat-name-input" placeholder="Masalan: 10-Sinf Huquq">
         </div>
-        <div id="boolean-container" style="display: none;">
-          <p>To'g'ri javob: <select id="boolean-answer">
-            <option value="true">Ha</option>
-            <option value="false">Yo'q</option>
-          </select></p>
+        <button class="btn btn-primary" id="add-cat-btn">Toifa Qo'shish</button>
+      </div>
+
+      <div class="card">
+        <h2>Yangi Savol Qo'shish</h2>
+        <div class="form-group">
+          <label>Toifani tanlang:</label>
+          <select id="admin-cat-select"><option value="">Tanlang...</option></select>
         </div>
-        <div id="variant-answer-container">
-          <select id="variant-answer">
-            <option value="0">Variant A</option>
-            <option value="1">Variant B</option>
-            <option value="2">Variant C</option>
-            <option value="3">Variant D</option>
+        <div class="form-group">
+          <label>Savol matni:</label>
+          <input type="text" id="q-text-input" placeholder="Savolni kiriting...">
+        </div>
+        <div class="form-group">
+          <label>Savol turi:</label>
+          <select id="q-type-select">
+            <option value="variant">4 ta Variantli</option>
+            <option value="boolean">Ha / Yo'q (Rost/Yolg'on)</option>
           </select>
         </div>
-        <button class="btn btn-primary" onclick="addNewQuestion()">Savol Qo'shish</button>
+
+        <div id="variant-inputs">
+          <div class="form-group"><input type="text" class="v-inp" placeholder="A Variant (To'g'ri javob)"></div>
+          <div class="form-group"><input type="text" class="v-inp" placeholder="B Variant"></div>
+          <div class="form-group"><input type="text" class="v-inp" placeholder="C Variant"></div>
+          <div class="form-group"><input type="text" class="v-inp" placeholder="D Variant"></div>
+        </div>
+
+        <div id="boolean-inputs" style="display:none;">
+          <div class="form-group">
+            <label>To'g'ri Javob:</label>
+            <select id="bool-ans"><option value="true">Ha (To'g'ri)</option><option value="false">Yo'q (Noto'g'ri)</option></select>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="add-q-btn">Savol Qo'shish</button>
       </div>
     </div>
 
-    <div class="admin-section">
-      <h2>Toifalar va Savollar</h2>
-      <div id="categories-list"></div>
+    <div>
+      <div class="card">
+        <h2>Mavjud Savollar va Toifalar</h2>
+        <div id="categories-list"></div>
+        <button class="btn btn-primary" id="download-json-btn" style="width:100%; margin-top:15px; background:#10b981;">
+          💾 Yangi JSON faylni yuklab olish
+        </button>
+      </div>
     </div>
+  </div>
+</main>
 
-    <div class="admin-section">
-      <h2>Ma'lumotlarni Saqlash</h2>
-      <button class="btn btn-primary" onclick="saveData()">Ma'lumotlarni Saqlash</button>
-      <button class="btn btn-secondary" onclick="loadData()">Ma'lumotlarni Yangilash</button>
-    </div>
-  </main>
+<footer>
+  <div class="container" style="text-align:center;">
+    <p>© 2026 Huquq Ustoz. Admin Boshqaruv Tizimi.</p>
+  </div>
+</footer>
 
-  <footer>
-    &copy; 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
-  </footer>
-
-  <!-- Script yo'li to'g'rilandi -->
-  <script src="scripts/admin.js"></script>
+<script src="scripts/app.js"></script>
 </body>
 </html>
