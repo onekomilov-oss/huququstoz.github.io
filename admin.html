@@ -14,22 +14,34 @@ header{ position:sticky; top:0; background:#111827; padding:15px 0; border-botto
 .logo{ display:flex; align-items:center; gap:12px; text-decoration:none; }
 .logo img{ width:55px; height:55px; border-radius:50%; object-fit:cover; }
 .logo h2{ color:#a855f7; font-size:24px; }
-.logout-btn{ background:#ef4444; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:bold; }
+.logout-btn{ background:#ef4444; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:bold; transition:.3s; }
+.logout-btn:hover{ background:#dc2626; }
 
-main{ flex:1; padding:40px 0; }
+main{ flex:1; padding:30px 0; }
+.tab-buttons{ display:flex; gap:10px; margin-bottom:25px; flex-wrap:wrap; }
+.tab-btn{ background:#1f2937; color:white; border:1px solid #444; padding:12px 20px; border-radius:8px; cursor:pointer; font-weight:bold; transition:.3s; }
+.tab-btn.active, .tab-btn:hover{ background:#7c3aed; border-color:#7c3aed; }
+
+.tab-content{ display:none; }
+.tab-content.active{ display:block; }
+
 .admin-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .card{ background:#111827; border:1px solid #333; border-radius:12px; padding:25px; margin-bottom:20px; }
 .card h2{ color:#a855f7; margin-bottom:15px; font-size:20px; border-bottom:1px solid #333; padding-bottom:10px; }
 
 .form-group{ margin-bottom:15px; }
 .form-group label{ display:block; margin-bottom:5px; color:#cbd5e1; font-size:14px; }
-input, select{ width:100%; padding:10px; background:#1f2937; border:1px solid #444; color:white; border-radius:8px; outline:none; }
-input:focus, select:focus{ border-color:#a855f7; }
+input, select, textarea{ width:100%; padding:10px; background:#1f2937; border:1px solid #444; color:white; border-radius:8px; outline:none; font-size:14px; }
+textarea{ resize:vertical; min-height:80px; }
+input:focus, select:focus, textarea:focus{ border-color:#a855f7; }
 
 .btn{ padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer; border:none; color:white; transition:.3s; }
 .btn-primary{ background:#7c3aed; }
 .btn-primary:hover{ background:#6d28d9; }
+.btn-success{ background:#10b981; }
+.btn-success:hover{ background:#059669; }
 .btn-danger{ background:#ef4444; padding:5px 10px; font-size:12px; }
+.btn-danger:hover{ background:#dc2626; }
 
 .q-item{ background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
 
@@ -52,60 +64,108 @@ footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9c
 </header>
 
 <main class="container">
-  <div class="admin-grid">
-    <div>
-      <div class="card">
-        <h2>Yangi Toifa Qo'shish</h2>
-        <div class="form-group">
-          <input type="text" id="cat-name-input" placeholder="Masalan: 10-Sinf Huquq">
+  <!-- TAB TUGLAMALARI -->
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Testlarni Boshqarish</button>
+    <button class="tab-btn" onclick="switchTab('bio-tab', this)">👤 Bio / Sayt Matnlarini O'zgartirish</button>
+  </div>
+
+  <!-- 1-TAB: TESTLARNI BOSHQARISH -->
+  <div id="quiz-tab" class="tab-content active">
+    <div class="admin-grid">
+      <div>
+        <div class="card">
+          <h2>1. Yangi Toifa Qo'shish</h2>
+          <div class="form-group">
+            <input type="text" id="cat-name-input" placeholder="Masalan: 10-Sinf Huquq">
+          </div>
+          <button class="btn btn-primary" id="add-cat-btn">Toifa Qo'shish</button>
         </div>
-        <button class="btn btn-primary" id="add-cat-btn">Toifa Qo'shish</button>
+
+        <div class="card">
+          <h2>2. Yangi Savol Qo'shish</h2>
+          <div class="form-group">
+            <label>Toifani tanlang:</label>
+            <select id="admin-cat-select"><option value="">Tanlang...</option></select>
+          </div>
+          <div class="form-group">
+            <label>Savol matni:</label>
+            <input type="text" id="q-text-input" placeholder="Savolni kiriting...">
+          </div>
+          <div class="form-group">
+            <label>Savol turi:</label>
+            <select id="q-type-select">
+              <option value="variant">4 ta Variantli</option>
+              <option value="boolean">Ha / Yo'q (Rost/Yolg'on)</option>
+            </select>
+          </div>
+
+          <div id="variant-inputs">
+            <div class="form-group"><input type="text" class="v-inp" placeholder="A Variant (To'g'ri javob)"></div>
+            <div class="form-group"><input type="text" class="v-inp" placeholder="B Variant"></div>
+            <div class="form-group"><input type="text" class="v-inp" placeholder="C Variant"></div>
+            <div class="form-group"><input type="text" class="v-inp" placeholder="D Variant"></div>
+          </div>
+
+          <div id="boolean-inputs" style="display:none;">
+            <div class="form-group">
+              <label>To'g'ri Javob:</label>
+              <select id="bool-ans"><option value="true">Ha (To'g'ri)</option><option value="false">Yo'q (Noto'g'ri)</option></select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="add-q-btn">Savol Qo'shish</button>
+        </div>
       </div>
 
-      <div class="card">
-        <h2>Yangi Savol Qo'shish</h2>
-        <div class="form-group">
-          <label>Toifani tanlang:</label>
-          <select id="admin-cat-select"><option value="">Tanlang...</option></select>
+      <div>
+        <div class="card">
+          <h2>3. Savollar va Toifalar Ro'yxati</h2>
+          <div id="categories-list"></div>
+          <button class="btn btn-success" id="download-json-btn" style="width:100%; margin-top:15px;">
+            💾 Yangilangan "savollar.json" Faylini Yuklab Olish
+          </button>
         </div>
-        <div class="form-group">
-          <label>Savol matni:</label>
-          <input type="text" id="q-text-input" placeholder="Savolni kiriting...">
-        </div>
-        <div class="form-group">
-          <label>Savol turi:</label>
-          <select id="q-type-select">
-            <option value="variant">4 ta Variantli</option>
-            <option value="boolean">Ha / Yo'q (Rost/Yolg'on)</option>
-          </select>
-        </div>
-
-        <div id="variant-inputs">
-          <div class="form-group"><input type="text" class="v-inp" placeholder="A Variant (To'g'ri javob)"></div>
-          <div class="form-group"><input type="text" class="v-inp" placeholder="B Variant"></div>
-          <div class="form-group"><input type="text" class="v-inp" placeholder="C Variant"></div>
-          <div class="form-group"><input type="text" class="v-inp" placeholder="D Variant"></div>
-        </div>
-
-        <div id="boolean-inputs" style="display:none;">
-          <div class="form-group">
-            <label>To'g'ri Javob:</label>
-            <select id="bool-ans"><option value="true">Ha (To'g'ri)</option><option value="false">Yo'q (Noto'g'ri)</option></select>
-          </div>
-        </div>
-
-        <button class="btn btn-primary" id="add-q-btn">Savol Qo'shish</button>
       </div>
     </div>
+  </div>
 
-    <div>
-      <div class="card">
-        <h2>Mavjud Savollar va Toifalar</h2>
-        <div id="categories-list"></div>
-        <button class="btn btn-primary" id="download-json-btn" style="width:100%; margin-top:15px; background:#10b981;">
-          💾 Yangi JSON faylni yuklab olish
-        </button>
+  <!-- 2-TAB: BIO WA MATNLARNI O'ZGARTIRISH -->
+  <div id="bio-tab" class="tab-content">
+    <div class="card" style="max-width:700px; margin:auto;">
+      <h2>Bosh Sahifa Ma'lumotlarini Tahrirlash</h2>
+      
+      <div class="form-group">
+        <label>Sarlavha (Hero Header):</label>
+        <input type="text" id="hero-title-input" placeholder="Huquqiy bilim sari birgalikda">
       </div>
+
+      <div class="form-group">
+        <label>Asosiy Kirish Matni (Hero Text):</label>
+        <textarea id="hero-desc-input" rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>"Men haqimda" Sarlavhasi:</label>
+        <input type="text" id="about-title-input" placeholder="Men haqimda">
+      </div>
+
+      <div class="form-group">
+        <label>"Men haqimda" Matni:</label>
+        <textarea id="about-desc-input" rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Telegram Kanal Havolasi:</label>
+        <input type="text" id="tg-link-input" placeholder="https://t.me/huququstoz">
+      </div>
+
+      <div class="form-group">
+        <label>Instagram Sahifa Havolasi:</label>
+        <input type="text" id="insta-link-input" placeholder="https://instagram.com/huququstoz">
+      </div>
+
+      <button class="btn btn-primary" id="save-bio-btn" style="width:100%;">Saqlash (Brauzer xotirasiga)</button>
     </div>
   </div>
 </main>
