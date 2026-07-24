@@ -3,25 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huquqiy Quiz | Huquq Ustoz</title>
+<title>Huquqiy Quiz | Interaktiv Sinov</title>
 
 <meta name="description" content="Huquqshunoslik bo'yicha bilimlaringizni sinab ko'ring.">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
 
-<!-- FontAwesome Ikonkalar Kutubxonasi -->
+<!-- FontAwesome Icons & Animate.css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<!-- Canvas Confetti JS -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-/* ZAMONAVIY GLASSMORPHISM DIZAYN */
 :root {
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.08);
-  --primary-purple: #8b5cf6;
-  --accent-cyan: #06b6d4;
-  --success-green: #10b981;
-  --error-red: #ef4444;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #2e1065 0%, #0f172a 70%, #020617 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-glow: rgba(139, 92, 246, 0.25);
+  --primary-glow: #a855f7;
+  --accent-cyan: #22d3ee;
+  --success-color: #10b981;
+  --error-color: #f43f5e;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
 }
@@ -30,7 +32,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
 }
 
 body {
@@ -39,23 +41,24 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
-/* NAVIGATION HEADER */
+/* HEADER */
 header {
   position: sticky;
   top: 0;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
-  padding: 16px 0;
+  padding: 14px 0;
   z-index: 1000;
 }
 
 .container {
-  width: 90%;
-  max-width: 1150px;
+  width: 92%;
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -68,251 +71,369 @@ header {
 .logo {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-decoration: none;
 }
 
 .logo img {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--primary-purple);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  border: 2px solid var(--primary-glow);
+  box-shadow: 0 0 15px var(--glass-glow);
 }
 
 .logo h2 {
-  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
+  background: linear-gradient(135deg, #c084fc, var(--accent-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .social {
   display: flex;
   gap: 10px;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .nav-link {
   text-decoration: none;
   color: var(--text-main);
-  padding: 10px 18px;
+  padding: 9px 16px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 14px;
-  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.nav-link i {
-  color: #a78bfa;
-}
-
 .nav-link:hover, .nav-link.active {
-  background: var(--glass-hover);
-  border-color: var(--primary-purple);
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--primary-glow);
+  box-shadow: 0 0 20px var(--glass-glow);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
 }
 
-.nav-link.active {
-  background: rgba(139, 92, 246, 0.2);
-}
-
-/* MAIN QUIZ CONTAINER */
-.quiz-section {
-  padding: 50px 20px;
-  max-width: 800px;
-  margin: auto;
-  width: 90%;
+/* QUIZ APP MAIN */
+.quiz-wrapper {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-.quiz-card {
-  background: var(--glass-bg);
+.quiz-box {
+  width: 100%;
+  max-width: 750px;
+  background: rgba(15, 23, 42, 0.65);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 24px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 28px;
   padding: 35px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px var(--glass-glow);
   position: relative;
   overflow: hidden;
 }
 
-/* HEADER INFO IN QUIZ */
-.quiz-header {
+/* PROGRESS BAR */
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-glow), var(--accent-cyan));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+/* TOP STATUS METRICS */
+.quiz-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--glass-border);
 }
 
-.quiz-progress {
-  font-size: 14px;
-  font-weight: 600;
+.badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--accent-cyan);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.quiz-timer {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #fca5a5;
-  padding: 6px 14px;
+.timer-badge {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: #fda4af;
+  padding: 6px 16px;
   border-radius: 999px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  animation: pulse 2s infinite;
 }
 
-/* QUESTION TEXT */
-.question-title {
-  font-size: 20px;
+/* QUESTION CONTENT */
+.question-text {
+  font-size: 21px;
   font-weight: 700;
   line-height: 1.5;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   color: #ffffff;
+  letter-spacing: -0.2px;
 }
 
-/* OPTIONS LIST */
-.options-list {
+/* OPTIONS GRID */
+.options-grid {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.option-btn {
+.opt-card {
+  position: relative;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  padding: 18px 22px;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--text-main);
-  padding: 16px 20px;
-  border-radius: 14px;
-  font-size: 16px;
-  text-align: left;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  user-select: none;
 }
 
-.option-btn:hover:not(:disabled) {
-  background: var(--glass-hover);
-  border-color: var(--primary-purple);
-  transform: translateX(4px);
+.opt-card:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-glow);
+  transform: scale(1.01) translateX(4px);
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.2);
 }
 
-.option-btn:disabled {
+.opt-prefix {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  border: 1px solid var(--glass-border);
+}
+
+.opt-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.opt-card.correct {
+  background: rgba(16, 185, 129, 0.18) !important;
+  border-color: var(--success-color) !important;
+  color: #6ee7b7 !important;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3) !important;
+}
+
+.opt-card.correct .opt-prefix {
+  background: var(--success-color);
+  color: white;
+}
+
+.opt-card.incorrect {
+  background: rgba(244, 63, 94, 0.18) !important;
+  border-color: var(--error-color) !important;
+  color: #fda4af !important;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.3) !important;
+}
+
+.opt-card.incorrect .opt-prefix {
+  background: var(--error-color);
+  color: white;
+}
+
+.opt-card.disabled {
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
-/* CORRECT / INCORRECT STATES */
-.option-btn.correct {
-  background: rgba(16, 185, 129, 0.2) !important;
-  border-color: var(--success-green) !important;
-  color: #6ee7b7;
-}
-
-.option-btn.incorrect {
-  background: rgba(239, 68, 68, 0.2) !important;
-  border-color: var(--error-red) !important;
-  color: #fca5a5;
-}
-
-/* NEXT BUTTON */
-.actions {
+/* ACTIONS FOOTER */
+.quiz-actions {
   margin-top: 30px;
   display: flex;
   justify-content: flex-end;
 }
 
-.primary-btn {
-  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+.btn-next {
+  background: linear-gradient(135deg, #9333ea, #6366f1);
   color: white;
   border: none;
-  padding: 14px 28px;
+  padding: 14px 32px;
   border-radius: 14px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(147, 51, 234, 0.35);
 }
 
-.primary-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+.btn-next:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(147, 51, 234, 0.5);
 }
 
-.primary-btn:disabled {
-  opacity: 0.5;
+.btn-next:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
-  transform: none;
   box-shadow: none;
+  transform: none;
 }
 
-/* RESULT SCREEN */
-.result-box {
+/* START SCREEN */
+.start-screen {
   text-align: center;
-  padding: 20px 0;
+  padding: 20px 10px;
 }
 
-.result-icon {
-  font-size: 60px;
-  color: #a78bfa;
-  margin-bottom: 15px;
+.start-icon {
+  width: 90px;
+  height: 90px;
+  background: rgba(168, 85, 247, 0.12);
+  border: 2px solid var(--primary-glow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 38px;
+  color: var(--primary-glow);
+  box-shadow: 0 0 30px var(--glass-glow);
 }
 
-.result-score {
-  font-size: 40px;
+.start-title {
+  font-size: 28px;
   font-weight: 800;
-  margin: 15px 0;
-  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
 }
 
-.result-desc {
+.start-desc {
   color: var(--text-muted);
-  font-size: 16px;
+  font-size: 15px;
   margin-bottom: 30px;
+  line-height: 1.6;
 }
 
-/* FOOTER */
+/* RESULT REVIEW BOARD */
+.result-screen {
+  text-align: center;
+}
+
+.result-score-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, rgba(15,23,42,0) 70%);
+  border: 3px solid var(--primary-glow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 35px var(--glass-glow);
+}
+
+.result-score-number {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.result-score-total {
+  font-size: 12px;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.review-list {
+  margin: 25px 0;
+  text-align: left;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.review-list::-webkit-scrollbar {
+  width: 6px;
+}
+.review-list::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+
+.review-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.review-item.is-correct {
+  border-left: 4px solid var(--success-color);
+}
+.review-item.is-wrong {
+  border-left: 4px solid var(--error-color);
+}
+
 footer {
-  margin-top: auto;
-  padding: 25px 0;
+  padding: 20px 0;
   text-align: center;
   border-top: 1px solid var(--glass-border);
   background: rgba(15, 23, 42, 0.9);
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 @media(max-width: 768px) {
-  .logo h2 { font-size: 20px; }
-  .nav { flex-direction: column; gap: 15px; }
-  .social { width: 100%; justify-content: center; }
-  .quiz-card { padding: 25px 20px; }
-  .question-title { font-size: 18px; }
+  .logo h2 { font-size: 18px; }
+  .nav { flex-direction: column; gap: 12px; }
+  .social { width: 100%; justify-content: center; flex-wrap: wrap; }
+  .quiz-box { padding: 25px 18px; }
+  .question-text { font-size: 17px; }
 }
 </style>
 </head>
@@ -321,16 +442,16 @@ footer {
 <header>
   <div class="container nav">
     <a class="logo" href="index.html">
-      <img src="huquq.jpg" alt="Huquq Ustoz Logo">
+      <img src="huquq.jpg" alt="Huquq Ustoz">
       <h2>Huquq Ustoz</h2>
     </a>
     <div class="social">
       <a href="kutubxona.html" class="nav-link">
         <i class="fa-solid fa-book-open"></i>
-        <span>Elektron Kutubxona</span>
+        <span>Kutubxona</span>
       </a>
       <a href="quiz.html" class="nav-link active">
-        <i class="fa-solid fa-circle-question"></i>
+        <i class="fa-solid fa-gamepad"></i>
         <span>Quiz</span>
       </a>
       <a href="https://instagram.com/huququstoz" target="_blank" class="nav-link">
@@ -345,184 +466,246 @@ footer {
   </div>
 </header>
 
-<main class="quiz-section">
-  <div class="quiz-card" id="quizCard">
-    <!-- Test kontenti JavaScript orqali yuklanadi -->
+<main class="quiz-wrapper">
+  <div class="quiz-box" id="quizBox">
+    <!-- Dastlabki boshlash ekrani -->
+    <div class="start-screen animate__animated animate__fadeIn">
+      <div class="start-icon">
+        <i class="fa-solid fa-scale-balanced"></i>
+      </div>
+      <h1 class="start-title">Huquqiy Bilimlar Duellari</h1>
+      <p class="start-desc">O'zbekiston Respublikasi Qonunchiligi va Konstitutsiyasi bo'yicha interaktiv test sinoviga xush kelibsiz. Har bir savol uchun 20 soniya vaqt beriladi!</p>
+      <button class="btn-next" onclick="startQuiz()">
+        <span>Sinovni Boshlash</span>
+        <i class="fa-solid fa-play"></i>
+      </button>
+    </div>
   </div>
 </main>
 
 <footer>
-  © 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
+  © 2026 Huquq Ustoz. Interaktiv Ta'lim Platformasi.
 </footer>
 
 <script>
-// HUQUQIY TEST SAVOLLARI
-const questions = [
+const quizData = [
   {
-    question: "O'zbekiston Respublikasining Amaldagi Konstitutsiyasi qachon umumxalq referendumi orqali yangi tahrirda qabul qilingan?",
+    q: "O'zbekiston Respublikasining Yangi Tahrirdagi Konstitutsiyasi qachon umumxalq referendumi orqali qabul qilingan?",
     options: [
       "1992-yil 8-dekabrda",
       "2023-yil 30-aprelda",
       "2017-yil 19-oktyabrda",
-      "2020-yil 8-dekabrda"
+      "2021-yil 24-oktyabrda"
     ],
-    answer: 1
+    correct: 1
   },
   {
-    question: "O'zbekiston Respublikasida hokimiyatning birinchi manbai kim?",
+    q: "O'zbekiston Respublikasida davlat hokimiyatining birinchi manbai kim?",
     options: [
-      "Oliy Majlis",
+      "Oliy Majlis va Vazirlar Mahkamasi",
       "O'zbekiston Respublikasi Prezidenti",
       "O'zbekiston xalqi",
-      "Sud hokimiyati"
+      "Konstitutsiyaviy Sud"
     ],
-    answer: 2
+    correct: 2
   },
   {
-    question: "Fuqarolik huquqida shaxs necha yoshdan to'liq muomala layoqatiga ega bo'ladi?",
+    q: "Fuqarolik huquqida shaxs qachondan e'tiboran to'liq muomala layoqatiga ega bo'ladi?",
     options: [
-      "16 yoshdan",
-      "18 yoshdan",
-      "14 yoshdan",
-      "21 yoshdan"
+      "16 yoshga to'lganda",
+      "18 yoshga to'lganda",
+      "14 yoshga to'lganda",
+      "21 yoshga to'lganda"
     ],
-    answer: 1
+    correct: 1
   },
   {
-    question: "Inson huquqlari umumjahon deklaratsiyasi BMT Bosh Assambleyasi tomonidan qaysi yili qabul qilingan?",
+    q: "Inson huquqlari umumjahon deklaratsiyasi qaysi xalqaro tashkilot Bosh Assambleyasi tomonidan qabul qilingan?",
     options: [
-      "1945-yil",
-      "1948-yil",
-      "1950-yil",
-      "1991-yil"
+      "Yevropa Ittifoqi (EU)",
+      "Birlashgan Millatlar Tashkiloti (BMT)",
+      "Yevropada Xavfsizlik va Hamkorlik Tashkiloti (YEXHT)",
+      "Shanxay Hamkorlik Tashkiloti (SHHT)"
     ],
-    answer: 1
+    correct: 1
   },
   {
-    question: "O'zbekiston Respublikasida qonun chiqaruvchi hokimiyatni qaysi organ amalga oshiradi?",
+    q: "O'zbekistonda Oliy davlat vakillik organi va qonun chiqaruvchi hokimiyatni qaysi organ amalga oshiradi?",
     options: [
       "Vazirlar Mahkamasi",
       "Oliy Majlis",
-      "Konstitutsiyaviy sud",
-      "Adliya vazirligi"
+      "Oliy Sud",
+      "Adliya Vazirligi"
     ],
-    answer: 1
+    correct: 1
   }
 ];
 
-let currentIndex = 0;
+let currentIdx = 0;
 let score = 0;
-let selectedOption = null;
+let timer = null;
+let timeLeft = 20;
+let userAnswers = [];
 
-const quizCard = document.getElementById('quizCard');
+const quizBox = document.getElementById('quizBox');
+
+function startQuiz() {
+  currentIdx = 0;
+  score = 0;
+  userAnswers = [];
+  renderQuestion();
+}
 
 function renderQuestion() {
-  selectedOption = null;
-  const q = questions[currentIndex];
+  clearInterval(timer);
+  timeLeft = 20;
   
-  quizCard.innerHTML = `
-    <div class="quiz-header">
-      <div class="quiz-progress">
-        <i class="fa-solid fa-layer-group"></i>
-        <span>Savol: ${currentIndex + 1} / ${questions.length}</span>
+  const currentQ = quizData[currentIdx];
+  const progressPercent = ((currentIdx) / quizData.length) * 100;
+  
+  quizBox.innerHTML = `
+    <div class="progress-container">
+      <div class="progress-bar" style="width: ${progressPercent}%"></div>
+    </div>
+
+    <div class="quiz-meta">
+      <div class="badge">
+        <i class="fa-solid fa-fire"></i>
+        <span>Savol: ${currentIdx + 1} / ${quizData.length}</span>
       </div>
-      <div class="quiz-timer">
-        <i class="fa-regular fa-clock"></i>
-        <span>Test rejimi</span>
+      <div class="timer-badge">
+        <i class="fa-solid fa-stopwatch"></i>
+        <span id="timerText">20s</span>
       </div>
     </div>
 
-    <h3 class="question-title">${q.question}</h3>
+    <div class="question-text animate__animated animate__fadeIn">
+      ${currentQ.q}
+    </div>
 
-    <div class="options-list">
-      ${q.options.map((opt, idx) => `
-        <button class="option-btn" onclick="selectOption(${idx})" id="opt-${idx}">
-          <span>${opt}</span>
-          <i class="fa-regular fa-circle"></i>
-        </button>
+    <div class="options-grid">
+      ${currentQ.options.map((opt, i) => `
+        <div class="opt-card animate__animated animate__fadeInUp" style="animation-delay: ${i * 0.08}s" onclick="selectAnswer(${i})" id="opt-${i}">
+          <div class="opt-content">
+            <div class="opt-prefix">${String.fromCharCode(65 + i)}</div>
+            <span>${opt}</span>
+          </div>
+          <i class="fa-regular fa-circle icon-state"></i>
+        </div>
       `).join('')}
     </div>
 
-    <div class="actions">
-      <button class="primary-btn" id="nextBtn" onclick="nextQuestion()" disabled>
+    <div class="quiz-actions">
+      <button class="btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
         <span>Keyingisi</span>
         <i class="fa-solid fa-arrow-right"></i>
       </button>
     </div>
   `;
+
+  startTimer();
 }
 
-function selectOption(index) {
-  if (selectedOption !== null) return; // Bir marta tanlangandan keyin o'zgartirib bo'lmaydi
-  selectedOption = index;
+function startTimer() {
+  const timerText = document.getElementById('timerText');
+  timer = setInterval(() => {
+    timeLeft--;
+    if (timerText) timerText.innerText = `${timeLeft}s`;
 
-  const q = questions[currentIndex];
-  const buttons = document.querySelectorAll('.option-btn');
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      autoTimeOut();
+    }
+  }, 1000);
+}
 
-  buttons.forEach((btn, idx) => {
-    btn.disabled = true;
-    if (idx === q.answer) {
-      btn.classList.add('correct');
-      btn.querySelector('i').className = 'fa-solid fa-circle-check';
-    }
-    if (idx === index && index !== q.answer) {
-      btn.classList.add('incorrect');
-      btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
-    }
+function autoTimeOut() {
+  // Vaqt tugaganda avtomatik o'tkazish
+  selectAnswer(-1);
+}
+
+function selectAnswer(selectedIdx) {
+  clearInterval(timer);
+  const currentQ = quizData[currentIdx];
+  const cards = document.querySelectorAll('.opt-card');
+  
+  cards.forEach(c => c.classList.add('disabled'));
+
+  let isCorrect = false;
+
+  if (selectedIdx === currentQ.correct) {
+    score++;
+    isCorrect = true;
+  }
+
+  userAnswers.push({
+    q: currentQ.q,
+    selected: selectedIdx,
+    correct: currentQ.correct,
+    options: currentQ.options
   });
 
-  if (index === q.answer) {
-    score++;
-  }
+  cards.forEach((card, idx) => {
+    if (idx === currentQ.correct) {
+      card.classList.add('correct');
+      card.querySelector('.icon-state').className = 'fa-solid fa-circle-check';
+    }
+    if (idx === selectedIdx && selectedIdx !== currentQ.correct) {
+      card.classList.add('incorrect');
+      card.querySelector('.icon-state').className = 'fa-solid fa-circle-xmark';
+    }
+  });
 
   document.getElementById('nextBtn').disabled = false;
 }
 
 function nextQuestion() {
-  currentIndex++;
-  if (currentIndex < questions.length) {
+  currentIdx++;
+  if (currentIdx < quizData.length) {
     renderQuestion();
   } else {
-    renderResult();
+    showResults();
   }
 }
 
-function renderResult() {
-  const percentage = Math.round((score / questions.length) * 100);
-  let resultIcon = 'fa-award';
-  let message = 'Ajoyib natija!';
-
-  if (percentage < 60) {
-    resultIcon = 'fa-book-open-reader';
-    message = 'Ko\'proq tayyorgarlik ko\'rish tavsiya etiladi.';
-  } else if (percentage < 80) {
-    resultIcon = 'fa-thumbs-up';
-    message = 'Yaxshi natija!';
+function showResults() {
+  const percentage = Math.round((score / quizData.length) * 100);
+  
+  if (percentage >= 80 && typeof confetti === 'function') {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   }
 
-  quizCard.innerHTML = `
-    <div class="result-box">
-      <i class="fa-solid ${resultIcon} result-icon"></i>
-      <h2>Test Yakunlandi!</h2>
-      <div class="result-score">${score} / ${questions.length}</div>
-      <p class="result-desc">Siz ${percentage}% to'g'ri javob berdingiz. ${message}</p>
-      
-      <button class="primary-btn" onclick="restartQuiz()">
+  quizBox.innerHTML = `
+    <div class="result-screen animate__animated animate__zoomIn">
+      <div class="result-score-circle">
+        <span class="result-score-number">${score}</span>
+        <span class="result-score-total">/ ${quizData.length} TO'G'RI</span>
+      </div>
+
+      <h2>Natijangiz: ${percentage}%</h2>
+      <p style="color: var(--text-muted); margin-top: 6px; font-size: 14px;">
+        ${percentage >= 80 ? 'Ajoyib! Huquqiy bilimlaringiz yuqori darajada.' : 'Yaxshi harakat! Yana darsliklarni takrorlash tavsiya etiladi.'}
+      </p>
+
+      <div class="review-list">
+        ${userAnswers.map((item, idx) => `
+          <div class="review-item ${item.selected === item.correct ? 'is-correct' : 'is-wrong'}">
+            <strong>${idx + 1}. ${item.q}</strong><br>
+            <span style="color: ${item.selected === item.correct ? 'var(--success-color)' : 'var(--error-color)'}">
+              Sizning javobingiz: ${item.selected >= 0 ? item.options[item.selected] : 'Vaqt tugadi'}
+            </span><br>
+            ${item.selected !== item.correct ? `<span style="color: var(--accent-cyan)">To'g'ri javob: ${item.options[item.correct]}</span>` : ''}
+          </div>
+        `).join('')}
+      </div>
+
+      <button class="btn-next" onclick="startQuiz()" style="margin: auto;">
         <i class="fa-solid fa-rotate-right"></i>
-        <span>Qayta topshirish</span>
+        <span>Qaytadan Sinash</span>
       </button>
     </div>
   `;
 }
-
-function restartQuiz() {
-  currentIndex = 0;
-  score = 0;
-  renderQuestion();
-}
-
-// Dastlabki savolni yuklash
-renderQuestion();
 </script>
 </body>
 </html>
