@@ -87,7 +87,7 @@ function initQuiz() {
     
     const q = currentQuestions[currentQIndex];
     
-    // Variantli va Ha/Yo'q savollari uchun xavfsiz solishtirish
+    // Variantli va Ha/Yo'q savollari uchun tekshirish
     if (q.turi === 'variant') {
       if (parseInt(selectedOption) === parseInt(q.tugri)) userScore++;
     } else if (q.turi === 'boolean') {
@@ -171,7 +171,7 @@ function initAdmin() {
     renderAdminCategories();
   });
 
-  // Savol Qo'shish (Variant va Boolean uchun moslashtirilgan)
+  // Savol Qo'shish (Tugmachalardan qiymat olish)
   document.getElementById('add-q-btn')?.addEventListener('click', () => {
     const cat = document.getElementById('admin-cat-select').value;
     const qText = document.getElementById('q-text-input').value.trim();
@@ -192,9 +192,9 @@ function initAdmin() {
       newQ.variantlar = vars;
       newQ.tugri = correctIdx;
     } else {
-      // Boolean (Ha/Yo'q) qiymatini boolean tipida saqlash
-      const boolSelect = document.getElementById('bool-ans');
-      newQ.tugri = boolSelect ? (boolSelect.value === 'true') : true;
+      // Radio tugmadan 'true' yoki 'false' ni tanlab olish
+      const selectedBoolRadio = document.querySelector('input[name="boolAnsRadio"]:checked');
+      newQ.tugri = selectedBoolRadio ? (selectedBoolRadio.value === 'true') : true;
     }
 
     quizData[cat].push(newQ);
@@ -203,16 +203,12 @@ function initAdmin() {
     document.getElementById('q-text-input').value = '';
     document.querySelectorAll('.v-inp').forEach(i => i.value = '');
     
-    // Radio va Select holatlarini boshlang'ichga qaytarish
+    // Radio tugmalarni boshlang'ich holatga qaytarish
     const defaultRadio = document.querySelector('input[name="correctVariant"][value="0"]');
-    if (defaultRadio) {
-      defaultRadio.checked = true;
-      if (typeof window.markCorrect === 'function') {
-        window.markCorrect(0);
-      }
-    }
-    const boolSelect = document.getElementById('bool-ans');
-    if (boolSelect) boolSelect.value = 'true';
+    if (defaultRadio) defaultRadio.checked = true;
+
+    const defaultBoolRadio = document.querySelector('input[name="boolAnsRadio"][value="true"]');
+    if (defaultBoolRadio) defaultBoolRadio.checked = true;
 
     renderAdminCategories();
     alert('Savol muvaffaqiyatli qo\'shildi!');
