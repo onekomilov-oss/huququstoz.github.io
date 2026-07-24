@@ -1,47 +1,18 @@
 {
-  "Huquq asoslari": [
+  "9-Sinf Konstitutsiya": [
     {
       "savol": "O'zbekiston Respublikasi Konstitutsiyasi qachon qabul qilingan?",
       "turi": "variant",
       "variantlar": [
-        "1991-yil",
-        "1992-yil",
-        "1993-yil",
-        "1994-yil"
+        "1992-yil 8-dekabr",
+        "1991-yil 1-sentyabr",
+        "1993-yil 8-dekabr",
+        "1990-yil 20-iyun"
       ],
-      "tugri": 1
+      "tugri": 0
     },
     {
-      "savol": "Huquq shaxsning asosiy huquqi va erkinligini kafolatlaydimi?",
-      "turi": "boolean",
-      "tugri": true
-    },
-    {
-      "savol": "O'zbekiston Respublikasining davlat tili nima?",
-      "turi": "variant",
-      "variantlar": [
-        "Rus tili",
-        "O'zbek tili",
-        "Ingliz tili",
-        "Arab tili"
-      ],
-      "tugri": 1
-    }
-  ],
-  "Jinoiy huquq": [
-    {
-      "savol": "Jinoiy javobgarlikning umumiy yoshi qanchadan boshlanadi?",
-      "turi": "variant",
-      "variantlar": [
-        "14 yosh",
-        "16 yosh",
-        "18 yosh",
-        "21 yosh"
-      ],
-      "tugri": 1
-    },
-    {
-      "savol": "O'g'irlik jinoyat hisoblanadimi?",
+      "savol": "O'zbekiston - suveren demokratik davlatmi?",
       "turi": "boolean",
       "tugri": true
     }
