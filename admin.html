@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel — Huquq Ustoz</title>
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; }
 body{ background:#0f172a; color:white; min-height:100vh; display:flex; flex-direction:column; }
@@ -35,6 +36,55 @@ input, select, textarea{ width:100%; padding:10px; background:#1f2937; border:1p
 textarea{ resize:vertical; min-height:80px; }
 input:focus, select:focus, textarea:focus{ border-color:#a855f7; }
 
+/* VARIANTLAR VA TO'G'RI JAVOBNI BELGILASH VA HUDUDI */
+.options-wrapper { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1f2937;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  transition: 0.2s ease-in-out;
+}
+.option-row.correct-selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+.radio-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.radio-box input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #9ca3af;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+.radio-box input[type="radio"]:checked {
+  border-color: #10b981;
+  background-color: #10b981;
+}
+.radio-box input[type="radio"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.opt-prefix { font-weight: bold; color: #a855f7; width: 20px; }
+
 .btn{ padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer; border:none; color:white; transition:.3s; }
 .btn-primary{ background:#7c3aed; }
 .btn-primary:hover{ background:#6d28d9; }
@@ -42,8 +92,6 @@ input:focus, select:focus, textarea:focus{ border-color:#a855f7; }
 .btn-success:hover{ background:#059669; }
 .btn-danger{ background:#ef4444; padding:5px 10px; font-size:12px; }
 .btn-danger:hover{ background:#dc2626; }
-
-.q-item{ background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
 
 footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9ca3af; margin-top:auto; }
 
@@ -64,7 +112,7 @@ footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9c
 </header>
 
 <main class="container">
-  <!-- TAB TUGLAMALARI -->
+  <!-- TAB TUGMALARI -->
   <div class="tab-buttons">
     <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Testlarni Boshqarish</button>
     <button class="tab-btn" onclick="switchTab('bio-tab', this)">👤 Bio / Sayt Matnlarini O'zgartirish</button>
@@ -94,27 +142,64 @@ footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9c
           </div>
           <div class="form-group">
             <label>Savol turi:</label>
-            <select id="q-type-select">
+            <select id="q-type-select" onchange="toggleQType(this.value)">
               <option value="variant">4 ta Variantli</option>
               <option value="boolean">Ha / Yo'q (Rost/Yolg'on)</option>
             </select>
           </div>
 
+          <!-- VARIANTLI SAVOL KIRTISH (RADIO TUGMALARI BILAN) -->
           <div id="variant-inputs">
-            <div class="form-group"><input type="text" class="v-inp" placeholder="A Variant (To'g'ri javob)"></div>
-            <div class="form-group"><input type="text" class="v-inp" placeholder="B Variant"></div>
-            <div class="form-group"><input type="text" class="v-inp" placeholder="C Variant"></div>
-            <div class="form-group"><input type="text" class="v-inp" placeholder="D Variant"></div>
-          </div>
+            <label style="color:#cbd5e1; font-size:14px; margin-bottom:6px; display:block;">
+              Variantlarni kiriting va <b>to'g'ri javobni belgilang</b>:
+            </label>
+            <div class="options-wrapper">
+              <div class="option-row correct-selected" id="opt-row-0">
+                <label class="radio-box" title="To'g'ri javob">
+                  <input type="radio" name="correctVariant" value="0" checked onclick="markCorrect(0)">
+                </label>
+                <span class="opt-prefix">A)</span>
+                <input type="text" class="v-inp" placeholder="A Variant">
+              </div>
 
-          <div id="boolean-inputs" style="display:none;">
-            <div class="form-group">
-              <label>To'g'ri Javob:</label>
-              <select id="bool-ans"><option value="true">Ha (To'g'ri)</option><option value="false">Yo'q (Noto'g'ri)</option></select>
+              <div class="option-row" id="opt-row-1">
+                <label class="radio-box" title="To'g'ri javob">
+                  <input type="radio" name="correctVariant" value="1" onclick="markCorrect(1)">
+                </label>
+                <span class="opt-prefix">B)</span>
+                <input type="text" class="v-inp" placeholder="B Variant">
+              </div>
+
+              <div class="option-row" id="opt-row-2">
+                <label class="radio-box" title="To'g'ri javob">
+                  <input type="radio" name="correctVariant" value="2" onclick="markCorrect(2)">
+                </label>
+                <span class="opt-prefix">C)</span>
+                <input type="text" class="v-inp" placeholder="C Variant">
+              </div>
+
+              <div class="option-row" id="opt-row-3">
+                <label class="radio-box" title="To'g'ri javob">
+                  <input type="radio" name="correctVariant" value="3" onclick="markCorrect(3)">
+                </label>
+                <span class="opt-prefix">D)</span>
+                <input type="text" class="v-inp" placeholder="D Variant">
+              </div>
             </div>
           </div>
 
-          <button class="btn btn-primary" id="add-q-btn">Savol Qo'shish</button>
+          <!-- HA / YO'Q SAVOL KIRITISH -->
+          <div id="boolean-inputs" style="display:none; margin-top:15px;">
+            <div class="form-group">
+              <label>To'g'ri Javob:</label>
+              <select id="bool-ans">
+                <option value="true">Ha (To'g'ri)</option>
+                <option value="false">Yo'q (Noto'g'ri)</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="add-q-btn" style="margin-top:15px; width:100%;">Savol Qo'shish</button>
         </div>
       </div>
 
@@ -130,7 +215,7 @@ footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9c
     </div>
   </div>
 
-  <!-- 2-TAB: BIO WA MATNLARNI O'ZGARTIRISH -->
+  <!-- 2-TAB: BIO VA MATNLARNI O'ZGARTIRISH -->
   <div id="bio-tab" class="tab-content">
     <div class="card" style="max-width:700px; margin:auto;">
       <h2>Bosh Sahifa Ma'lumotlarini Tahrirlash</h2>
@@ -176,6 +261,40 @@ footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9c
   </div>
 </footer>
 
+<script>
+// Tablarni almashtirish
+function switchTab(tabId, element) {
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  element.classList.add('active');
+}
+
+// Savol turiga qarab inputlarni almashtirish
+function toggleQType(type) {
+  const vInp = document.getElementById('variant-inputs');
+  const bInp = document.getElementById('boolean-inputs');
+  if (type === 'boolean') {
+    vInp.style.display = 'none';
+    bInp.style.display = 'block';
+  } else {
+    vInp.style.display = 'block';
+    bInp.style.display = 'none';
+  }
+}
+
+// Qaysi radio-tugma tanlangan bo'lsa, o'sha qatorni yashil qilib ajratish
+function markCorrect(selectedIndex) {
+  for (let i = 0; i < 4; i++) {
+    const row = document.getElementById(`opt-row-${i}`);
+    if (i === selectedIndex) {
+      row.classList.add('correct-selected');
+    } else {
+      row.classList.remove('correct-selected');
+    }
+  }
+}
+</script>
 <script src="scripts/app.js"></script>
 </body>
 </html>
