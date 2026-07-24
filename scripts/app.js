@@ -13,11 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchData();
   loadBioToHomepage();
 
-  // Admin Kirishni tekshirish
-  if (window.location.pathname.includes('admin.html')) {
+  // ADMIN PANELGA KIRISHNI TEKSHIRISH (Aniqroq mantiq)
+  const isAdminPage = window.location.pathname.toLowerCase().includes('admin');
+  
+  if (isAdminPage) {
+    // Agar xotirada 'isAdmin' bo'lmasa, kirishga ruxsat berilmaydi
     if (localStorage.getItem('isAdmin') !== 'true') {
       window.location.href = 'login.html';
+      return;
     }
+
+    // Chiqish tugmasi
     document.getElementById('logout-btn')?.addEventListener('click', () => {
       localStorage.removeItem('isAdmin');
       window.location.href = 'login.html';
@@ -32,9 +38,10 @@ async function fetchData() {
     if (!res.ok) throw new Error('JSON topilmadi');
     quizData = await res.json();
 
-    if (window.location.pathname.includes('quiz.html')) {
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('quiz')) {
       initQuiz();
-    } else if (window.location.pathname.includes('admin.html')) {
+    } else if (path.includes('admin')) {
       initAdmin();
     }
   } catch (err) {
@@ -175,7 +182,7 @@ function initAdmin() {
       const vars = Array.from(vInputs).map(i => i.value.trim());
       if (vars.some(v => !v)) return alert('Barcha 4 ta variantni yozing!');
       newQ.variantlar = vars;
-      newQ.tugri = 0; // Birinchi kiritilgan (A) variant to'g'ri deb olinadi
+      newQ.tugri = 0;
     } else {
       newQ.tugri = document.getElementById('bool-ans').value === 'true';
     }
@@ -266,8 +273,9 @@ function initBioForm() {
 
 function loadBioToHomepage() {
   const bioData = JSON.parse(localStorage.getItem('siteBio') || '{}');
+  const path = window.location.pathname.toLowerCase();
   
-  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+  if (path.endsWith('index.html') || path === '/' || path.endsWith('/')) {
     if (bioData.heroTitle) {
       const el = document.querySelector('.hero h1');
       if (el) el.textContent = bioData.heroTitle;
