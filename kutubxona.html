@@ -52,6 +52,8 @@ font-size:24px;
 .social{
 display:flex;
 gap:12px;
+flex-wrap:wrap;
+justify-content:flex-end;
 }
 .social a{
 text-decoration:none;
@@ -60,6 +62,7 @@ padding:10px 18px;
 border:1px solid #444;
 border-radius:8px;
 transition:.3s;
+white-space:nowrap;
 }
 .social a:hover{
 background:#7c3aed;
@@ -196,9 +199,17 @@ font-size:20px;
 .page-head h1{
 font-size:28px;
 }
+.nav{
+flex-wrap:wrap;
+gap:12px;
+}
+.social{
+justify-content:center;
+width:100%;
+}
 .social a{
 padding:8px 12px;
-font-size:14px;
+font-size:13px;
 }
 }
 </style>
@@ -213,6 +224,8 @@ font-size:14px;
 <div class="social">
 <a href="kutubxona.html" class="active">Elektron Kutubxona</a>
 <a href="quiz.html">Quiz</a>
+<a href="https://instagram.com/huququstoz" target="_blank">Instagram</a>
+<a href="https://t.me/huququstoz" target="_blank">Telegram</a>
 </div>
 </div>
 </header>
