@@ -9,7 +9,7 @@
         "1993-yil",
         "1994-yil"
       ],
-      "tugri": 2
+      "tugri": 1
     },
     {
       "savol": "Huquq shaxsning asosiy huquqi va erkinligini kafolatlaydimi?",
@@ -30,7 +30,7 @@
   ],
   "Jinoiy huquq": [
     {
-      "savol": "Jinoiy javobgarlik yoshi qanchadan boshlanadi?",
+      "savol": "Jinoiy javobgarlikning umumiy yoshi qanchadan boshlanadi?",
       "turi": "variant",
       "variantlar": [
         "14 yosh",
@@ -41,7 +41,7 @@
       "tugri": 1
     },
     {
-      "savol": "O'g'irlik jinoyat hisoblanadi?",
+      "savol": "O'g'irlik jinoyat hisoblanadimi?",
       "turi": "boolean",
       "tugri": true
     }
