@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huquq Ustoz</title>
+<title>Huquq Ustoz — Huquqiy bilim sari birgalikda</title>
+
+<!-- SEO va Ijtimoiy tarmoqlar uchun metateglar -->
+<meta name="description" content="Huquqiy savodxonlik, interaktiv quizlar va elektron kutubxona platformasi.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Huquq Ustoz — Huquqiy bilim sari birgalikda">
+<meta property="og:description" content="Huquqiy savodxonlikni oshirish va qonunchilik bo'yicha tushunarli ma'lumotlar platformasi.">
+<meta property="og:image" content="huquq.jpg">
+<link rel="icon" type="image/jpeg" href="huquq.jpg">
+
 <style>
 *{
 margin:0;
@@ -62,6 +71,9 @@ border:1px solid #444;
 border-radius:8px;
 transition:.3s;
 white-space:nowrap;
+display:inline-flex;
+align-items:center;
+justify-content:center;
 }
 .social a:hover{
 background:#7c3aed;
@@ -132,11 +144,26 @@ color:#d1d5db;
 font-size:18px;
 }
 footer{
-padding:25px;
-text-align:center;
+padding:25px 0;
 border-top:1px solid #333;
 background:#0f172a;
 color:#9ca3af;
+}
+.footer-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:12px;
+}
+.admin-link{
+color:#64748b;
+text-decoration:none;
+font-size:14px;
+transition:.3s;
+}
+.admin-link:hover{
+color:#a855f7;
 }
 @media(max-width:768px){
 .logo h2{
@@ -160,6 +187,10 @@ width:100%;
 padding:8px 12px;
 font-size:13px;
 }
+.footer-content{
+justify-content:center;
+text-align:center;
+}
 }
 </style>
 </head>
@@ -178,6 +209,7 @@ font-size:13px;
 </div>
 </div>
 </header>
+
 <section class="hero">
 <div>
 <h1>Huquqiy bilim sari birgalikda</h1>
@@ -196,6 +228,7 @@ Quiz
 </div>
 </div>
 </section>
+
 <section class="about">
 <h2>Men haqimda</h2>
 <p>
@@ -205,8 +238,12 @@ Kelajakda ushbu saytda elektron kutubxona, qonunlar bazasi,
 AI huquqiy yordamchi va bepul o'quv materiallari joylashtiriladi.
 </p>
 </section>
+
 <footer>
-© 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
+<div class="container footer-content">
+<p>© 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.</p>
+<a href="login.html" class="admin-link">⚙️ Admin Paneli</a>
+</div>
 </footer>
 </body>
 </html>
