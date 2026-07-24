@@ -86,8 +86,13 @@ function initQuiz() {
     if (selectedOption === null) return alert('Javobni tanlang!');
     
     const q = currentQuestions[currentQIndex];
-    if (q.turi === 'variant' && selectedOption === q.tugri) userScore++;
-    if (q.turi === 'boolean' && selectedOption === q.tugri) userScore++;
+    
+    // Variantli va Ha/Yo'q savollari uchun xavfsiz solishtirish
+    if (q.turi === 'variant') {
+      if (parseInt(selectedOption) === parseInt(q.tugri)) userScore++;
+    } else if (q.turi === 'boolean') {
+      if (String(selectedOption) === String(q.tugri)) userScore++;
+    }
 
     currentQIndex++;
     selectedOption = null;
@@ -166,7 +171,7 @@ function initAdmin() {
     renderAdminCategories();
   });
 
-  // Savol Qo'shish (TO'G'RILANGAN MANTEQ)
+  // Savol Qo'shish (Variant va Boolean uchun moslashtirilgan)
   document.getElementById('add-q-btn')?.addEventListener('click', () => {
     const cat = document.getElementById('admin-cat-select').value;
     const qText = document.getElementById('q-text-input').value.trim();
@@ -181,23 +186,24 @@ function initAdmin() {
       const vars = Array.from(vInputs).map(i => i.value.trim());
       if (vars.some(v => !v)) return alert('Barcha 4 ta variantni yozing!');
       
-      // Radio tugmadan belgilangan to'g'ri javob indeksini olish (0, 1, 2, 3)
       const selectedRadio = document.querySelector('input[name="correctVariant"]:checked');
       const correctIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
 
       newQ.variantlar = vars;
-      newQ.tugri = correctIdx; // Tanlangan radio indeksi saqlanadi
+      newQ.tugri = correctIdx;
     } else {
-      newQ.tugri = document.getElementById('bool-ans').value === 'true';
+      // Boolean (Ha/Yo'q) qiymatini boolean tipida saqlash
+      const boolSelect = document.getElementById('bool-ans');
+      newQ.tugri = boolSelect ? (boolSelect.value === 'true') : true;
     }
 
     quizData[cat].push(newQ);
     
-    // Formalarni tozalash va standart holatga keltirish
+    // Formalarni tozalash va reset qilish
     document.getElementById('q-text-input').value = '';
     document.querySelectorAll('.v-inp').forEach(i => i.value = '');
     
-    // Birinchi radio tugmani qayta tanlab qo'yish
+    // Radio va Select holatlarini boshlang'ichga qaytarish
     const defaultRadio = document.querySelector('input[name="correctVariant"][value="0"]');
     if (defaultRadio) {
       defaultRadio.checked = true;
@@ -205,6 +211,8 @@ function initAdmin() {
         window.markCorrect(0);
       }
     }
+    const boolSelect = document.getElementById('bool-ans');
+    if (boolSelect) boolSelect.value = 'true';
 
     renderAdminCategories();
     alert('Savol muvaffaqiyatli qo\'shildi!');
@@ -242,7 +250,7 @@ function renderAdminCategories() {
       const item = document.createElement('div');
       item.className = 'q-item';
       item.innerHTML = `
-        <span>${idx + 1}. ${q.savol}</span>
+        <span>${idx + 1}. ${q.savol} (${q.turi === 'boolean' ? 'Ha/Yo\'q' : 'Variantli'})</span>
         <button class="btn btn-danger" onclick="deleteQ('${cat}', ${idx})">O'chirish</button>
       `;
       box.appendChild(item);
