@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektron Kutubxona | Huquq Ustoz</title>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+body{
+background:#0f172a;
+color:white;
+}
+header{
+position:sticky;
+top:0;
+background:#111827;
+padding:15px 0;
+border-bottom:1px solid #333;
+z-index:10;
+}
+.container{
+width:90%;
+max-width:1100px;
+margin:auto;
+}
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+text-decoration:none;
+}
+.logo img{
+width:55px;
+height:55px;
+border-radius:50%;
+object-fit:cover;
+}
+.logo h2{
+color:#a855f7;
+font-size:24px;
+}
+.social{
+display:flex;
+gap:12px;
+}
+.social a{
+text-decoration:none;
+color:white;
+padding:10px 18px;
+border:1px solid #444;
+border-radius:8px;
+transition:.3s;
+}
+.social a:hover{
+background:#7c3aed;
+border-color:#7c3aed;
+}
+.social a.active{
+background:#7c3aed;
+border-color:#7c3aed;
+}
+.page-head{
+padding:60px 20px 20px;
+text-align:center;
+}
+.page-head h1{
+font-size:38px;
+margin-bottom:12px;
+}
+.page-head p{
+color:#94a3b8;
+font-size:17px;
+}
+.search-wrap{
+display:flex;
+justify-content:center;
+padding:20px 20px 10px;
+}
+.search-wrap input{
+width:100%;
+max-width:420px;
+padding:12px 16px;
+border-radius:10px;
+border:1px solid #333;
+background:#111827;
+color:white;
+font-size:16px;
+outline:none;
+transition:.3s;
+}
+.search-wrap input:focus{
+border-color:#7c3aed;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:28px;
+padding:40px 20px 90px;
+max-width:1100px;
+margin:auto;
+}
+.card{
+background:#111827;
+border:1px solid #23293b;
+border-radius:14px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-4px);
+border-color:#7c3aed;
+}
+.card .cover{
+width:100%;
+aspect-ratio:3/4;
+overflow:hidden;
+background:#1e293b;
+}
+.card .cover img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+.card-body{
+padding:16px 16px 20px;
+display:flex;
+flex-direction:column;
+flex:1;
+}
+.card-body h3{
+font-size:16px;
+line-height:1.4;
+margin-bottom:8px;
+color:#f1f5f9;
+}
+.card-body .meta{
+color:#94a3b8;
+font-size:13px;
+margin-bottom:6px;
+}
+.card-body .genre{
+display:inline-block;
+align-self:flex-start;
+background:#312e81;
+color:#c7d2fe;
+font-size:12px;
+padding:4px 10px;
+border-radius:999px;
+margin-bottom:14px;
+}
+.read-btn{
+margin-top:auto;
+text-align:center;
+text-decoration:none;
+background:#7c3aed;
+color:white;
+padding:10px;
+border-radius:8px;
+font-weight:bold;
+font-size:14px;
+transition:.3s;
+}
+.read-btn:hover{
+background:#6d28d9;
+}
+.empty{
+text-align:center;
+color:#64748b;
+padding:60px 20px;
+grid-column:1/-1;
+}
+footer{
+padding:25px;
+text-align:center;
+border-top:1px solid #333;
+background:#0f172a;
+color:#9ca3af;
+}
+@media(max-width:768px){
+.logo h2{
+font-size:20px;
+}
+.page-head h1{
+font-size:28px;
+}
+.social a{
+padding:8px 12px;
+font-size:14px;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="container nav">
+<a class="logo" href="index.html">
+<img src="huquq.jpg" alt="Huquq Ustoz Logo">
+<h2>Huquq Ustoz</h2>
+</a>
+<div class="social">
+<a href="kutubxona.html" class="active">Elektron Kutubxona</a>
+<a href="quiz.html">Quiz</a>
+</div>
+</div>
+</header>
+
+<section class="page-head">
+<h1>Elektron Kutubxona</h1>
+<p>Huquqshunoslik bo'yicha darsliklar va o'quv materiallari</p>
+</section>
+
+<div class="search-wrap">
+<input type="text" id="searchInput" placeholder="Kitob nomi yoki sinf bo'yicha qidirish...">
+</div>
+
+<section class="grid" id="booksGrid"></section>
+
+<footer>
+© 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
+</footer>
+
+<script>
+const books = [
+{
+title: "O'ZBEKISTON DAVLATI VA HUQUQI ASOSLARI",
+meta: "\"Huquq va Jamiyat\" nashriyoti, Toshkent — 2019",
+genre: "8-sinf darsligi",
+cover: "8-sinf.png",
+driveLink: "https://drive.google.com/file/d/1iJSyVPBEuGwNSYBO9cIqC_Q4V_K_XvcC/view?usp=sharing"
+},
+{
+title: "KONSTITUTSIYAVIY HUQUQ ASOSLARI",
+meta: "«SHARQ» nashriyot-matbaa aksiyadorlik kompaniyasi, Toshkent — 2019",
+genre: "9-sinf darsligi",
+cover: "9-sinf%20.png",
+driveLink: "https://drive.google.com/file/d/1xYBYuR1bjwQeme4TtKVIsgSl1JPRtYau/view?usp=sharing"
+},
+{
+title: "DAVLAT VA HUQUQ ASOSLARI",
+meta: "«Yangiyo'l Poligraf Servis», Toshkent — 2017",
+genre: "10-sinf darsligi",
+cover: "10-sinf.png",
+driveLink: "https://drive.google.com/file/d/1RcyhKuHv5xQg0EUQy_pb62TPqV4N51oa/view?usp=sharing"
+},
+{
+title: "DAVLAT VA HUQUQ ASOSLARI",
+meta: "«Yangiyul Poligraph Service», Toshkent — 2018",
+genre: "11-sinf darsligi",
+cover: "11-sinf.png",
+driveLink: "https://drive.google.com/file/d/1RBl1J9zqTnarkO11MpLI0rQJMpTga1a3/view?usp=sharing"
+}
+];
+
+const grid = document.getElementById('booksGrid');
+const searchInput = document.getElementById('searchInput');
+
+function renderBooks(list){
+grid.innerHTML = "";
+if(list.length === 0){
+grid.innerHTML = '<p class="empty">Hech narsa topilmadi.</p>';
+return;
+}
+list.forEach(book => {
+const card = document.createElement('div');
+card.className = 'card';
+card.innerHTML = `
+<div class="cover">
+<img src="${book.cover}" alt="${book.title}">
+</div>
+<div class="card-body">
+<h3>${book.title}</h3>
+<div class="meta">${book.meta}</div>
+<span class="genre">${book.genre}</span>
+<a class="read-btn" href="${book.driveLink}" target="_blank" rel="noopener">O'qish</a>
+</div>
+`;
+grid.appendChild(card);
+});
+}
+
+searchInput.addEventListener('input', () => {
+const q = searchInput.value.trim().toLowerCase();
+const filtered = books.filter(b =>
+b.title.toLowerCase().includes(q) ||
+b.genre.toLowerCase().includes(q) ||
+b.meta.toLowerCase().includes(q)
+);
+renderBooks(filtered);
+});
+
+renderBooks(books);
+</script>
+</body>
+</html>
