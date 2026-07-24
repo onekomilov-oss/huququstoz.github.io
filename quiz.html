@@ -1,142 +1,51 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz | Huquq Ustoz</title>
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-body{
-background:#0f172a;
-color:white;
-}
-header{
-position:sticky;
-top:0;
-background:#111827;
-padding:15px 0;
-border-bottom:1px solid #333;
-z-index:10;
-}
-.container{
-width:90%;
-max-width:1100px;
-margin:auto;
-}
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-.logo{
-display:flex;
-align-items:center;
-gap:12px;
-text-decoration:none;
-}
-.logo img{
-width:55px;
-height:55px;
-border-radius:50%;
-object-fit:cover;
-}
-.logo h2{
-color:#a855f7;
-font-size:24px;
-}
-.social{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-justify-content:flex-end;
-}
-.social a{
-text-decoration:none;
-color:white;
-padding:10px 18px;
-border:1px solid #444;
-border-radius:8px;
-transition:.3s;
-white-space:nowrap;
-}
-.social a:hover{
-background:#7c3aed;
-border-color:#7c3aed;
-}
-.social a.active{
-background:#7c3aed;
-border-color:#7c3aed;
-}
-@media(max-width:768px){
-.nav{
-flex-wrap:wrap;
-gap:12px;
-}
-.social{
-justify-content:center;
-width:100%;
-}
-.social a{
-padding:8px 12px;
-font-size:13px;
-}
-}
-.soon{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-min-height:70vh;
-padding:30px;
-}
-.soon h1{
-font-size:38px;
-margin-bottom:16px;
-color:#a855f7;
-}
-.soon p{
-color:#94a3b8;
-font-size:18px;
-max-width:600px;
-}
-footer{
-padding:25px;
-text-align:center;
-border-top:1px solid #333;
-background:#0f172a;
-color:#9ca3af;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huquq Ustoz — Bilim sinovi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/quiz.css">
 </head>
 <body>
-<header>
-<div class="container nav">
-<a class="logo" href="index.html">
-<img src="huquq.jpg" alt="Huquq Ustoz Logo">
-<h2>Huquq Ustoz</h2>
-</a>
-<div class="social">
-<a href="kutubxona.html">Elektron Kutubxona</a>
-<a href="quiz.html" class="active">Quiz</a>
-<a href="https://instagram.com/huququstoz" target="_blank">Instagram</a>
-<a href="https://t.me/huququstoz" target="_blank">Telegram</a>
-</div>
-</div>
-</header>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <img src="images/huquq.jpg" alt="Huquq Ustoz Logo">
+        <h2>Huquq Ustoz</h2>
+      </a>
+      <div class="social">
+        <a href="kutubxona.html">Elektron Kutubxona</a>
+        <a href="quiz.html" class="active">Quiz</a>
+        <a href="https://instagram.com/huququstoz" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://t.me/huququstoz" target="_blank" rel="noopener noreferrer">Telegram</a>
+      </div>
+    </div>
+  </header>
 
-<section class="soon">
-<h1>Tez orada...</h1>
-<p>Quiz bo'limi ustida ishlanmoqda. Yaqin orada bu yerda huquqshunoslik bo'yicha bilimingizni sinab ko'rishingiz mumkin bo'ladi.</p>
-</section>
+  <div class="wrap">
+    <div class="brand">
+      <svg class="seal" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="#B08D3E" stroke-width="2"/>
+        <circle cx="24" cy="24" r="16" stroke="#B08D3E" stroke-width="1.2"/>
+        <path d="M24 12 L27 21 L36 21 L29 27 L31.5 36 L24 30.5 L16.5 36 L19 27 L12 21 L21 21 Z" fill="#B08D3E"/>
+      </svg>
+      <div class="brand-text">
+        <div class="kicker">Huquq Ustoz</div>
+        <h1>Bilim sinovi</h1>
+      </div>
+    </div>
+    <div id="app"></div>
+  </div>
 
-<footer>
-© 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
-</footer>
+  <footer>
+    &copy; 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
+  </footer>
+
+  <script src="scripts/quiz.js" type="module"></script>
 </body>
 </html>
