@@ -1,5 +1,5 @@
 // ===== CONSTANTS =====
-const DATA_URL = '../savollar.json';
+const DATA_URL = './savollar.json';
 const state = {
   view: 'loading', // loading | categories | quiz | results | certificate
   categories: {},
