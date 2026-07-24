@@ -3,109 +3,526 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz — Huquq Ustoz</title>
+<title>Huquqiy Quiz | Huquq Ustoz</title>
+
+<meta name="description" content="Huquqshunoslik bo'yicha bilimlaringizni sinab ko'ring.">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
+
+<!-- FontAwesome Ikonkalar Kutubxonasi -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-*{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; }
-body{ background:#0f172a; color:white; min-height:100vh; display:flex; flex-direction:column; }
-header{ position:sticky; top:0; background:#111827; padding:15px 0; border-bottom:1px solid #333; z-index:10; }
-.container{ width:90%; max-width:1100px; margin:auto; }
-.nav{ display:flex; justify-content:space-between; align-items:center; }
-.logo{ display:flex; align-items:center; gap:12px; text-decoration:none; }
-.logo img{ width:55px; height:55px; border-radius:50%; object-fit:cover; }
-.logo h2{ color:#a855f7; font-size:24px; }
-.social{ display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
-.social a{ text-decoration:none; color:white; padding:10px 18px; border:1px solid #444; border-radius:8px; transition:.3s; }
-.social a:hover, .social a.active{ background:#7c3aed; border-color:#7c3aed; }
+/* ZAMONAVIY GLASSMORPHISM DIZAYN */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --primary-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --success-green: #10b981;
+  --error-red: #ef4444;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
 
-main{ flex:1; padding:40px 0; }
-.quiz-card{ background:#111827; border:1px solid #333; border-radius:12px; padding:30px; max-width:800px; margin:auto; }
-.quiz-card h1{ color:#a855f7; margin-bottom:20px; font-size:28px; text-align:center; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
 
-.select-group{ margin-bottom:25px; }
-.select-group label{ display:block; margin-bottom:10px; color:#cbd5e1; font-size:16px; }
-select{ width:100%; padding:12px 15px; background:#1f2937; border:1px solid #444; color:white; border-radius:8px; font-size:16px; outline:none; }
-select:focus{ border-color:#a855f7; }
+body {
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-.question-box{ background:#1f2937; border-radius:10px; padding:20px; margin-bottom:20px; }
-.question-title{ font-size:18px; margin-bottom:15px; color:#f3f4f6; }
-.options{ display:flex; flex-direction:column; gap:10px; }
-.option-btn{ background:#111827; border:1px solid #444; color:white; padding:12px 15px; border-radius:8px; text-align:left; cursor:pointer; font-size:16px; transition:.2s; }
-.option-btn:hover{ background:#374151; border-color:#7c3aed; }
-.option-btn.selected{ background:#7c3aed; border-color:#a855f7; }
+/* NAVIGATION HEADER */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 16px 0;
+  z-index: 1000;
+}
 
-.actions{ display:flex; justify-content:space-between; align-items:center; margin-top:25px; }
-.btn{ padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer; border:none; color:white; transition:.3s; text-decoration:none; }
-.primary{ background:#7c3aed; }
-.primary:hover{ background:#6d28d9; }
-.secondary{ background:transparent; border:2px solid #7c3aed; }
-.secondary:hover{ background:#7c3aed; }
+.container {
+  width: 90%;
+  max-width: 1150px;
+  margin: auto;
+}
 
-.result-box{ text-align:center; padding:20px; }
-.result-box h2{ color:#a855f7; font-size:32px; margin-bottom:15px; }
-.result-box p{ font-size:20px; color:#cbd5e1; margin-bottom:25px; }
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9ca3af; margin-top:auto; }
-.footer-content{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
-.admin-link{ color:#64748b; text-decoration:none; font-size:14px; transition:.3s; }
-.admin-link:hover{ color:#a855f7; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
 
-@media(max-width:768px){
-  .nav{ flex-wrap:wrap; gap:12px; }
-  .social{ justify-content:center; width:100%; }
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-purple);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.logo h2 {
+  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-main);
+  padding: 10px 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link i {
+  color: #a78bfa;
+}
+
+.nav-link:hover, .nav-link.active {
+  background: var(--glass-hover);
+  border-color: var(--primary-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+}
+
+.nav-link.active {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+/* MAIN QUIZ CONTAINER */
+.quiz-section {
+  padding: 50px 20px;
+  max-width: 800px;
+  margin: auto;
+  width: 90%;
+  flex: 1;
+}
+
+.quiz-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* HEADER INFO IN QUIZ */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.quiz-progress {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quiz-timer {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* QUESTION TEXT */
+.question-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 25px;
+  color: #ffffff;
+}
+
+/* OPTIONS LIST */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.option-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: var(--glass-hover);
+  border-color: var(--primary-purple);
+  transform: translateX(4px);
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* CORRECT / INCORRECT STATES */
+.option-btn.correct {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: var(--success-green) !important;
+  color: #6ee7b7;
+}
+
+.option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: var(--error-red) !important;
+  color: #fca5a5;
+}
+
+/* NEXT BUTTON */
+.actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* RESULT SCREEN */
+.result-box {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.result-icon {
+  font-size: 60px;
+  color: #a78bfa;
+  margin-bottom: 15px;
+}
+
+.result-score {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 15px 0;
+  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.result-desc {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* FOOTER */
+footer {
+  margin-top: auto;
+  padding: 25px 0;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+@media(max-width: 768px) {
+  .logo h2 { font-size: 20px; }
+  .nav { flex-direction: column; gap: 15px; }
+  .social { width: 100%; justify-content: center; }
+  .quiz-card { padding: 25px 20px; }
+  .question-title { font-size: 18px; }
 }
 </style>
 </head>
 <body>
+
 <header>
   <div class="container nav">
-    <a href="index.html" class="logo">
+    <a class="logo" href="index.html">
       <img src="huquq.jpg" alt="Huquq Ustoz Logo">
       <h2>Huquq Ustoz</h2>
     </a>
     <div class="social">
-      <a href="index.html">Bosh sahifa</a>
-      <a href="kutubxona.html">Elektron Kutubxona</a>
-      <a href="quiz.html" class="active">Quiz</a>
+      <a href="kutubxona.html" class="nav-link">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Elektron Kutubxona</span>
+      </a>
+      <a href="quiz.html" class="nav-link active">
+        <i class="fa-solid fa-circle-question"></i>
+        <span>Quiz</span>
+      </a>
+      <a href="https://instagram.com/huququstoz" target="_blank" class="nav-link">
+        <i class="fa-brands fa-instagram"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="https://t.me/huququstoz" target="_blank" class="nav-link">
+        <i class="fa-brands fa-telegram"></i>
+        <span>Telegram</span>
+      </a>
     </div>
   </div>
 </header>
 
-<main class="container">
-  <div class="quiz-card" id="quiz-container">
-    <h1>Huquqiy Quiz Test</h1>
-    
-    <div class="select-group" id="category-picker">
-      <label for="quiz-category">Test toifasini tanlang:</label>
-      <select id="quiz-category">
-        <option value="" disabled selected>Yuklanmoqda...</option>
-      </select>
-      <button class="btn primary" style="width:100%; margin-top:15px;" id="start-btn">Testni boshlash</button>
-    </div>
-
-    <div id="quiz-body" style="display:none;">
-      <div id="questions-wrapper"></div>
-      <div class="actions">
-        <span id="progress-text" style="color:#9ca3af;">1 / 10</span>
-        <button class="btn primary" id="next-btn">Keyingisi</button>
-      </div>
-    </div>
-
-    <div id="result-screen" class="result-box" style="display:none;">
-      <h2>Natijangiz</h2>
-      <p id="score-text">0 / 0</p>
-      <button class="btn primary" onclick="location.reload()">Qaytadan topshirish</button>
-    </div>
+<main class="quiz-section">
+  <div class="quiz-card" id="quizCard">
+    <!-- Test kontenti JavaScript orqali yuklanadi -->
   </div>
 </main>
 
 <footer>
-  <div class="container footer-content">
-    <p>© 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.</p>
-    <a href="login.html" class="admin-link">⚙️ Admin Paneli</a>
-  </div>
+  © 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
 </footer>
 
-<script src="scripts/app.js"></script>
+<script>
+// HUQUQIY TEST SAVOLLARI
+const questions = [
+  {
+    question: "O'zbekiston Respublikasining Amaldagi Konstitutsiyasi qachon umumxalq referendumi orqali yangi tahrirda qabul qilingan?",
+    options: [
+      "1992-yil 8-dekabrda",
+      "2023-yil 30-aprelda",
+      "2017-yil 19-oktyabrda",
+      "2020-yil 8-dekabrda"
+    ],
+    answer: 1
+  },
+  {
+    question: "O'zbekiston Respublikasida hokimiyatning birinchi manbai kim?",
+    options: [
+      "Oliy Majlis",
+      "O'zbekiston Respublikasi Prezidenti",
+      "O'zbekiston xalqi",
+      "Sud hokimiyati"
+    ],
+    answer: 2
+  },
+  {
+    question: "Fuqarolik huquqida shaxs necha yoshdan to'liq muomala layoqatiga ega bo'ladi?",
+    options: [
+      "16 yoshdan",
+      "18 yoshdan",
+      "14 yoshdan",
+      "21 yoshdan"
+    ],
+    answer: 1
+  },
+  {
+    question: "Inson huquqlari umumjahon deklaratsiyasi BMT Bosh Assambleyasi tomonidan qaysi yili qabul qilingan?",
+    options: [
+      "1945-yil",
+      "1948-yil",
+      "1950-yil",
+      "1991-yil"
+    ],
+    answer: 1
+  },
+  {
+    question: "O'zbekiston Respublikasida qonun chiqaruvchi hokimiyatni qaysi organ amalga oshiradi?",
+    options: [
+      "Vazirlar Mahkamasi",
+      "Oliy Majlis",
+      "Konstitutsiyaviy sud",
+      "Adliya vazirligi"
+    ],
+    answer: 1
+  }
+];
+
+let currentIndex = 0;
+let score = 0;
+let selectedOption = null;
+
+const quizCard = document.getElementById('quizCard');
+
+function renderQuestion() {
+  selectedOption = null;
+  const q = questions[currentIndex];
+  
+  quizCard.innerHTML = `
+    <div class="quiz-header">
+      <div class="quiz-progress">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Savol: ${currentIndex + 1} / ${questions.length}</span>
+      </div>
+      <div class="quiz-timer">
+        <i class="fa-regular fa-clock"></i>
+        <span>Test rejimi</span>
+      </div>
+    </div>
+
+    <h3 class="question-title">${q.question}</h3>
+
+    <div class="options-list">
+      ${q.options.map((opt, idx) => `
+        <button class="option-btn" onclick="selectOption(${idx})" id="opt-${idx}">
+          <span>${opt}</span>
+          <i class="fa-regular fa-circle"></i>
+        </button>
+      `).join('')}
+    </div>
+
+    <div class="actions">
+      <button class="primary-btn" id="nextBtn" onclick="nextQuestion()" disabled>
+        <span>Keyingisi</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  `;
+}
+
+function selectOption(index) {
+  if (selectedOption !== null) return; // Bir marta tanlangandan keyin o'zgartirib bo'lmaydi
+  selectedOption = index;
+
+  const q = questions[currentIndex];
+  const buttons = document.querySelectorAll('.option-btn');
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === q.answer) {
+      btn.classList.add('correct');
+      btn.querySelector('i').className = 'fa-solid fa-circle-check';
+    }
+    if (idx === index && index !== q.answer) {
+      btn.classList.add('incorrect');
+      btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+    }
+  });
+
+  if (index === q.answer) {
+    score++;
+  }
+
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  currentIndex++;
+  if (currentIndex < questions.length) {
+    renderQuestion();
+  } else {
+    renderResult();
+  }
+}
+
+function renderResult() {
+  const percentage = Math.round((score / questions.length) * 100);
+  let resultIcon = 'fa-award';
+  let message = 'Ajoyib natija!';
+
+  if (percentage < 60) {
+    resultIcon = 'fa-book-open-reader';
+    message = 'Ko\'proq tayyorgarlik ko\'rish tavsiya etiladi.';
+  } else if (percentage < 80) {
+    resultIcon = 'fa-thumbs-up';
+    message = 'Yaxshi natija!';
+  }
+
+  quizCard.innerHTML = `
+    <div class="result-box">
+      <i class="fa-solid ${resultIcon} result-icon"></i>
+      <h2>Test Yakunlandi!</h2>
+      <div class="result-score">${score} / ${questions.length}</div>
+      <p class="result-desc">Siz ${percentage}% to'g'ri javob berdingiz. ${message}</p>
+      
+      <button class="primary-btn" onclick="restartQuiz()">
+        <i class="fa-solid fa-rotate-right"></i>
+        <span>Qayta topshirish</span>
+      </button>
+    </div>
+  `;
+}
+
+function restartQuiz() {
+  currentIndex = 0;
+  score = 0;
+  renderQuestion();
+}
+
+// Dastlabki savolni yuklash
+renderQuestion();
+</script>
 </body>
 </html>
