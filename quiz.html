@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huquqiy Quiz | Interaktiv Sinov</title>
+<title>Huquqiy Quiz | Timer Bilan Ishlash</title>
 
-<meta name="description" content="Huquqshunoslik bo'yicha bilimlaringizni sinab ko'ring.">
+<meta name="description" content="Huquqshunoslik bo'yicha bilimlaringizni taymer ostida sinab ko'ring.">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
 
 <!-- FontAwesome Icons & Animate.css -->
@@ -131,7 +131,7 @@ header {
 
 .quiz-box {
   width: 100%;
-  max-width: 750px;
+  max-width: 780px;
   background: rgba(15, 23, 42, 0.65);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(25px);
@@ -182,28 +182,95 @@ header {
   gap: 6px;
 }
 
-.timer-badge {
-  background: rgba(244, 63, 94, 0.12);
-  border: 1px solid rgba(244, 63, 94, 0.3);
-  color: #fda4af;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 700;
+/* CIRCULAR TIMER */
+.circular-timer {
+  position: relative;
+  width: 54px;
+  height: 54px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  animation: pulse 2s infinite;
+  justify-content: center;
+}
+
+.circular-timer svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-timer circle {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.circular-timer .bg-circle {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.circular-timer .progress-circle {
+  stroke: var(--primary-glow);
+  stroke-dasharray: 138;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+
+.timer-num {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* TIMER SELECTOR (MODES) */
+.timer-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin: 20px 0 30px;
+}
+
+.mode-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.mode-card:hover, .mode-card.selected {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--primary-glow);
+  box-shadow: 0 0 15px var(--glass-glow);
+  transform: translateY(-2px);
+}
+
+.mode-card i {
+  font-size: 20px;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+}
+
+.mode-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mode-card p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
 
 /* QUESTION CONTENT */
 .question-text {
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
   color: #ffffff;
-  letter-spacing: -0.2px;
 }
 
 /* OPTIONS GRID */
@@ -325,12 +392,12 @@ header {
 /* START SCREEN */
 .start-screen {
   text-align: center;
-  padding: 20px 10px;
+  padding: 10px;
 }
 
 .start-icon {
-  width: 90px;
-  height: 90px;
+  width: 85px;
+  height: 85px;
   background: rgba(168, 85, 247, 0.12);
   border: 2px solid var(--primary-glow);
   border-radius: 50%;
@@ -338,32 +405,31 @@ header {
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
-  font-size: 38px;
+  font-size: 36px;
   color: var(--primary-glow);
   box-shadow: 0 0 30px var(--glass-glow);
 }
 
 .start-title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .start-desc {
   color: var(--text-muted);
-  font-size: 15px;
-  margin-bottom: 30px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
-/* RESULT REVIEW BOARD */
+/* RESULT SCREEN */
 .result-screen {
   text-align: center;
 }
 
 .result-score-circle {
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, rgba(15,23,42,0) 70%);
   border: 3px solid var(--primary-glow);
@@ -376,27 +442,27 @@ header {
 }
 
 .result-score-number {
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 900;
   color: #fff;
 }
 
 .result-score-total {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--accent-cyan);
   font-weight: 700;
 }
 
 .review-list {
-  margin: 25px 0;
+  margin: 20px 0;
   text-align: left;
-  max-height: 280px;
+  max-height: 250px;
   overflow-y: auto;
   padding-right: 8px;
 }
 
 .review-list::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 .review-list::-webkit-scrollbar-thumb {
   background: var(--glass-border);
@@ -406,8 +472,8 @@ header {
 .review-item {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  padding: 14px;
+  border-radius: 12px;
+  padding: 12px;
   margin-bottom: 10px;
   font-size: 13px;
 }
@@ -434,6 +500,7 @@ footer {
   .social { width: 100%; justify-content: center; flex-wrap: wrap; }
   .quiz-box { padding: 25px 18px; }
   .question-text { font-size: 17px; }
+  .timer-modes { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -451,7 +518,7 @@ footer {
         <span>Kutubxona</span>
       </a>
       <a href="quiz.html" class="nav-link active">
-        <i class="fa-solid fa-gamepad"></i>
+        <i class="fa-solid fa-stopwatch"></i>
         <span>Quiz</span>
       </a>
       <a href="https://instagram.com/huququstoz" target="_blank" class="nav-link">
@@ -471,10 +538,35 @@ footer {
     <!-- Dastlabki boshlash ekrani -->
     <div class="start-screen animate__animated animate__fadeIn">
       <div class="start-icon">
-        <i class="fa-solid fa-scale-balanced"></i>
+        <i class="fa-solid fa-hourglass-half"></i>
       </div>
-      <h1 class="start-title">Huquqiy Bilimlar Duellari</h1>
-      <p class="start-desc">O'zbekiston Respublikasi Qonunchiligi va Konstitutsiyasi bo'yicha interaktiv test sinoviga xush kelibsiz. Har bir savol uchun 20 soniya vaqt beriladi!</p>
+      <h1 class="start-title">Huquqiy Quiz: Timer Rejimida</h1>
+      <p class="start-desc">O'zingizga qulay timer vaqtini tanlang va bilimlaringizni sinovdan o'tkazing!</p>
+      
+      <!-- TIMER MODE SELECTOR -->
+      <div class="timer-modes">
+        <div class="mode-card" onclick="setTimerMode(10, this)">
+          <i class="fa-solid fa-bolt"></i>
+          <h4>10 Sekund</h4>
+          <p>Ekstremal rejim</p>
+        </div>
+        <div class="mode-card selected" onclick="setTimerMode(20, this)">
+          <i class="fa-solid fa-stopwatch"></i>
+          <h4>20 Sekund</h4>
+          <p>Standart rejim</p>
+        </div>
+        <div class="mode-card" onclick="setTimerMode(30, this)">
+          <i class="fa-solid fa-clock"></i>
+          <h4>30 Sekund</h4>
+          <p>Maksimal rejim</p>
+        </div>
+        <div class="mode-card" onclick="setTimerMode(0, this)">
+          <i class="fa-solid fa-infinity"></i>
+          <h4>Sekundomer</h4>
+          <p>Vaqt cheklovsiz</p>
+        </div>
+      </div>
+
       <button class="btn-next" onclick="startQuiz()">
         <span>Sinovni Boshlash</span>
         <i class="fa-solid fa-play"></i>
@@ -541,11 +633,34 @@ const quizData = [
   }
 ];
 
+let selectedTimerLimit = 20; // standart 20 soniya
 let currentIdx = 0;
 let score = 0;
 let timer = null;
 let timeLeft = 20;
+let stopwatchElapsed = 0;
 let userAnswers = [];
+
+// Audio Beep effektlari uchun
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playBeep(freq = 600, duration = 0.1) {
+  try {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+    osc.stop(audioCtx.currentTime + duration);
+  } catch(e){}
+}
+
+function setTimerMode(seconds, cardEl) {
+  selectedTimerLimit = seconds;
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  cardEl.classList.add('selected');
+}
 
 const quizBox = document.getElementById('quizBox');
 
@@ -558,8 +673,6 @@ function startQuiz() {
 
 function renderQuestion() {
   clearInterval(timer);
-  timeLeft = 20;
-  
   const currentQ = quizData[currentIdx];
   const progressPercent = ((currentIdx) / quizData.length) * 100;
   
@@ -573,9 +686,14 @@ function renderQuestion() {
         <i class="fa-solid fa-fire"></i>
         <span>Savol: ${currentIdx + 1} / ${quizData.length}</span>
       </div>
-      <div class="timer-badge">
-        <i class="fa-solid fa-stopwatch"></i>
-        <span id="timerText">20s</span>
+
+      <!-- CIRCULAR TIMER DISPLAY -->
+      <div class="circular-timer">
+        <svg>
+          <circle class="bg-circle" cx="27" cy="27" r="22"></circle>
+          <circle class="progress-circle" id="circleProgress" cx="27" cy="27" r="22"></circle>
+        </svg>
+        <div class="timer-num" id="timerText">--</div>
       </div>
     </div>
 
@@ -603,25 +721,57 @@ function renderQuestion() {
     </div>
   `;
 
-  startTimer();
+  if (selectedTimerLimit > 0) {
+    runCountdownTimer();
+  } else {
+    runStopwatch();
+  }
 }
 
-function startTimer() {
+// BARKAMOL ORQA SANOQ (COUNTDOWN) TAYMERI
+function runCountdownTimer() {
+  timeLeft = selectedTimerLimit;
   const timerText = document.getElementById('timerText');
+  const circleProgress = document.getElementById('circleProgress');
+  const maxDash = 138; // 2 * PI * 22 radius
+
+  timerText.innerText = `${timeLeft}s`;
+
   timer = setInterval(() => {
     timeLeft--;
-    if (timerText) timerText.innerText = `${timeLeft}s`;
+    timerText.innerText = `${timeLeft}s`;
+
+    // Halqa aylanasini qisqartirish
+    const offset = maxDash - (timeLeft / selectedTimerLimit) * maxDash;
+    if(circleProgress) {
+      circleProgress.style.strokeDashoffset = offset;
+      if (timeLeft <= 5) {
+        circleProgress.style.stroke = '#f43f5e'; // qizil ogohlantirish
+        playBeep(750, 0.1);
+      }
+    }
 
     if (timeLeft <= 0) {
       clearInterval(timer);
-      autoTimeOut();
+      playBeep(300, 0.3);
+      selectAnswer(-1); // Vaqt tugadi
     }
   }, 1000);
 }
 
-function autoTimeOut() {
-  // Vaqt tugaganda avtomatik o'tkazish
-  selectAnswer(-1);
+// SEKUNDOMER REJIMI (CHEKSIZ)
+function runStopwatch() {
+  stopwatchElapsed = 0;
+  const timerText = document.getElementById('timerText');
+  const circleProgress = document.getElementById('circleProgress');
+  if(circleProgress) circleProgress.style.strokeDasharray = 'none';
+
+  timerText.innerText = `0s`;
+
+  timer = setInterval(() => {
+    stopwatchElapsed++;
+    timerText.innerText = `${stopwatchElapsed}s`;
+  }, 1000);
 }
 
 function selectAnswer(selectedIdx) {
@@ -631,18 +781,16 @@ function selectAnswer(selectedIdx) {
   
   cards.forEach(c => c.classList.add('disabled'));
 
-  let isCorrect = false;
-
   if (selectedIdx === currentQ.correct) {
     score++;
-    isCorrect = true;
   }
 
   userAnswers.push({
     q: currentQ.q,
     selected: selectedIdx,
     correct: currentQ.correct,
-    options: currentQ.options
+    options: currentQ.options,
+    timeUsed: selectedTimerLimit > 0 ? (selectedTimerLimit - timeLeft) : stopwatchElapsed
   });
 
   cards.forEach((card, idx) => {
@@ -672,7 +820,7 @@ function showResults() {
   const percentage = Math.round((score / quizData.length) * 100);
   
   if (percentage >= 80 && typeof confetti === 'function') {
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
   }
 
   quizBox.innerHTML = `
@@ -684,7 +832,7 @@ function showResults() {
 
       <h2>Natijangiz: ${percentage}%</h2>
       <p style="color: var(--text-muted); margin-top: 6px; font-size: 14px;">
-        ${percentage >= 80 ? 'Ajoyib! Huquqiy bilimlaringiz yuqori darajada.' : 'Yaxshi harakat! Yana darsliklarni takrorlash tavsiya etiladi.'}
+        ${percentage >= 80 ? 'Ajoyib tezlik va aniqlik! Sinov muvaffaqiyatli topshirildi.' : 'Biroz ko\'proq mashq va tezlik kerak. Qayta urinib ko\'ring!'}
       </p>
 
       <div class="review-list">
@@ -692,16 +840,17 @@ function showResults() {
           <div class="review-item ${item.selected === item.correct ? 'is-correct' : 'is-wrong'}">
             <strong>${idx + 1}. ${item.q}</strong><br>
             <span style="color: ${item.selected === item.correct ? 'var(--success-color)' : 'var(--error-color)'}">
-              Sizning javobingiz: ${item.selected >= 0 ? item.options[item.selected] : 'Vaqt tugadi'}
+              Javobingiz: ${item.selected >= 0 ? item.options[item.selected] : 'Vaqt tugadi (0s)'} 
+              <small style="color: var(--text-muted);">(${item.timeUsed}s ketdi)</small>
             </span><br>
             ${item.selected !== item.correct ? `<span style="color: var(--accent-cyan)">To'g'ri javob: ${item.options[item.correct]}</span>` : ''}
           </div>
         `).join('')}
       </div>
 
-      <button class="btn-next" onclick="startQuiz()" style="margin: auto;">
+      <button class="btn-next" onclick="location.reload()" style="margin: auto;">
         <i class="fa-solid fa-rotate-right"></i>
-        <span>Qaytadan Sinash</span>
+        <span>Qayta Boshlash</span>
       </button>
     </div>
   `;
