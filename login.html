@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Kirish — Huquq Ustoz</title>
+<link rel="icon" type="image/jpeg" href="huquq.jpg">
+<style>
+*{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; }
+body{ background:#0f172a; color:white; min-height:100vh; display:flex; align-items:center; justify-content:center; }
+.login-card{ background:#111827; border:1px solid #333; padding:40px; border-radius:12px; width:100%; max-width:400px; text-align:center; }
+.login-card h2{ color:#a855f7; margin-bottom:20px; }
+input{ width:100%; padding:12px; background:#1f2937; border:1px solid #444; border-radius:8px; color:white; margin-bottom:15px; outline:none; }
+input:focus{ border-color:#a855f7; }
+.btn{ width:100%; padding:12px; background:#7c3aed; border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer; }
+.btn:hover{ background:#6d28d9; }
+</style>
+</head>
+<body>
+<div class="login-card">
+  <h2>Admin Panelga Kirish</h2>
+  <form id="login-form">
+    <input type="password" id="admin-pass" placeholder="Parolni kiriting..." required>
+    <button type="submit" class="btn">Kirish</button>
+  </form>
+</div>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const pass = document.getElementById('admin-pass').value;
+  // Parol: admin123 (Xohlaganingizga o'zgartirishingiz mumkin)
+  if(pass === 'admin123') {
+    localStorage.setItem('isAdmin', 'true');
+    window.location.href = 'admin.html';
+  } else {
+    alert('Parol noto\'g'ri!');
+  }
+});
+</script>
+</body>
+</html>
