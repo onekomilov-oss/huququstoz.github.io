@@ -189,14 +189,22 @@ footer{ padding:25px 0; border-top:1px solid #333; background:#0f172a; color:#9c
             </div>
           </div>
 
-          <!-- HA / YO'Q SAVOL KIRITISH -->
+          <!-- HA / YO'Q SAVOL KIRITISH (TUGMACHALAR RO'YXATI) -->
           <div id="boolean-inputs" style="display:none; margin-top:15px;">
-            <div class="form-group">
-              <label>To'g'ri Javob:</label>
-              <select id="bool-ans">
-                <option value="true">Ha (To'g'ri)</option>
-                <option value="false">Yo'q (Noto'g'ri)</option>
-              </select>
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color:#cbd5e1;">To'g'ri javobni tanlang:</label>
+            <div class="options-wrapper">
+              <div class="option-row correct-selected" id="bool-row-true">
+                <label class="radio-box">
+                  <input type="radio" name="boolAnsRadio" value="true" checked onclick="markCorrectBool(true)">
+                </label>
+                <span>Ha (To'g'ri)</span>
+              </div>
+              <div class="option-row" id="bool-row-false">
+                <label class="radio-box">
+                  <input type="radio" name="boolAnsRadio" value="false" onclick="markCorrectBool(false)">
+                </label>
+                <span>Yo'q (Noto'g'ri)</span>
+              </div>
             </div>
           </div>
 
@@ -274,15 +282,30 @@ function toggleQType(type) {
   }
 }
 
-// Qaysi radio-tugma bosilsa, yashil chegarani o'shanga o'tkazish
+// Variantli savol radiosi bosilganda chegaralarni yangilash
 function markCorrect(selectedIndex) {
   for (let i = 0; i < 4; i++) {
     const row = document.getElementById(`opt-row-${i}`);
-    if (i === selectedIndex) {
-      row.classList.add('correct-selected');
-    } else {
-      row.classList.remove('correct-selected');
+    if (row) {
+      if (i === selectedIndex) {
+        row.classList.add('correct-selected');
+      } else {
+        row.classList.remove('correct-selected');
+      }
     }
+  }
+}
+
+// Ha / Yo'q radiosi bosilganda chegaralarni yangilash
+function markCorrectBool(isTrue) {
+  const rowTrue = document.getElementById('bool-row-true');
+  const rowFalse = document.getElementById('bool-row-false');
+  if (isTrue) {
+    rowTrue.classList.add('correct-selected');
+    rowFalse.classList.remove('correct-selected');
+  } else {
+    rowFalse.classList.add('correct-selected');
+    rowTrue.classList.remove('correct-selected');
   }
 }
 </script>
