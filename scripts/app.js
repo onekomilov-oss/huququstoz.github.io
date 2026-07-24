@@ -13,11 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchData();
   loadBioToHomepage();
 
-  // ADMIN PANELGA KIRISHNI TEKSHIRISH (Aniqroq mantiq)
+  // ADMIN PANELGA KIRISHNI TEKSHIRISH
   const isAdminPage = window.location.pathname.toLowerCase().includes('admin');
   
   if (isAdminPage) {
-    // Agar xotirada 'isAdmin' bo'lmasa, kirishga ruxsat berilmaydi
     if (localStorage.getItem('isAdmin') !== 'true') {
       window.location.href = 'login.html';
       return;
@@ -167,7 +166,7 @@ function initAdmin() {
     renderAdminCategories();
   });
 
-  // Savol Qo'shish
+  // Savol Qo'shish (TO'G'RILANGAN MANTEQ)
   document.getElementById('add-q-btn')?.addEventListener('click', () => {
     const cat = document.getElementById('admin-cat-select').value;
     const qText = document.getElementById('q-text-input').value.trim();
@@ -181,15 +180,32 @@ function initAdmin() {
       const vInputs = document.querySelectorAll('.v-inp');
       const vars = Array.from(vInputs).map(i => i.value.trim());
       if (vars.some(v => !v)) return alert('Barcha 4 ta variantni yozing!');
+      
+      // Radio tugmadan belgilangan to'g'ri javob indeksini olish (0, 1, 2, 3)
+      const selectedRadio = document.querySelector('input[name="correctVariant"]:checked');
+      const correctIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
+
       newQ.variantlar = vars;
-      newQ.tugri = 0;
+      newQ.tugri = correctIdx; // Tanlangan radio indeksi saqlanadi
     } else {
       newQ.tugri = document.getElementById('bool-ans').value === 'true';
     }
 
     quizData[cat].push(newQ);
+    
+    // Formalarni tozalash va standart holatga keltirish
     document.getElementById('q-text-input').value = '';
     document.querySelectorAll('.v-inp').forEach(i => i.value = '');
+    
+    // Birinchi radio tugmani qayta tanlab qo'yish
+    const defaultRadio = document.querySelector('input[name="correctVariant"][value="0"]');
+    if (defaultRadio) {
+      defaultRadio.checked = true;
+      if (typeof window.markCorrect === 'function') {
+        window.markCorrect(0);
+      }
+    }
+
     renderAdminCategories();
     alert('Savol muvaffaqiyatli qo\'shildi!');
   });
