@@ -1,0 +1,49 @@
+{
+  "Huquq asoslari": [
+    {
+      "savol": "O'zbekiston Respublikasi Konstitutsiyasi qachon qabul qilingan?",
+      "turi": "variant",
+      "variantlar": [
+        "1991-yil",
+        "1992-yil",
+        "1993-yil",
+        "1994-yil"
+      ],
+      "tugri": 2
+    },
+    {
+      "savol": "Huquq shaxsning asosiy huquqi va erkinligini kafolatlaydimi?",
+      "turi": "boolean",
+      "tugri": true
+    },
+    {
+      "savol": "O'zbekiston Respublikasining davlat tili nima?",
+      "turi": "variant",
+      "variantlar": [
+        "Rus tili",
+        "O'zbek tili",
+        "Ingliz tili",
+        "Arab tili"
+      ],
+      "tugri": 1
+    }
+  ],
+  "Jinoiy huquq": [
+    {
+      "savol": "Jinoiy javobgarlik yoshi qanchadan boshlanadi?",
+      "turi": "variant",
+      "variantlar": [
+        "14 yosh",
+        "16 yosh",
+        "18 yosh",
+        "21 yosh"
+      ],
+      "tugri": 1
+    },
+    {
+      "savol": "O'g'irlik jinoyat hisoblanadi?",
+      "turi": "boolean",
+      "tugri": true
+    }
+  ]
+}
