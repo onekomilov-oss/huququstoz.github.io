@@ -1,8 +1,17 @@
 let quizData = {};
 
+// Tablarni almashish
+function switchTab(tabId, btnEl) {
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btnEl.classList.add('active');
+}
+
 // ===== DOM ISHLASHINI ANIQLASH =====
 document.addEventListener('DOMContentLoaded', () => {
   fetchData();
+  loadBioToHomepage();
 
   // Admin Kirishni tekshirish
   if (window.location.pathname.includes('admin.html')) {
@@ -70,7 +79,6 @@ function initQuiz() {
   document.getElementById('next-btn').addEventListener('click', () => {
     if (selectedOption === null) return alert('Javobni tanlang!');
     
-    // Natijani hisoblash
     const q = currentQuestions[currentQIndex];
     if (q.turi === 'variant' && selectedOption === q.tugri) userScore++;
     if (q.turi === 'boolean' && selectedOption === q.tugri) userScore++;
@@ -128,6 +136,7 @@ function showResults() {
 // ==========================================
 function initAdmin() {
   renderAdminCategories();
+  initBioForm();
 
   document.getElementById('q-type-select')?.addEventListener('change', (e) => {
     if (e.target.value === 'variant') {
@@ -166,7 +175,7 @@ function initAdmin() {
       const vars = Array.from(vInputs).map(i => i.value.trim());
       if (vars.some(v => !v)) return alert('Barcha 4 ta variantni yozing!');
       newQ.variantlar = vars;
-      newQ.tugri = 0; // A variant har doim to'g'ri deb belgilanadi
+      newQ.tugri = 0; // Birinchi kiritilgan (A) variant to'g'ri deb olinadi
     } else {
       newQ.tugri = document.getElementById('bool-ans').value === 'true';
     }
@@ -197,16 +206,14 @@ function renderAdminCategories() {
   catList.innerHTML = '';
 
   Object.keys(quizData).forEach(cat => {
-    // Select dropdown to'ldirish
     const opt = document.createElement('option');
     opt.value = cat;
     opt.textContent = cat;
     catSelect.appendChild(opt);
 
-    // Ro'yxatni chiqarish
     const box = document.createElement('div');
     box.style.marginBottom = '15px';
-    box.innerHTML = `<h3 style="color:#a855f7;">${cat} (${quizData[cat].length} ta savol)</h3>`;
+    box.innerHTML = `<h3 style="color:#a855f7; margin-bottom:8px;">${cat} (${quizData[cat].length} ta savol)</h3>`;
 
     quizData[cat].forEach((q, idx) => {
       const item = document.createElement('div');
@@ -226,5 +233,64 @@ function deleteQ(cat, idx) {
   if (confirm('Ushbu savolni o\'chirmoqchimisiz?')) {
     quizData[cat].splice(idx, 1);
     renderAdminCategories();
+  }
+}
+
+// ==========================================
+// BIO VA MATNLARNI BOSHQARISH
+// ==========================================
+function initBioForm() {
+  const bioData = JSON.parse(localStorage.getItem('siteBio') || '{}');
+  
+  if (bioData.heroTitle) document.getElementById('hero-title-input').value = bioData.heroTitle;
+  if (bioData.heroDesc) document.getElementById('hero-desc-input').value = bioData.heroDesc;
+  if (bioData.aboutTitle) document.getElementById('about-title-input').value = bioData.aboutTitle;
+  if (bioData.aboutDesc) document.getElementById('about-desc-input').value = bioData.aboutDesc;
+  if (bioData.tgLink) document.getElementById('tg-link-input').value = bioData.tgLink;
+  if (bioData.instaLink) document.getElementById('insta-link-input').value = bioData.instaLink;
+
+  document.getElementById('save-bio-btn')?.addEventListener('click', () => {
+    const newBio = {
+      heroTitle: document.getElementById('hero-title-input').value,
+      heroDesc: document.getElementById('hero-desc-input').value,
+      aboutTitle: document.getElementById('about-title-input').value,
+      aboutDesc: document.getElementById('about-desc-input').value,
+      tgLink: document.getElementById('tg-link-input').value,
+      instaLink: document.getElementById('insta-link-input').value
+    };
+
+    localStorage.setItem('siteBio', JSON.stringify(newBio));
+    alert('Bosh sahifa ma\'lumotlari saqlandi!');
+  });
+}
+
+function loadBioToHomepage() {
+  const bioData = JSON.parse(localStorage.getItem('siteBio') || '{}');
+  
+  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+    if (bioData.heroTitle) {
+      const el = document.querySelector('.hero h1');
+      if (el) el.textContent = bioData.heroTitle;
+    }
+    if (bioData.heroDesc) {
+      const el = document.querySelector('.hero p');
+      if (el) el.textContent = bioData.heroDesc;
+    }
+    if (bioData.aboutTitle) {
+      const el = document.querySelector('.about h2');
+      if (el) el.textContent = bioData.aboutTitle;
+    }
+    if (bioData.aboutDesc) {
+      const el = document.querySelector('.about p');
+      if (el) el.textContent = bioData.aboutDesc;
+    }
+    if (bioData.tgLink) {
+      const el = document.querySelector('a[href*="t.me"]');
+      if (el) el.href = bioData.tgLink;
+    }
+    if (bioData.instaLink) {
+      const el = document.querySelector('a[href*="instagram.com"]');
+      if (el) el.href = bioData.instaLink;
+    }
   }
 }
