@@ -1,3 +1,4 @@
+// ===== STATE VARIABLES =====
 let categories = {};
 let currentData = {};
 
@@ -24,18 +25,39 @@ function setupEventListeners() {
     if (e.target.value === 'variant') {
       variantsContainer.style.display = 'block';
       booleanContainer.style.display = 'none';
-      variantAnswerSelect.style.display = 'block';
+      if (variantAnswerSelect) variantAnswerSelect.style.display = 'block';
     } else {
       variantsContainer.style.display = 'none';
       booleanContainer.style.display = 'block';
-      variantAnswerSelect.style.display = 'none';
+      if (variantAnswerSelect) variantAnswerSelect.style.display = 'none';
     }
+  });
+
+  // Dynamic variant inputs generator & listener (agar variantlar kiritilganda)
+  const variantInputs = document.querySelectorAll('.variant-input');
+  variantInputs.forEach((input, index) => {
+    input.addEventListener('input', updateVariantAnswerOptions);
+  });
+}
+
+function updateVariantAnswerOptions() {
+  if (!variantAnswerSelect) return;
+  const variantInputs = document.querySelectorAll('.variant-input');
+  variantAnswerSelect.innerHTML = '';
+  
+  variantInputs.forEach((input, index) => {
+    const val = input.value.trim() || `${index + 1}-variant`;
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = `${String.fromCharCode(65 + index)}) ${val}`;
+    variantAnswerSelect.appendChild(option);
   });
 }
 
 // ===== LOAD DATA =====
 async function loadData() {
   try {
+    // Admin papkasi ichidan ildiz papkadagi savollar.json'ni chaqirish
     const response = await fetch('../savollar.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Failed to fetch data');
     categories = await response.json();
@@ -44,7 +66,7 @@ async function loadData() {
     renderCategoriesList();
   } catch (error) {
     console.error('Error loading data:', error);
-    alert('Ma\'lumotlarni yuklashda xatolik yuz berdi!');
+    alert("Ma'lumotlarni yuklashda xatolik yuz berdi! savollar.json faylini tekshiring.");
   }
 }
 
@@ -66,10 +88,19 @@ function renderCategoriesList() {
     categoryItem.className = 'category-item';
 
     const categoryHeader = document.createElement('h3');
+    categoryHeader.style.display = 'flex';
+    categoryHeader.style.justifyContent = 'space-between';
+    categoryHeader.style.alignItems = 'center';
+    
     categoryHeader.innerHTML = `
-      ${categoryName}
-      <button onclick="deleteCategory('${categoryName}')">Toifani O'chirish</button>
+      <span>${escapeHtml(categoryName)} (${questions.length} ta savol)</span>
     `;
+
+    const deleteCatBtn = document.createElement('button');
+    deleteCatBtn.className = 'btn btn-danger';
+    deleteCatBtn.textContent = "Toifani O'chirish";
+    deleteCatBtn.onclick = () => deleteCategory(categoryName);
+    categoryHeader.appendChild(deleteCatBtn);
 
     const questionsList = document.createElement('div');
     questionsList.className = 'questions-list';
@@ -77,12 +108,15 @@ function renderCategoriesList() {
     questions.forEach((question, index) => {
       const questionItem = document.createElement('div');
       questionItem.className = 'question-item';
+      questionItem.style.display = 'flex';
+      questionItem.style.justifyContent = 'space-between';
+      questionItem.style.margin = '8px 0';
 
       const questionText = document.createElement('p');
-      questionText.textContent = question.savol;
+      questionText.innerHTML = `<b>${index + 1}.</b> ${escapeHtml(question.savol)}`;
 
       const deleteButton = document.createElement('button');
-      deleteButton.textContent = 'O\'chirish';
+      deleteButton.textContent = "O'chirish";
       deleteButton.onclick = () => deleteQuestion(categoryName, index);
 
       questionItem.appendChild(questionText);
@@ -140,12 +174,14 @@ function addNewQuestion() {
   if (questionType === 'variant') {
     const variantInputs = document.querySelectorAll('.variant-input');
     const variants = Array.from(variantInputs).map(input => input.value.trim());
+    
     if (variants.some(v => !v)) {
-      alert('Barcha variantlarni to\'ldiring!');
+      alert("Barcha variantlarni to'ldiring!");
       return;
     }
+    
     newQuestion.variantlar = variants;
-    const correctAnswerIndex = parseInt(variantAnswerSelect.value);
+    const correctAnswerIndex = parseInt(variantAnswerSelect.value, 10) || 0;
     newQuestion.tugri = correctAnswerIndex;
   } else {
     newQuestion.tugri = booleanAnswerSelect.value === 'true';
@@ -154,11 +190,12 @@ function addNewQuestion() {
   categories[categoryName].push(newQuestion);
   currentData[categoryName].push(newQuestion);
 
-  // Clear inputs
+  // Formani tozalash
   newQuestionTextInput.value = '';
   document.querySelectorAll('.variant-input').forEach(input => input.value = '');
 
   renderCategoriesList();
+  alert("Savol muvaffaqiyatli qo'shildi! Ish yakunida 'Saqlash' tugmasini bosing.");
 }
 
 // ===== DELETE CATEGORY =====
@@ -173,7 +210,7 @@ function deleteCategory(categoryName) {
 
 // ===== DELETE QUESTION =====
 function deleteQuestion(categoryName, questionIndex) {
-  if (confirm('Bu savolni o\'chirishni xohlaysizmi?')) {
+  if (confirm("Bu savolni o'chirishni xohlaysizmi?")) {
     categories[categoryName].splice(questionIndex, 1);
     currentData[categoryName].splice(questionIndex, 1);
     renderCategoriesList();
@@ -183,11 +220,9 @@ function deleteQuestion(categoryName, questionIndex) {
 // ===== SAVE DATA =====
 async function saveData() {
   try {
-    // Create a Blob with the JSON data
     const data = JSON.stringify(categories, null, 2);
     const blob = new Blob([data], { type: 'application/json' });
 
-    // Create a download link
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -197,9 +232,16 @@ async function saveData() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    alert('Ma\'lumotlar muvaffaqiyatli saqlandi! Faylni "savollar.json" nomli fayl sifatida yuklab oling.');
+    alert('Yangi "savollar.json" fayli yuklandi! Uni loyihangizdagi asosiy "savollar.json" fayli o\'rniga joylashtiring.');
   } catch (error) {
     console.error('Error saving data:', error);
-    alert('Ma\'lumotlarni saqlashda xatolik yuz berdi!');
+    alert("Ma'lumotlarni saqlashda xatolik yuz berdi!");
   }
+}
+
+// Helper: HTML escape
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
