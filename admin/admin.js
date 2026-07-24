@@ -33,9 +33,8 @@ function setupEventListeners() {
     }
   });
 
-  // Dynamic variant inputs generator & listener (agar variantlar kiritilganda)
   const variantInputs = document.querySelectorAll('.variant-input');
-  variantInputs.forEach((input, index) => {
+  variantInputs.forEach((input) => {
     input.addEventListener('input', updateVariantAnswerOptions);
   });
 }
@@ -57,8 +56,8 @@ function updateVariantAnswerOptions() {
 // ===== LOAD DATA =====
 async function loadData() {
   try {
-    // Admin papkasi ichidan ildiz papkadagi savollar.json'ni chaqirish
-    const response = await fetch('../savollar.json', { cache: 'no-store' });
+    // Fayl ildiz papkaga ko'chgani uchun yo'li to'g'rilandi:
+    const response = await fetch('./savollar.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Failed to fetch data');
     categories = await response.json();
     currentData = JSON.parse(JSON.stringify(categories)); // Deep copy
