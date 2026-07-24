@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huquq Ustoz | Admin Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="../index.html">
+        <img src="../images/huquq.jpg" alt="Huquq Ustoz Logo">
+        <h2>Huquq Ustoz</h2>
+      </a>
+      <div class="social">
+        <a href="../index.html">Bosh sahifa</a>
+        <a href="../quiz.html">Quiz</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="login-container">
+    <div class="login-card">
+      <h1>Admin Panelga Kirish</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Foydalanuvchi nomi:</label>
+          <input type="text" id="username" name="username" placeholder="Foydalanuvchi nomini kiriting" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Parol:</label>
+          <input type="password" id="password" name="password" placeholder="Parolni kiriting" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Kirish</button>
+      </form>
+      <div id="error-message" class="error-message"></div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Huquq Ustoz. Barcha huquqlar himoyalangan.
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+</html>
