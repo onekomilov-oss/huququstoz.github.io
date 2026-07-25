@@ -122,7 +122,9 @@
     -webkit-backdrop-filter: blur(16px);
     font-size: 1.05rem;
     color: #f8fafc;
-    outline: none;
+    outline: none !important;
+    -webkit-appearance: none;
+    appearance: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -136,6 +138,7 @@
     background: rgba(255, 255, 255, 0.07);
     box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
     transform: translateY(-2px);
+    outline: none !important;
 }
 
 .legal-dictionary-section .alphabet-filter {
@@ -155,6 +158,7 @@
     font-weight: 600;
     font-size: 0.95rem;
     color: #cbd5e1;
+    outline: none !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -404,7 +408,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const query = searchInput.value.toLowerCase().trim();
         
         const filtered = dictionaryData.filter(item => {
-            // includes() orqali so'z qayerida kelishidan qat'iy nazar (o'rtada yoki oxirida bo'lsa ham) qidiriladi
             const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
             const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
             return matchesSearch && matchesLetter;
@@ -425,7 +428,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Boshlang'ich yuklash
     render(dictionaryData);
 });
 </script>
