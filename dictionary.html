@@ -412,14 +412,35 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+  
     function filterData() {
         const query = searchInput.value.toLowerCase().trim();
         
-        const filtered = dictionaryData.filter(item => {
+        let filtered = dictionaryData.filter(item => {
             const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
             const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
             return matchesSearch && matchesLetter;
         });
+
+        // Agar tanlangan harf bo'yicha qidirilganda hech narsa topilmasa, 
+        // lekin qidiruv maydonida matn bo'lsa — filtrni avtomatik "ALL" (Barchasi) ga o'tkazib yuboramiz
+        if (filtered.length === 0 && query.length > 0 && currentLetter !== 'ALL') {
+            currentLetter = 'ALL';
+            
+            // Tugmalarning vizual faolligini (active class) ham "ALL" ga moslaymiz
+            alphabetButtons.forEach(b => {
+                if (b.getAttribute('data-letter') === 'ALL') {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+
+            // "ALL" bilan qaytadan qidirib natijani olamiz
+            filtered = dictionaryData.filter(item => {
+                return item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
+            });
+        }
 
         render(filtered);
     }
