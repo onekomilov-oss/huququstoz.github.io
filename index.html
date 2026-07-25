@@ -13,275 +13,14 @@
 <meta property="og:image" content="huquq.jpg">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
 
+<!-- Google Fonts: Qiyishaytirilgan (Italic/Handwriting) va zamonaviy shriftlar -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <!-- FontAwesome Ikonkalar Kutubxonasi -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-/* ZAMONAVIY GLASSMORPHISM DIZAYN */
-:root {
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.08);
-  --primary-purple: #8b5cf6;
-  --accent-cyan: #06b6d4;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-}
-
-body {
-  background: var(--bg-gradient);
-  color: var(--text-main);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* NAVIGATION HEADER */
-header {
-  position: sticky;
-  top: 0;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--glass-border);
-  padding: 16px 0;
-  z-index: 1000;
-}
-
-.container {
-  width: 90%;
-  max-width: 1150px;
-  margin: auto;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-
-.logo img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--primary-purple);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
-}
-
-.logo h2 {
-  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.social {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: var(--text-main);
-  padding: 10px 18px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 14px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav-link i {
-  color: #a78bfa;
-}
-
-.nav-link:hover {
-  background: var(--glass-hover);
-  border-color: var(--primary-purple);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
-}
-
-/* HERO SECTION */
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 80vh;
-  padding: 60px 20px;
-  position: relative;
-}
-
-.hero-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 50px 35px;
-  border-radius: 24px;
-  max-width: 850px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-}
-
-.hero h1 {
-  font-size: 46px;
-  line-height: 1.2;
-  margin-bottom: 24px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  font-size: 18px;
-  line-height: 1.8;
-  color: var(--text-muted);
-  margin-bottom: 35px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.primary {
-  background: linear-gradient(135deg, #7c3aed, #4f46e5);
-  color: white;
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
-}
-
-.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
-}
-
-.secondary {
-  background: var(--glass-bg);
-  border: 1px solid var(--primary-purple);
-  color: white;
-}
-
-.secondary:hover {
-  background: rgba(124, 58, 237, 0.15);
-  transform: translateY(-3px);
-}
-
-/* ABOUT SECTION */
-.about {
-  padding: 80px 20px;
-  position: relative;
-}
-
-.about-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  border-radius: 24px;
-  padding: 45px 35px;
-  max-width: 850px;
-  margin: auto;
-  text-align: center;
-}
-
-.about h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: #c084fc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.about p {
-  line-height: 1.8;
-  color: var(--text-muted);
-  font-size: 17px;
-}
-
-/* FOOTER */
-footer {
-  margin-top: auto;
-  padding: 30px 0;
-  border-top: 1px solid var(--glass-border);
-  background: rgba(15, 23, 42, 0.9);
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  color: var(--text-muted);
-  font-size: 14px;
-}
-
-.admin-link {
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.admin-link:hover {
-  color: var(--accent-cyan);
-}
-
-/* RESPONSIVE DESIGN */
-@media(max-width: 768px) {
-  .logo h2 { font-size: 20px; }
-  .hero-card { padding: 30px 20px; }
-  .hero h1 { font-size: 32px; }
-  .hero p { font-size: 16px; }
-  .nav { flex-direction: column; gap: 15px; }
-  .social { width: 100%; justify-content: center; }
-  .nav-link { padding: 8px 12px; font-size: 13px; }
-  .footer-content { justify-content: center; text-align: center; }
-}
-</style>
+<!-- Tashqi CSS dizayn fayli -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -300,7 +39,6 @@ footer {
         <i class="fa-solid fa-circle-question"></i>
         <span>Quiz</span>
       </a>
-      <!-- Yuridik lug'at havolasi qo'shildi -->
       <a href="dictionary.html" class="nav-link">
         <i class="fa-solid fa-graduation-cap"></i>
         <span>Yuridik Lug'at</span>
@@ -317,14 +55,33 @@ footer {
   </div>
 </header>
 
+<!-- SIRLI SAHIFA BO'LIMI (ENG BIRINCHI O'RINDA) -->
+<section class="sirli-section">
+  <div class="sirli-container">
+    <h2 class="section-title"><i class="fa-solid fa-lock-open"></i> Sirli Sahifa</h2>
+    
+    <div class="flashcard-slider">
+      <div class="flashcard" id="flashcard">
+        <p class="quote-text" id="quoteText">"Adolat — davlatning poydevori."</p>
+        <p class="quote-author" id="quoteAuthor">— Alisher Navoiy</p>
+      </div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+      <span class="card-counter" id="cardCounter">1 / 5</span>
+      <button class="slider-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-card">
-    <!-- Admin paneldan o'zgaradigan sarlavha va matn ID'lari -->
     <h1 id="hero-title">Huquqiy bilim sari birgalikda</h1>
     <p id="hero-desc">
-      Men Zokirjon. Xalqaro huquq yo'nalishida tahsil olaman.
       Huquqiy savodxonlikni oshirish, talabalar va abituriyentlarga yordam berish,
-      hamda O'zbekiston qonunchiligi bo'yicha sodda va tushunarli ma'lumotlarni ulashishni maqsad qilganman.
+      hamda O'zbekiston qonunchiligi bo'yicha sodda va tushunarli ma'lumotlarni ulashish platformasi.
     </p>
     <div class="buttons">
       <a class="btn primary" href="kutubxona.html">
@@ -339,9 +96,9 @@ footer {
 
 <section class="about">
   <div class="about-card">
-    <!-- Admin paneldan o'zgaradigan haqida bo'limi ID'lari -->
     <h2 id="about-title"><i class="fa-solid fa-user-graduate"></i> Men haqimda</h2>
     <p id="about-desc">
+      Men Zokirjon. Xalqaro huquq yo'nalishida tahsil olaman.
       Huquq Ustoz loyihasi orqali talabalar, abituriyentlar va barcha fuqarolar uchun
       huquqiy bilimlarni sodda, tushunarli va ishonchli shaklda taqdim etaman.
       Kelajakda ushbu saytda elektron kutubxona, qonunlar bazasi,
@@ -357,8 +114,8 @@ footer {
   </div>
 </footer>
 
-<!-- TIZIM SKRIPTI -->
-<script src="scripts/app.js"></script>
+<!-- Kelajakda o'zingiz kod yozishingiz uchun mo'ljallangan alohida JavaScript fayl havolasi -->
+<script src="sirli-sahifa.js"></script>
 
 </body>
 </html>
