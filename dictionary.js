@@ -53,7 +53,7 @@ const dictionaryData = [
     { id: 52, term: "Harakat va Harakatsizlik", definition: "Huquqbuzarlikning obyektiv tomoni; taqiqlangan xulqni bajarish yoki majburiy vazifani bajarmaslik.", source: "Jinoyat / Maʼmuriy kodeks" },
     { id: 53, term: "Hukm", definition: "Sudlanuvchining aybdorligi va jazo chorasi toʻgʻrisida sud tomonidan chiqariladigan oliy qaror.", source: "Jinoyat-protsessual kodeksi" },
     { id: 54, term: "Huquqbuzarlik", definition: "Qonunchilik normalarini buzadigan, yuridik javobgarlikka sabab boʻladigan aybli, gʻayrihuquqiy qilmish.", source: "Huquq nazariyasi" },
-    { id: 55, term: "Ijro varaqasi", datum: "Sud qarorlarini majburiy tartibda ijro ettirish uchun asos boʻladigan maxsus hujjat.", source: "Sud hujjatlarini ijro etish to'g'risida Qonun" },
+    { id: 55, term: "Ijro varaqasi", definition: "Sud qarorlarini majburiy tartibda ijro ettirish uchun asos boʻladigan maxsus hujjat.", source: "Sud hujjatlarini ijro etish to'g'risida Qonun" },
     { id: 56, term: "Immutabilitet", definition: "Normativ hujjatlar yoki shartnoma shartlarini tomonlarning oʻzboshimchalik bilan bir tomonlama oʻzgartira olmasligi.", source: "Fuqarolik huquqi" },
     { id: 57, term: "Imperativ norma", definition: "Oʻzgartirilishi mutlaqo mumkin boʻlmagan, qatʼiy va majburiy xarakterga ega boʻlgan buyruq qoidasi.", source: "Huquq nazariyasi" },
     { id: 58, term: "In camera", definition: "Yopiq eshiklar ortida. Sirlarni saqlash maqsadida sud majlisining jamoatchilik ishtirokisiz oʻtkazilishi.", source: "Protsessual huquq" },
@@ -104,6 +104,7 @@ const dictionaryData = [
 // Kartochkalarni ekranga chiqarish
 function displayDictionary(data) {
     const grid = document.getElementById('dictionaryGrid');
+    if (!grid) return;
     grid.innerHTML = '';
     
     if (data.length === 0) {
@@ -127,12 +128,16 @@ function displayDictionary(data) {
 
 // Qidiruv funksiyasi
 function filterDictionary() {
-    const query = document.getElementById('dictionarySearch').value.toLowerCase().trim();
+    const searchInput = document.getElementById('dictionarySearch');
+    if (!searchInput) return;
+    const query = searchInput.value.toLowerCase().trim();
     
-    // Harflar filterini "Barchasi" ga qaytarish qidiruv paytida chalg'itmasligi uchun
+    // Harflar filterini "Barchasi" ga qaytarish
     const buttons = document.querySelectorAll('.alphabet-filter button');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    buttons[0].classList.add('active');
+    if (buttons.length > 0) {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        buttons[0].classList.add('active');
+    }
 
     const filtered = dictionaryData.filter(item => 
         item.term.toLowerCase().includes(query) || 
@@ -141,14 +146,19 @@ function filterDictionary() {
     displayDictionary(filtered);
 }
 
-// Harflar bo'yicha filtrlash
-function filterByLetter(letter) {
+// Harflar bo'yicha filtrlash (event o'rniga 'this' orqali ishlaydigan qilindi)
+function filterByLetter(letter, buttonElement) {
     const buttons = document.querySelectorAll('.alphabet-filter button');
     buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    
+    // Agar funksiya chaqirilganda element uzatilgan bo'lsa, unga 'active' klassini beramiz
+    if (buttonElement) {
+        buttonElement.classList.add('active');
+    }
 
     // Qidiruv satrini tozalash
-    document.getElementById('dictionarySearch').value = '';
+    const searchInput = document.getElementById('dictionarySearch');
+    if (searchInput) searchInput.value = '';
 
     if (letter === 'ALL') {
         displayDictionary(dictionaryData);
