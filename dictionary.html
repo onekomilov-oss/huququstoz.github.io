@@ -1,12 +1,13 @@
 <!-- Yuridik lug'at bo'limi -->
 <section class="legal-dictionary-section">
     <div class="container">
-        <h2 class="section-title">Yuridik Lug'at</h2>
+        <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> Yuridik Lug'at</h2>
         <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga qat'iy moslashtirilgan eng muhim atamalar bazasi</p>
         
         <!-- Qidirish va Filtrlash paneli -->
         <div class="dictionary-controls">
             <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" id="dictionarySearch" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)..." onkeyup="filterDictionary()">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
@@ -38,67 +39,107 @@
 
         <!-- Lug'at kartochkalari paneli -->
         <div class="dictionary-grid" id="dictionaryGrid">
-            <!-- JavaScript orqali to'ldiriladi -->
+            <!-- JavaScript orqali dinamik to'ldiriladi -->
         </div>
     </div>
 </section>
 
 <style>
-/* Glassmorphism dizayn uslubi */
+/* ZAMONAVIY GLASSMORPHISM DIZAYN (Sayt uslubiga moslashtirilgan) */
 .legal-dictionary-section {
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
     min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #f8fafc;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1150px;
     margin: 0 auto;
 }
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    color: #0f172a;
-    margin-bottom: 10px;
+    font-size: 2.8rem;
+    color: #f8fafc;
+    margin-bottom: 12px;
     font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-title i {
+    color: #a78bfa;
+    -webkit-text-fill-color: initial;
 }
 
 .section-subtitle {
     text-align: center;
-    color: #475569;
-    margin-bottom: 40px;
-    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 45px;
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
 
 .dictionary-controls {
-    max-width: 800px;
-    margin: 0 auto 40px auto;
+    max-width: 850px;
+    margin: 0 auto 45px auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
+}
+
+/* Qidiruv oynasi dizayni */
+.search-box {
+    position: relative;
+    width: 100%;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a78bfa;
+    font-size: 1.1rem;
 }
 
 .search-box input {
     width: 100%;
-    padding: 16px 24px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
+    padding: 16px 24px 16px 52px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     font-size: 1.05rem;
+    color: #f8fafc;
     outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.search-box input::placeholder {
+    color: #94a3b8;
 }
 
 .search-box input:focus {
-    border-color: #2563eb;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+    border-color: #8b5cf6;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
+    transform: translateY(-2px);
 }
 
+/* Alifbo filter tugmalari dizayni */
 .alphabet-filter {
     display: flex;
     flex-wrap: wrap;
@@ -107,70 +148,195 @@
 }
 
 .alphabet-filter button {
-    padding: 8px 14px;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(8px);
+    padding: 9px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
     cursor: pointer;
     font-weight: 600;
-    color: #334155;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.alphabet-filter button:hover, .alphabet-filter button.active {
-    background: #2563eb;
-    color: #fff;
+.alphabet-filter button:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #ffffff;
     transform: translateY(-2px);
 }
 
+.alphabet-filter button.active {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #ffffff;
+    border-color: #8b5cf6;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Kartochkalar grid va dizayni */
 .dictionary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 25px;
 }
 
 .dict-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 18px;
-    padding: 24px;
-    box-shadow: 0 10px 30px 0 rgba(31, 38, 135, 0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.dict-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .dict-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 15px 35px 0 rgba(31, 38, 135, 0.1);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.dict-card:hover::before {
+    opacity: 1;
 }
 
 .dict-term {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 10px;
-    letter-spacing: -0.5px;
+    color: #f8fafc;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
 }
 
 .dict-definition {
     font-size: 0.98rem;
-    color: #475569;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 20px;
 }
 
 .dict-source {
-    font-size: 0.8rem;
-    color: #2563eb;
+    font-size: 0.82rem;
+    color: #06b6d4;
     font-weight: 600;
     align-self: flex-start;
-    background: rgba(37, 99, 235, 0.08);
-    padding: 4px 10px;
-    border-radius: 6px;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
 }
 </style>
+
+<script>
+// Lug'at ma'lumotlar bazasi (Atamalar)
+const dictionaryData = [
+    { term: "Afv etish", definition: "Jinoiy javobgarlikdan yoki jazodan ozod qilish yoxud tayinlangan jazoni yengillashtirish.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
+    { term: "Da'vo muddati", definition: "Shaxs o'zining buzilgan huquqini da'vo qo'zg'ash yo'li bilan himoya qilishi mumkin bo'lgan muddat.", source: "Fuqarolik kodeksi" },
+    { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
+    { term: "Fuqarolik", definition: "Shaxsning muayyan davlat bilan siyosiy-huquqiy aloqasi, ularning o'zaro huquq va burchlari majmui.", source: "O'zbekiston Respublikasi qonunchiligi" },
+    { term: "Guvoh", definition: "Jinoyat ishi bo'yicha ahamiyatga molika holatlarni bilishi mumkin bo'lgan jismoniy shaxs.", source: "Jinoyat-protsessual kodeksi" },
+    { term: "Hokimiyat", definition: "Davlat organlari va mansabdor shaxslarning jamiyat hayotini boshqarishdagi vakolatlari va huquqiy kuchi.", source: "Konstitutsiyaviy huquq" },
+    { term: "Imunitet", definition: "Ayrim shaxslar yoki organlarning umumiy qoidalardan istisno tariqasida ayrim majburiyatlar yoki javobgarlikdan ozod qilinishi.", source: "Xalqaro va milliy huquq" },
+    { term: "Jinoyat", definition: "Jinoyat kodeksida nazarda tutilgan, ijtimoiy xavfli bo'lgan aybdor qilmish.", source: "Jinoyat kodeksi" },
+    { term: "Konsessiya", definition: "Davlatning o'ziga tegishli obyektlarni shartnoma asosida muayyan muddatga xususiy shaxslarga boshqarish yoki qurish uchun berishi.", source: "Iqtisodiy huquq" },
+    { term: "Litsenziya", definition: "Muayyan faoliyat turi bilan shug'ullanish uchun vakolatli organ tomonidan beriladigan maxsus ruxsatnoma.", source: "Tadbirkorlik huquqi" },
+    { term: "Muomalaga layoqatli", definition: "Fuqaroning o'z harakatlari bilan o'ziga huquqlar olish va o'z zimmasiga burchlar yuklay olish layoqati.", source: "Fuqarolik kodeksi" },
+    { term: "Notarius", definition: "Yuridik shaxslar va fuqarolarning huquqlari hamda qonuniy manfaatlarini himoya qilish uchun huquqiy hujjatlarni tasdiqlovchi shaxs.", source: "Notariat to'g'risidagi qonun" },
+    { term: "Ombudsman", definition: "Inson huquqlari bo'yicha vakil, fuqarolarning huquq va erkinliklariga rioya etilishini nazorat qiluvchi parlament instituti.", source: "Maxsus qonun" },
+    { term: "Pretsedent", definition: "Muayyan ish bo'yicha chiqarilgan va keyinchalik shunga o'xshash ishlar uchun majburiy yoki namuna bo'ladigan sud qarori.", source: "Huquq nazariyasi" },
+    { term: "Reabilitatsiya", definition: "Noqonuniy ravishda jinoiy javobgarlikka tortilgan yoki huquqlari buzilgan shaxsning huquqlari va obro'sini tiklash.", source: "Jinoyat-protsessual kodeksi" },
+    { term: "Sanatsiya", definition: "Moliyaviy qiyinchilikka uchragan korxona yoki tashkilotni inqirozdan qutqarish bo'yicha ko'riladigan sog'lomlashtirish choralari.", source: "Iqtisodiy huquq" },
+    { term: "Talabnoma", definition: "Shaxsning o'z huquqlarini tiklash yoki buzilgan majburiyatlarni bajarish bo'yicha ikkinchi tarafga qo'yadigan yozma e'tirozi.", source: "Fuqarolik protsessual kodeksi" },
+    { term: "Vasiylik", definition: "O'n to'rt yoshga to'lmagan yetim bolalarni yoki muomalaga layoqatsiz deb topilgan fuqarolarni himoya qilish shakli.", source: "Oila kodeksi" },
+    { term: "Yurisdiksiya", definition: "Sud yoki boshqa davlat organlarining huquqiy masalalarni hal qilish, qonunbuzarliklarga nisbatan chora ko'rish vakolati.", source: "Huquqiy atamalar lug'ati" },
+    { term: "Zarar", definition: "Huquqi buzilgan shaxsning huquqlarini tiklash uchun qilgan yoki qilishi lozim bo'lgan xarajatlari, mol-mulkining yo'qolishi.", source: "Fuqarolik kodeksi" }
+];
+
+let currentLetter = 'ALL';
+
+// Kartochkalarni ekranga chiqarish funksiyasi
+function renderDictionary(data) {
+    const grid = document.getElementById('dictionaryGrid');
+    grid.innerHTML = '';
+
+    if (data.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px);">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #a78bfa; margin-bottom: 15px;"></i>
+                <p style="color: #94a3b8; font-size: 1.15rem;">Hech qanday atama topilmadi.</p>
+            </div>
+        `;
+        return;
+    }
+
+    data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'dict-card';
+        card.innerHTML = `
+            <div>
+                <h3 class="dict-term">${item.term}</h3>
+                <p class="dict-definition">${item.definition}</p>
+            </div>
+            <span class="dict-source"><i class="fa-solid fa-bookmark" style="margin-right: 5px;"></i>${item.source}</span>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Qidiruv funksiyasi
+function filterDictionary() {
+    const query = document.getElementById('dictionarySearch').value.toLowerCase().trim();
+    
+    const filtered = dictionaryData.filter(item => {
+        const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
+        const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
+        return matchesSearch && matchesLetter;
+    });
+
+    renderDictionary(filtered);
+}
+
+// Harflar bo'yicha filter qilish funksiyasi
+function filterByLetter(letter) {
+    currentLetter = letter;
+    
+    // Tugmalar aktiv holatini o'zgartirish
+    const buttons = document.querySelectorAll('.alphabet-filter button');
+    buttons.forEach(btn => {
+        if (btn.textContent.trim() === letter || (letter === 'ALL' && btn.textContent.trim() === 'Barchasi')) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    filterDictionary();
+}
+
+// Sahifa yuklanganda barcha ma'lumotlarni chiqarish
+window.addEventListener('DOMContentLoaded', () => {
+    renderDictionary(dictionaryData);
+});
+</script>
