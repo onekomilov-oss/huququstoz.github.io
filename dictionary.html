@@ -1,401 +1,293 @@
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuridik Atamalar Lug'ati</title>
-    <!-- FontAwesome ikonkalari uchun -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Sahifa tana qismidagi har qanday cheklov va oq bo'shliqlarni yo'q qilish */
-        html, body {
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-            overflow-x: hidden !important;
-            background-color: #0f172a !important;
-        }
-
-.legal-dictionary-section {
-            padding: 90px 20px;
-            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
-            min-height: 100vh;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: #f8fafc;
-            box-sizing: border-box;
-            
-            /* Ekranni to'liq egallash va chetlarini yopish uchun majburiy xususiyatlar */
-            width: 100vw !important;
-            max-width: 100vw !important;
-            position: relative !important;
-            left: 50% !important;
-            right: 50% !important;
-            margin-left: -50vw !important;
-            margin-right: -50vw !important;
-            overflow-x: hidden !important;
-        }
-        }
-
-        .legal-dictionary-section *, 
-        .legal-dictionary-section *::before, 
-        .legal-dictionary-section *::after {
-            box-sizing: border-box;
-        }
-
-        .legal-dictionary-section .container {
-            width: 100% !important;
-            max-width: 100% !important;
-            padding: 0 20px;
-            margin: 0 auto;
-        }
-
-        .legal-dictionary-section .section-title,
-        .legal-dictionary-section .section-subtitle,
-        .legal-dictionary-section .dictionary-controls {
-            animation: dictSlideDown 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-        }
-
-        .legal-dictionary-section .section-subtitle {
-            animation-delay: 0.2s !important;
-        }
-
-        .legal-dictionary-section .dictionary-controls {
-            animation-delay: 0.4s !important;
-        }
-
-        .legal-dictionary-section .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            color: #f8fafc;
-            margin-bottom: 12px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .legal-dictionary-section .section-title i {
-            color: #a78bfa;
-            -webkit-text-fill-color: initial;
-            animation: dictPulse 3s ease-in-out infinite !important;
-        }
-
-        .legal-dictionary-section .section-subtitle {
-            text-align: center;
-            color: #94a3b8;
-            margin-bottom: 50px;
-            font-size: 1.15rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .legal-dictionary-section .dictionary-controls {
-            max-width: 100% !important;
-            margin: 0 auto 50px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-
-        .legal-dictionary-section .search-box {
-            position: relative;
-            width: 100%;
-            border-radius: 20px;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            padding: 6px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            backdrop-filter: blur(12px);
-        }
-
-        .legal-dictionary-section .search-box:hover,
-        .legal-dictionary-section .search-box:focus-within {
-            border-color: rgba(139, 92, 246, 0.8);
-            box-shadow: 0 0 35px rgba(139, 92, 246, 0.4);
-            transform: translateY(-3px) scale(1.005);
-        }
-
-        .legal-dictionary-section .search-icon-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            color: #a78bfa;
-            font-size: 1.25rem;
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .legal-dictionary-section .search-box:focus-within .search-icon-wrapper {
-            transform: scale(1.1) rotate(-10deg);
-        }
-
-        .legal-dictionary-section .search-box input {
-            position: relative;
-            width: 100%;
-            padding: 14px 15px 14px 5px;
-            border: none;
-            background: transparent;
-            font-size: 1.1rem;
-            color: #f8fafc;
-            outline: none !important;
-        }
-
-        .legal-dictionary-section .search-box input::placeholder {
-            color: #64748b;
-        }
-
-        .legal-dictionary-section .search-action-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #7c3aed, #4f46e5);
-            border: none;
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-            outline: none !important;
-            white-space: nowrap;
-        }
-
-        .legal-dictionary-section .search-action-btn:hover {
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.6);
-        }
-
-        .legal-dictionary-section .alphabet-filter {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .legal-dictionary-section .alphabet-filter button {
-            padding: 9px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #cbd5e1;
-            outline: none !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .legal-dictionary-section .alphabet-filter button:hover {
-            background: rgba(139, 92, 246, 0.15);
-            border-color: rgba(139, 92, 246, 0.4);
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        .legal-dictionary-section .alphabet-filter button.active {
-            background: linear-gradient(135deg, #7c3aed, #4f46e5);
-            color: #ffffff;
-            border-color: #8b5cf6;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .legal-dictionary-section .dictionary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            width: 100%;
-        }
-
-        .legal-dictionary-section .dict-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            padding: 28px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-            
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            animation: dictCardPop 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-        }
-
-        .legal-dictionary-section .dict-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #8b5cf6, #06b6d4);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .legal-dictionary-section .dict-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 22px 45px rgba(139, 92, 246, 0.25);
-            border-color: rgba(139, 92, 246, 0.4);
-            background: rgba(30, 41, 59, 0.85);
-        }
-
-        .legal-dictionary-section .dict-card:hover::before {
-            opacity: 1;
-        }
-
-        .legal-dictionary-section .dict-term {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
-
-        .legal-dictionary-section .dict-card:hover .dict-term {
-            color: #c4b5fd;
-        }
-
-        .legal-dictionary-section .dict-definition {
-            font-size: 0.98rem;
-            color: #94a3b8;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .legal-dictionary-section .dict-source {
-            font-size: 0.82rem;
-            color: #06b6d4;
-            font-weight: 600;
-            align-self: flex-start;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            padding: 6px 12px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .legal-dictionary-section .dict-card:hover .dict-source {
-            background: rgba(6, 182, 212, 0.2);
-            transform: scale(1.05);
-        }
-
-        @keyframes dictSlideDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-25px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes dictCardPop {
-            0% {
-                opacity: 0;
-                transform: translateY(40px) scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes dictPulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.15);
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <section class="legal-dictionary-section">
-        <div class="container">
-            <h2 class="section-title">
-                <i class="fa-solid fa-scale-balanced"></i> Yuridik Atamalar Lug'ati
-            </h2>
-            <p class="section-subtitle">
-                O'zbekiston Respublikasining amaldagi qonunchiligi, kodekslari va huquqiy hujjatlarida qo'llaniladigan asosiy tushunchalarning kengaytirilgan izohli bazasi.
-            </p>
-
-            <!-- Boshqaruv va qidiruv paneli -->
-            <div class="dictionary-controls">
-                <div class="search-box">
-                    <div class="search-icon-wrapper">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                    <input type="text" id="legalSearchInput" placeholder="Atama yoki ta'rifni kiriting (masalan: Mulk huquqi)...">
-                    <button class="search-action-btn" id="legalSearchBtn">
-                        <span>Qidirish</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+<!-- Yuridik lug'at bo'limi -->
+<section class="legal-dictionary-section" id="legalDictionaryApp">
+    <div class="container">
+        <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> Yuridik Lug'at</h2>
+        <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga va amaldagi huquq tizimiga to'liq moslashtirilgan kengaytirilgan atamalar bazasi</p>
+        
+        <!-- Qidirish va Filtrlash paneli -->
+        <div class="dictionary-controls">
+            <div class="search-box">
+                <div class="search-glow"></div>
+                <div class="search-icon-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-
-                <!-- Alifbo bo'yicha filtrlar -->
-                <div class="alphabet-filter" id="legalAlphabetFilter">
-                    <button class="active" data-letter="ALL">Barchasi</button>
-                    <button data-letter="A">A</button>
-                    <button data-letter="B">B</button>
-                    <button data-letter="D">D</button>
-                    <button data-letter="E">E</button>
-                    <button data-letter="F">F</button>
-                    <button data-letter="G">G</button>
-                    <button data-letter="H">H</button>
-                    <button data-letter="I">I</button>
-                    <button data-letter="J">J</button>
-                    <button data-letter="K">K</button>
-                    <button data-letter="L">L</button>
-                    <button data-letter="M">M</button>
-                    <button data-letter="N">N</button>
-                    <button data-letter="O">O</button>
-                    <button data-letter="P">P</button>
-                    <button data-letter="Q">Q</button>
-                    <button data-letter="R">R</button>
-                    <button data-letter="S">S</button>
-                    <button data-letter="T">T</button>
-                    <button data-letter="U">U</button>
-                    <button data-letter="V">V</button>
-                    <button data-letter="X">X</button>
-                    <button data-letter="Y">Y</button>
-                    <button data-letter="Z">Z</button>
-                </div>
+                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Yuridik shaxs, Adliya, Servitut)..." autocomplete="off">
+                <button type="button" id="legalSearchBtn" class="search-action-btn" title="Qidirish">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Qidirish</span>
+                </button>
             </div>
-
-            <!-- Kartochkalar chiqadigan panjara (Grid) -->
-            <div class="dictionary-grid" id="legalDictionaryGrid"></div>
+            <!-- Alifbo harflari bo'yicha filter -->
+            <div class="alphabet-filter" id="legalAlphabetFilter">
+                <button type="button" data-letter="ALL" class="active">Barchasi</button>
+                <button type="button" data-letter="A">A</button>
+                <button type="button" data-letter="B">B</button>
+                <button type="button" data-letter="D">D</button>
+                <button type="button" data-letter="E">E</button>
+                <button type="button" data-letter="F">F</button>
+                <button type="button" data-letter="G">G</button>
+                <button type="button" data-letter="H">H</button>
+                <button type="button" data-letter="I">I</button>
+                <button type="button" data-letter="J">J</button>
+                <button type="button" data-letter="K">K</button>
+                <button type="button" data-letter="L">L</button>
+                <button type="button" data-letter="M">M</button>
+                <button type="button" data-letter="N">N</button>
+                <button type="button" data-letter="O">O</button>
+                <button type="button" data-letter="P">P</button>
+                <button type="button" data-letter="Q">Q</button>
+                <button type="button" data-letter="R">R</button>
+                <button type="button" data-letter="S">S</button>
+                <button type="button" data-letter="T">T</button>
+                <button type="button" data-letter="U">U</button>
+                <button type="button" data-letter="V">V</button>
+                <button type="button" data-letter="X">X</button>
+                <button type="button" data-letter="Y">Y</button>
+                <button type="button" data-letter="Z">Z</button>
+            </div>
         </div>
-    </section>
 
-</body>
-</html>
-    </section>
+        <!-- Lug'at kartochkalari paneli -->
+        <div class="dictionary-grid" id="legalDictionaryGrid"></div>
+    </div>
+</section>
 
-        document.addEventListener("DOMContentLoaded", function() {
+<style>
+.legal-dictionary-section {
+    padding: 90px 20px;
+    background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #f8fafc;
+    box-sizing: border-box;
+}
+
+.legal-dictionary-section *, 
+.legal-dictionary-section *::before, 
+.legal-dictionary-section *::after {
+    box-sizing: border-box;
+}
+
+.legal-dictionary-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.legal-dictionary-section .section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #f8fafc;
+    margin-bottom: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.legal-dictionary-section .section-title i {
+    color: #a78bfa;
+    -webkit-text-fill-color: initial;
+}
+
+.legal-dictionary-section .section-subtitle {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 50px;
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.legal-dictionary-section .dictionary-controls {
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.legal-dictionary-section .search-box {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 6px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(12px);
+}
+
+.legal-dictionary-section .search-box:hover,
+.legal-dictionary-section .search-box:focus-within {
+    border-color: rgba(139, 92, 246, 0.8);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
+    transform: translateY(-2px);
+}
+
+.legal-dictionary-section .search-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: #a78bfa;
+    font-size: 1.25rem;
+    margin-left: 8px;
+}
+
+.legal-dictionary-section .search-box input {
+    position: relative;
+    width: 100%;
+    padding: 14px 15px 14px 5px;
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    color: #f8fafc;
+    outline: none !important;
+}
+
+.legal-dictionary-section .search-box input::placeholder {
+    color: #64748b;
+}
+
+.legal-dictionary-section .search-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    outline: none !important;
+    white-space: nowrap;
+}
+
+.legal-dictionary-section .search-action-btn:hover {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+}
+
+.legal-dictionary-section .alphabet-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.legal-dictionary-section .alphabet-filter button {
+    padding: 9px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    outline: none !important;
+    transition: all 0.3s ease;
+}
+
+.legal-dictionary-section .alphabet-filter button:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #ffffff;
+}
+
+.legal-dictionary-section .alphabet-filter button.active {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #ffffff;
+    border-color: #8b5cf6;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+
+.legal-dictionary-section .dictionary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.legal-dictionary-section .dict-card {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.legal-dictionary-section .dict-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.legal-dictionary-section .dict-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(30, 41, 59, 0.8);
+}
+
+.legal-dictionary-section .dict-card:hover::before {
+    opacity: 1;
+}
+
+.legal-dictionary-section .dict-term {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 12px;
+}
+
+.legal-dictionary-section .dict-definition {
+    font-size: 0.98rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.legal-dictionary-section .dict-source {
+    font-size: 0.82rem;
+    color: #06b6d4;
+    font-weight: 600;
+    align-self: flex-start;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
 const dictionaryData = [
     // A
     { term: "Yuridik shaxs", definition: "Mulk huquqiga ega bo'lgan, o'z nomidan majburiyatlar olib boruvchi tashkilot yoki korxona.", source: "Fuqarolik kodeksi" },
@@ -605,7 +497,7 @@ const dictionaryData = [
     { term: "Majburiyat", definition: "Qarzdorning kreditor foydasiga muayyan harakatni bajarishi yoki bajarishdan tiyilishi lozim bo'lgan huquqiy munosabat.", source: "Fuqarolik kodeksi" },
     { term: "Oferta", definition: "Shartnoma tuzish taklifi bo'lib, uni qabul qilgan taraf uchun huquqiy oqibat keltirib chiqaradigan aniq bildirishnoma.", source: "Fuqarolik kodeksi" },
     { term: "Aksept", definition: "Oferta (taklif)ni to'liq va so'zsiz qabul qilish to'g'risidagi bildirishnoma.", source: "Fuqarolik kodeksi" },
-    { term: "Qarz shartnomasi", definition: "Bir taraf ikkinchi tarafga pul yoki boshqa ashyolarni mulk qilib berib, ikkinchi taraf esa xuddi shunday miqdorni qaytarish majburiyatini oladigan shartnoma.", source: "Fuqarolik kodeksi" },
+    { term: "Zayom shartnomasi", definition: "Bir taraf ikkinchi tarafga pul yoki boshqa ashyolarni mulk qilib berib, ikkinchi taraf esa xuddi shunday miqdorni qaytarish majburiyatini oladigan shartnoma.", source: "Fuqarolik kodeksi" },
     { term: "Ijara shartnomasi", definition: "Ijaraga beruvchi ijarachiga mulkni haq evaziga vaqtincha egalik qilish va foydalanish uchun topshiradigan shartnoma.", source: "Fuqarolik kodeksi" },
     { term: "Hadya shartnomasi", definition: "Bir taraf ikkinchi tarafga mol-mulk yoki mulkiy huquqni tekinga topshiradigan shartnoma.", source: "Fuqarolik kodeksi" },
     { term: "Saqlash shartnomasi", definition: "Bir taraf ikkinchi tarafdan olingan ashyoni saqlab, uni saqlangan holicha qaytarish majburiyatini oladigan shartnoma.", source: "Fuqarolik kodeksi" },
@@ -1008,74 +900,108 @@ const dictionaryData = [
     { term: "Ekstraditsiya taqiqi", definition: "Shaxsni o'z fuqarosi bo'lgan davlat tomonidan boshqa davlatga topshirishning odatda taqiqlanishi.", source: "Jinoyat-protsessual kodeksi va xalqaro shartnomalar" }
 ];
 
-            const gridEl = document.getElementById("legalDictionaryGrid");
-            const searchInput = document.getElementById("legalSearchInput");
-            const searchBtn = document.getElementById("legalSearchBtn");
-            const alphabetFilter = document.getElementById("legalAlphabetFilter");
+    let currentLetter = 'ALL';
 
-            let currentLetter = "ALL";
-            let searchQuery = "";
+    const gridContainer = document.getElementById('legalDictionaryGrid');
+    const searchInput = document.getElementById('legalSearchInput');
+    const searchBtn = document.getElementById('legalSearchBtn');
+    const alphabetButtons = document.querySelectorAll('#legalAlphabetFilter button');
 
-            function renderDictionary() {
-                gridEl.innerHTML = "";
-                
-                const filtered = dictionaryData.filter(item => {
-                    const matchesSearch = item.term.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                          item.definition.toLowerCase().includes(searchQuery.toLowerCase());
-                    
-                    let matchesLetter = true;
-                    if (currentLetter !== "ALL") {
-                        const firstChar = item.term.charAt(0).toUpperCase();
-                        matchesLetter = firstChar === currentLetter;
-                    }
-                    
-                    return matchesSearch && matchesLetter;
-                });
+    if (!gridContainer || !searchInput) return;
 
-                if (filtered.length === 0) {
-                    gridEl.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #94a3b8; font-size: 1.1rem; animation: dictSlideDown 0.5s ease;">Qidiruv bo'yicha hech qanday atama topilmadi.</div>`;
-                    return;
-                }
+    function render(data) {
+        gridContainer.innerHTML = '';
+        if (data.length === 0) {
+            gridContainer.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px);">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #a78bfa; margin-bottom: 15px;"></i>
+                    <p style="color: #94a3b8; font-size: 1.15rem;">Hech qanday atama topilmadi.</p>
+                </div>
+            `;
+            return;
+        }
 
-                filtered.forEach((item, index) => {
-                    const card = document.createElement("div");
-                    card.className = "dict-card";
-                    
-                    const delay = Math.min(index * 0.04, 0.5);
-                    card.style.animationDelay = `${delay}s`;
-
-                    card.innerHTML = `
-                        <div>
-                            <div class="dict-term">${item.term}</div>
-                            <div class="dict-definition">${item.definition}</div>
-                        </div>
-                        <div class="dict-source"><i class="fa-solid fa-book-bookmark"></i> ${item.source}</div>
-                    `;
-                    gridEl.appendChild(card);
-                });
-            }
-
-            searchInput.addEventListener("input", (e) => {
-                searchQuery = e.target.value.trim();
-                renderDictionary();
-            });
-
-            searchBtn.addEventListener("click", () => {
-                searchQuery = searchInput.value.trim();
-                renderDictionary();
-            });
-
-            alphabetFilter.addEventListener("click", (e) => {
-                if (e.target.tagName === "BUTTON") {
-                    Array.from(alphabetFilter.children).forEach(btn => btn.classList.remove("active"));
-                    e.target.classList.add("active");
-                    currentLetter = e.target.getAttribute("data-letter");
-                    renderDictionary();
-                }
-            });
-
-            renderDictionary();
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'dict-card';
+            card.innerHTML = `
+                <div>
+                    <h3 class="dict-term">${item.term}</h3>
+                    <p class="dict-definition">${item.definition}</p>
+                </div>
+                <span class="dict-source"><i class="fa-solid fa-bookmark" style="margin-right: 5px;"></i>${item.source}</span>
+            `;
+            gridContainer.appendChild(card);
         });
-    </script>
-</body>
-</html>
+    }
+
+    function executeSearch(resetLetter = false) {
+        if (resetLetter) {
+            currentLetter = 'ALL';
+            alphabetButtons.forEach(b => {
+                if (b.getAttribute('data-letter') === 'ALL') {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+        }
+
+        const query = searchInput.value.toLowerCase().trim();
+        
+        // 1. Filtr qilish
+        const filtered = dictionaryData.filter(item => {
+            const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
+            const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
+            return matchesSearch && matchesLetter;
+        });
+
+        // 2. Qidirilgan so'z bo'yicha eng boshiga chiqarish (Sorting)
+        if (query) {
+            filtered.sort((a, b) => {
+                const aTerm = a.term.toLowerCase();
+                const bTerm = b.term.toLowerCase();
+                
+                const aStartsWith = aTerm.startsWith(query);
+                const bStartsWith = bTerm.startsWith(query);
+
+                // Agar ikkalasi ham shu so'z bilan boshlansa yoki boshlanmasa, o'zaro tartibni saqlaymiz
+                if (aStartsWith && !bStartsWith) return -1;
+                if (!aStartsWith && bStartsWith) return 1;
+                
+                return 0;
+            });
+        }
+
+        render(filtered);
+    }
+
+    searchInput.addEventListener('input', function() {
+        executeSearch(false);
+    });
+
+    if (searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            executeSearch(true);
+        });
+    }
+
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            executeSearch(true);
+        }
+    });
+
+    alphabetButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            alphabetButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentLetter = this.getAttribute('data-letter');
+            
+            executeSearch(false);
+        });
+    });
+
+    render(dictionaryData);
+});
+</script>
