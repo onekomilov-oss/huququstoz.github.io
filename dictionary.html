@@ -8,7 +8,7 @@
         <div class="dictionary-controls">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Apellyatsiya, Prokuratura, Servitut)...">
+                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Yuridik shaxs, Apellyatsiya, Servitut)...">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
             <div class="alphabet-filter" id="legalAlphabetFilter">
@@ -404,6 +404,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const query = searchInput.value.toLowerCase().trim();
         
         const filtered = dictionaryData.filter(item => {
+            // includes() orqali so'z qayerida kelishidan qat'iy nazar (o'rtada yoki oxirida bo'lsa ham) qidiriladi
             const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
             const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
             return matchesSearch && matchesLetter;
@@ -420,7 +421,6 @@ document.addEventListener("DOMContentLoaded", function() {
             this.classList.add('active');
             currentLetter = this.getAttribute('data-letter');
             
-            // Qidiruvni tozalash o'rniga harf tanlanganda qidiruv bilan birga ishlashini ta'minlaymiz
             filterData();
         });
     });
