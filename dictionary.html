@@ -18,14 +18,21 @@
         }
 
         .legal-dictionary-section {
-            padding: 90px 15px;
+            padding: 90px 20px;
             background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
             min-height: 100vh;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             color: #f8fafc;
             box-sizing: border-box;
+            
+            /* Mana bu qism sahifadagi barcha cheklovlarni chetlab o'tib, ekranni to'liq egallaydi */
             width: 100vw !important;
-            margin: 0 !important;
+            position: relative !important;
+            left: 50% !important;
+            right: 50% !important;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+        }
         }
 
         .legal-dictionary-section *, 
