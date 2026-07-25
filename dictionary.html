@@ -7,8 +7,9 @@
         <!-- Qidirish va Filtrlash paneli -->
         <div class="dictionary-controls">
             <div class="search-box">
+                <div class="search-glow"></div>
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Adliya, Apellyatsiya, Servitut)...">
+                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Adliya, Apellyatsiya, Servitut)..." autocomplete="off">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
             <div class="alphabet-filter" id="legalAlphabetFilter">
@@ -105,48 +106,84 @@
     gap: 24px;
 }
 
+/* Yangi zamonaviy va chiroyli qidiruv paneli dizayni */
 .legal-dictionary-section .search-box {
     position: relative;
     width: 100%;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.05));
+    padding: 2px; /* Gradient chegara effekti uchun */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.legal-dictionary-section .search-box:hover {
+    box-shadow: 0 15px 45px rgba(139, 92, 246, 0.25);
+    transform: translateY(-2px);
+}
+
+.legal-dictionary-section .search-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4, #8b5cf6);
+    background-size: 200% auto;
+    opacity: 0;
+    z-index: 0;
+    transition: opacity 0.4s ease;
+    animation: glowAnimation 4s linear infinite;
+}
+
+@keyframes glowAnimation {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.legal-dictionary-section .search-box:focus-within .search-glow {
+    opacity: 0.7;
 }
 
 .legal-dictionary-section .search-box .search-icon {
     position: absolute;
-    left: 20px;
+    left: 22px;
     top: 50%;
     transform: translateY(-50%);
     color: #a78bfa;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     pointer-events: none;
+    z-index: 2;
+    transition: color 0.3s ease;
 }
 
 .legal-dictionary-section .search-box input {
+    position: relative;
     width: 100%;
-    padding: 16px 24px 16px 52px;
+    padding: 18px 24px 18px 56px;
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    font-size: 1.05rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0f172a;
+    font-size: 1.1rem;
     color: #f8fafc;
     outline: none !important;
     -webkit-appearance: none;
     appearance: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .legal-dictionary-section .search-box input::placeholder {
-    color: #94a3b8;
+    color: #64748b;
+    font-weight: 400;
 }
 
 .legal-dictionary-section .search-box input:focus {
-    border-color: #8b5cf6;
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
-    transform: translateY(-2px);
+    background: rgba(15, 23, 42, 0.92);
+    border-color: rgba(139, 92, 246, 0.5);
     outline: none !important;
+}
+
+.legal-dictionary-section .search-box input:focus ~ .search-icon {
+    color: #06b6d4;
 }
 
 .legal-dictionary-section .alphabet-filter {
@@ -412,7 +449,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-  
     function filterData() {
         const query = searchInput.value.toLowerCase().trim();
         
@@ -422,12 +458,11 @@ document.addEventListener("DOMContentLoaded", function() {
             return matchesSearch && matchesLetter;
         });
 
-        // Agar tanlangan harf bo'yicha qidirilganda hech narsa topilmasa, 
-        // lekin qidiruv maydonida matn bo'lsa — filtrni avtomatik "ALL" (Barchasi) ga o'tkazib yuboramiz
+        // Agar tanlangan harf bo'yicha qidirganda hech narsa topilmasa, lekin inputda matn bo'lsa
+        // qidiruv samarasiz ketmasligi uchun filtrni avtomatik "ALL" ga o'tkazib qaytadan qidiramiz
         if (filtered.length === 0 && query.length > 0 && currentLetter !== 'ALL') {
             currentLetter = 'ALL';
             
-            // Tugmalarning vizual faolligini (active class) ham "ALL" ga moslaymiz
             alphabetButtons.forEach(b => {
                 if (b.getAttribute('data-letter') === 'ALL') {
                     b.classList.add('active');
@@ -436,7 +471,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            // "ALL" bilan qaytadan qidirib natijani olamiz
             filtered = dictionaryData.filter(item => {
                 return item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
             });
