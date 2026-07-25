@@ -8,44 +8,41 @@
         <div class="dictionary-controls">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="dictionarySearch" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)..." onkeyup="filterDictionary()">
+                <input type="text" id="dictionarySearch" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)..." oninput="filterDictionary()">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
             <div class="alphabet-filter" id="alphabetFilter">
-                <button onclick="filterByLetter('ALL')" class="active">Barchasi</button>
-                <button onclick="filterByLetter('A')">A</button>
-                <button onclick="filterByLetter('B')">B</button>
-                <button onclick="filterByLetter('D')">D</button>
-                <button onclick="filterByLetter('E')">E</button>
-                <button onclick="filterByLetter('F')">F</button>
-                <button onclick="filterByLetter('G')">G</button>
-                <button onclick="filterByLetter('H')">H</button>
-                <button onclick="filterByLetter('I')">I</button>
-                <button onclick="filterByLetter('J')">J</button>
-                <button onclick="filterByLetter('K')">K</button>
-                <button onclick="filterByLetter('L')">L</button>
-                <button onclick="filterByLetter('M')">M</button>
-                <button onclick="filterByLetter('N')">N</button>
-                <button onclick="filterByLetter('O')">O</button>
-                <button onclick="filterByLetter('P')">P</button>
-                <button onclick="filterByLetter('R')">R</button>
-                <button onclick="filterByLetter('S')">S</button>
-                <button onclick="filterByLetter('T')">T</button>
-                <button onclick="filterByLetter('V')">V</button>
-                <button onclick="filterByLetter('Y')">Y</button>
-                <button onclick="filterByLetter('Z')">Z</button>
+                <button type="button" onclick="filterByLetter('ALL', this)" class="active">Barchasi</button>
+                <button type="button" onclick="filterByLetter('A', this)">A</button>
+                <button type="button" onclick="filterByLetter('B', this)">B</button>
+                <button type="button" onclick="filterByLetter('D', this)">D</button>
+                <button type="button" onclick="filterByLetter('E', this)">E</button>
+                <button type="button" onclick="filterByLetter('F', this)">F</button>
+                <button type="button" onclick="filterByLetter('G', this)">G</button>
+                <button type="button" onclick="filterByLetter('H', this)">H</button>
+                <button type="button" onclick="filterByLetter('I', this)">I</button>
+                <button type="button" onclick="filterByLetter('J', this)">J</button>
+                <button type="button" onclick="filterByLetter('K', this)">K</button>
+                <button type="button" onclick="filterByLetter('L', this)">L</button>
+                <button type="button" onclick="filterByLetter('M', this)">M</button>
+                <button type="button" onclick="filterByLetter('N', this)">N</button>
+                <button type="button" onclick="filterByLetter('O', this)">O</button>
+                <button type="button" onclick="filterByLetter('P', this)">P</button>
+                <button type="button" onclick="filterByLetter('R', this)">R</button>
+                <button type="button" onclick="filterByLetter('S', this)">S</button>
+                <button type="button" onclick="filterByLetter('T', this)">T</button>
+                <button type="button" onclick="filterByLetter('V', this)">V</button>
+                <button type="button" onclick="filterByLetter('Y', this)">Y</button>
+                <button type="button" onclick="filterByLetter('Z', this)">Z</button>
             </div>
         </div>
 
         <!-- Lug'at kartochkalari paneli -->
-        <div class="dictionary-grid" id="dictionaryGrid">
-            <!-- JavaScript orqali dinamik to'ldiriladi -->
-        </div>
+        <div class="dictionary-grid" id="dictionaryGrid"></div>
     </div>
 </section>
 
 <style>
-/* ZAMONAVIY GLASSMORPHISM DIZAYN (Sayt uslubiga moslashtirilgan) */
 .legal-dictionary-section {
     padding: 80px 20px;
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
@@ -98,7 +95,6 @@
     gap: 24px;
 }
 
-/* Qidiruv oynasi dizayni */
 .search-box {
     position: relative;
     width: 100%;
@@ -139,7 +135,6 @@
     transform: translateY(-2px);
 }
 
-/* Alifbo filter tugmalari dizayni */
 .alphabet-filter {
     display: flex;
     flex-wrap: wrap;
@@ -175,7 +170,6 @@
     transform: translateY(-2px);
 }
 
-/* Kartochkalar grid va dizayni */
 .dictionary-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -250,8 +244,8 @@
 </style>
 
 <script>
-// Lug'at ma'lumotlar bazasi (Atamalar)
-const dictionaryData = [
+// Lug'at ma'lumotlar bazasi
+const globalDictionaryData = [
     { term: "Afv etish", definition: "Jinoiy javobgarlikdan yoki jazodan ozod qilish yoxud tayinlangan jazoni yengillashtirish.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
     { term: "Da'vo muddati", definition: "Shaxs o'zining buzilgan huquqini da'vo qo'zg'ash yo'li bilan himoya qilishi mumkin bo'lgan muddat.", source: "Fuqarolik kodeksi" },
     { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
@@ -274,15 +268,16 @@ const dictionaryData = [
     { term: "Zarar", definition: "Huquqi buzilgan shaxsning huquqlarini tiklash uchun qilgan yoki qilishi lozim bo'lgan xarajatlari, mol-mulkining yo'qolishi.", source: "Fuqarolik kodeksi" }
 ];
 
-let currentLetter = 'ALL';
+let activeSelectedLetter = 'ALL';
 
-// Kartochkalarni ekranga chiqarish funksiyasi
-function renderDictionary(data) {
-    const grid = document.getElementById('dictionaryGrid');
-    grid.innerHTML = '';
+function renderDictionaryGrid(dataArray) {
+    const gridContainer = document.getElementById('dictionaryGrid');
+    if (!gridContainer) return;
+    
+    gridContainer.innerHTML = '';
 
-    if (data.length === 0) {
-        grid.innerHTML = `
+    if (dataArray.length === 0) {
+        gridContainer.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px);">
                 <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #a78bfa; margin-bottom: 15px;"></i>
                 <p style="color: #94a3b8; font-size: 1.15rem;">Hech qanday atama topilmadi.</p>
@@ -291,52 +286,48 @@ function renderDictionary(data) {
         return;
     }
 
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'dict-card';
-        card.innerHTML = `
+    dataArray.forEach(item => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'dict-card';
+        cardElement.innerHTML = `
             <div>
                 <h3 class="dict-term">${item.term}</h3>
                 <p class="dict-definition">${item.definition}</p>
             </div>
             <span class="dict-source"><i class="fa-solid fa-bookmark" style="margin-right: 5px;"></i>${item.source}</span>
         `;
-        grid.appendChild(card);
+        gridContainer.appendChild(cardElement);
     });
 }
 
-// Qidiruv funksiyasi
 function filterDictionary() {
-    const query = document.getElementById('dictionarySearch').value.toLowerCase().trim();
+    const searchInputElem = document.getElementById('dictionarySearch');
+    if (!searchInputElem) return;
     
-    const filtered = dictionaryData.filter(item => {
-        const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
-        const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
-        return matchesSearch && matchesLetter;
+    const queryText = searchInputElem.value.toLowerCase().trim();
+    
+    const filteredResults = globalDictionaryData.filter(item => {
+        const matchesQuery = item.term.toLowerCase().includes(queryText) || item.definition.toLowerCase().includes(queryText);
+        const matchesAlpha = activeSelectedLetter === 'ALL' || item.term.toUpperCase().startsWith(activeSelectedLetter);
+        return matchesQuery && matchesAlpha;
     });
 
-    renderDictionary(filtered);
+    renderDictionaryGrid(filteredResults);
 }
 
-// Harflar bo'yicha filter qilish funksiyasi
-function filterByLetter(letter) {
-    currentLetter = letter;
+function filterByLetter(letterKey, buttonElement) {
+    activeSelectedLetter = letterKey;
     
-    // Tugmalar aktiv holatini o'zgartirish
-    const buttons = document.querySelectorAll('.alphabet-filter button');
-    buttons.forEach(btn => {
-        if (btn.textContent.trim() === letter || (letter === 'ALL' && btn.textContent.trim() === 'Barchasi')) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
+    const allButtons = document.querySelectorAll('.alphabet-filter button');
+    allButtons.forEach(btn => btn.classList.remove('active'));
+    
+    if (buttonElement) {
+        buttonElement.classList.add('active');
+    }
 
     filterDictionary();
 }
 
-// Sahifa yuklanganda barcha ma'lumotlarni chiqarish
-window.addEventListener('DOMContentLoaded', () => {
-    renderDictionary(dictionaryData);
-});
+// Skript o'qilishi bilan darhol ishga tushadi (DOMContentLoaded ni kutmasdan)
+renderDictionaryGrid(globalDictionaryData);
 </script>
