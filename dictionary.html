@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
         { term: "Ekspertiza", definition: "Maxsus bilim va fan sohalarida tekshiruv o'tkazib, xulosa berish jarayoni.", source: "Protsessual kodekslar" },
-        { term: "Ekstrakrad", definition: "Jinoyat sodir etgan shaxsni jinoiy javobgarlikka tortish uchun boshqa davlatga topshirish.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Ekstraditsiya", definition: "Jinoyat sodir etgan shaxsni jinoiy javobgarlikka tortish uchun boshqa davlatga topshirish.", source: "Jinoyat-protsessual kodeksi" },
         { term: "Emigratsiya", definition: "Fuqarolarning o'z mamlakatini tark etib, boshqa davlatga doimiy yashash uchun ko'chib ketishi.", source: "Migratsiya qonunchiligi" },
         
         { term: "Fuqarolik", definition: "Shaxsning muayyan davlat bilan siyosiy-huquqiy aloqasi, ularning o'zaro huquq va burchlari majmui.", source: "O'zbekiston Respublikasi qonunchiligi" },
@@ -420,9 +420,7 @@ document.addEventListener("DOMContentLoaded", function() {
             this.classList.add('active');
             currentLetter = this.getAttribute('data-letter');
             
-            // Harf bosilganda qidiruv inputini tozalash (ixtiyoriy, qulaylik uchun)
-            searchInput.value = '';
-            
+            // Qidiruvni tozalash o'rniga harf tanlanganda qidiruv bilan birga ishlashini ta'minlaymiz
             filterData();
         });
     });
