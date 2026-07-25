@@ -10,6 +10,10 @@
                 <div class="search-glow"></div>
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Adliya, Apellyatsiya, Servitut)..." autocomplete="off">
+                <!-- Yangi qidirish (bosish) tugmasi -->
+                <button type="button" id="legalSearchBtn" class="search-action-btn" title="Qidirish">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
             <div class="alphabet-filter" id="legalAlphabetFilter">
@@ -106,15 +110,17 @@
     gap: 24px;
 }
 
-/* Yangi zamonaviy va chiroyli qidiruv paneli dizayni */
+/* Zamonaviy qidiruv paneli va tugma dizayni */
 .legal-dictionary-section .search-box {
     position: relative;
     width: 100%;
     border-radius: 18px;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.05));
-    padding: 2px; /* Gradient chegara effekti uchun */
+    padding: 2px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
 }
 
 .legal-dictionary-section .search-box:hover {
@@ -158,7 +164,7 @@
 .legal-dictionary-section .search-box input {
     position: relative;
     width: 100%;
-    padding: 18px 24px 18px 56px;
+    padding: 18px 65px 18px 56px;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: #0f172a;
@@ -184,6 +190,35 @@
 
 .legal-dictionary-section .search-box input:focus ~ .search-icon {
     color: #06b6d4;
+}
+
+/* Qidirish tugmasi uslubi */
+.legal-dictionary-section .search-action-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+    outline: none !important;
+}
+
+.legal-dictionary-section .search-action-btn:hover {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.6);
 }
 
 .legal-dictionary-section .alphabet-filter {
@@ -419,6 +454,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const gridContainer = document.getElementById('legalDictionaryGrid');
     const searchInput = document.getElementById('legalSearchInput');
+    const searchBtn = document.getElementById('legalSearchBtn');
     const alphabetButtons = document.querySelectorAll('#legalAlphabetFilter button');
 
     if (!gridContainer || !searchInput) return;
@@ -449,20 +485,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function filterData() {
-        const query = searchInput.value.toLowerCase().trim();
-        
-        let filtered = dictionaryData.filter(item => {
-            const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
-            const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
-            return matchesSearch && matchesLetter;
-        });
-
-        // Agar tanlangan harf bo'yicha qidirganda hech narsa topilmasa, lekin inputda matn bo'lsa
-        // qidiruv samarasiz ketmasligi uchun filtrni avtomatik "ALL" ga o'tkazib qaytadan qidiramiz
-        if (filtered.length === 0 && query.length > 0 && currentLetter !== 'ALL') {
+    function executeSearch(resetLetter = false) {
+        // Agar qidirish tugmasi bosilsa yoki Enter bosilsa, harf filtrini "ALL" ga o'tkazish
+        if (resetLetter) {
             currentLetter = 'ALL';
-            
             alphabetButtons.forEach(b => {
                 if (b.getAttribute('data-letter') === 'ALL') {
                     b.classList.add('active');
@@ -470,24 +496,46 @@ document.addEventListener("DOMContentLoaded", function() {
                     b.classList.remove('active');
                 }
             });
-
-            filtered = dictionaryData.filter(item => {
-                return item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
-            });
         }
+
+        const query = searchInput.value.toLowerCase().trim();
+        
+        const filtered = dictionaryData.filter(item => {
+            const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
+            const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
+            return matchesSearch && matchesLetter;
+        });
 
         render(filtered);
     }
 
-    searchInput.addEventListener('input', filterData);
+    // Oddiy yozish paytida real vaqtda filtrlab borish
+    searchInput.addEventListener('input', function() {
+        executeSearch(false);
+    });
 
+    // Qidirish tugmasi bosilganda: Harfni avtomatik "Barchasi" (ALL) ga o'tkazib, tezkor qidirish
+    if (searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            executeSearch(true);
+        });
+    }
+
+    // Enter tugmasi bosilganda ham xuddi shunday ishlaydi
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            executeSearch(true);
+        }
+    });
+
+    // Harf tugmalari bosilganda
     alphabetButtons.forEach(btn => {
         btn.addEventListener('click', function() {
             alphabetButtons.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             currentLetter = this.getAttribute('data-letter');
             
-            filterData();
+            executeSearch(false);
         });
     });
 
