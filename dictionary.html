@@ -1,0 +1,176 @@
+<!-- Yuridik lug'at bo'limi -->
+<section class="legal-dictionary-section">
+    <div class="container">
+        <h2 class="section-title">Yuridik Lug'at</h2>
+        <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga qat'iy moslashtirilgan eng muhim atamalar bazasi</p>
+        
+        <!-- Qidirish va Filtrlash paneli -->
+        <div class="dictionary-controls">
+            <div class="search-box">
+                <input type="text" id="dictionarySearch" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)..." onkeyup="filterDictionary()">
+            </div>
+            <!-- Alifbo harflari bo'yicha filter -->
+            <div class="alphabet-filter" id="alphabetFilter">
+                <button onclick="filterByLetter('ALL')" class="active">Barchasi</button>
+                <button onclick="filterByLetter('A')">A</button>
+                <button onclick="filterByLetter('B')">B</button>
+                <button onclick="filterByLetter('D')">D</button>
+                <button onclick="filterByLetter('E')">E</button>
+                <button onclick="filterByLetter('F')">F</button>
+                <button onclick="filterByLetter('G')">G</button>
+                <button onclick="filterByLetter('H')">H</button>
+                <button onclick="filterByLetter('I')">I</button>
+                <button onclick="filterByLetter('J')">J</button>
+                <button onclick="filterByLetter('K')">K</button>
+                <button onclick="filterByLetter('L')">L</button>
+                <button onclick="filterByLetter('M')">M</button>
+                <button onclick="filterByLetter('N')">N</button>
+                <button onclick="filterByLetter('O')">O</button>
+                <button onclick="filterByLetter('P')">P</button>
+                <button onclick="filterByLetter('R')">R</button>
+                <button onclick="filterByLetter('S')">S</button>
+                <button onclick="filterByLetter('T')">T</button>
+                <button onclick="filterByLetter('V')">V</button>
+                <button onclick="filterByLetter('Y')">Y</button>
+                <button onclick="filterByLetter('Z')">Z</button>
+            </div>
+        </div>
+
+        <!-- Lug'at kartochkalari paneli -->
+        <div class="dictionary-grid" id="dictionaryGrid">
+            <!-- JavaScript orqali to'ldiriladi -->
+        </div>
+    </div>
+</section>
+
+<style>
+/* Glassmorphism dizayn uslubi */
+.legal-dictionary-section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0f172a;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #475569;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.dictionary-controls {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    font-size: 1.05rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.search-box input:focus {
+    border-color: #2563eb;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+}
+
+.alphabet-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.alphabet-filter button {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    font-weight: 600;
+    color: #334155;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.alphabet-filter button:hover, .alphabet-filter button.active {
+    background: #2563eb;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.dictionary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.dict-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 10px 30px 0 rgba(31, 38, 135, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dict-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px 0 rgba(31, 38, 135, 0.1);
+}
+
+.dict-term {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.dict-definition {
+    font-size: 0.98rem;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.dict-source {
+    font-size: 0.8rem;
+    color: #2563eb;
+    font-weight: 600;
+    align-self: flex-start;
+    background: rgba(37, 99, 235, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+</style>
