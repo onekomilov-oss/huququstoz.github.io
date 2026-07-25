@@ -2,13 +2,13 @@
 <section class="legal-dictionary-section" id="legalDictionaryApp">
     <div class="container">
         <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> Yuridik Lug'at</h2>
-        <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga qat'iy moslashtirilgan eng muhim atamalar bazasi</p>
+        <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga va amaldagi huquq tizimiga to'liq moslashtirilgan 100 ta muhim atamalar bazasi</p>
         
         <!-- Qidirish va Filtrlash paneli -->
         <div class="dictionary-controls">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)...">
+                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Apellyatsiya, Prokuratura, Servitut)...">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
             <div class="alphabet-filter" id="legalAlphabetFilter">
@@ -28,10 +28,13 @@
                 <button type="button" data-letter="N">N</button>
                 <button type="button" data-letter="O">O</button>
                 <button type="button" data-letter="P">P</button>
+                <button type="button" data-letter="Q">Q</button>
                 <button type="button" data-letter="R">R</button>
                 <button type="button" data-letter="S">S</button>
                 <button type="button" data-letter="T">T</button>
+                <button type="button" data-letter="U">U</button>
                 <button type="button" data-letter="V">V</button>
+                <button type="button" data-letter="X">X</button>
                 <button type="button" data-letter="Y">Y</button>
                 <button type="button" data-letter="Z">Z</button>
             </div>
@@ -246,26 +249,132 @@
 <script>
 (function() {
     const dictionaryData = [
+        { term: "Adliya", definition: "Huquq-tartibotni ta'minlash, sud ekspertizasini tashkil etish va qonun hujjatlarini tarqatish bilan shug'ullanuvchi davlat boshqaruvi organi.", source: "O'zbekiston Respublikasi Qonunchiligi" },
+        { term: "Advokat", definition: "Jismoniy va yuridik shaxslarga yuridik yordam ko'rsatuvchi, sudlarda ularning manfaatlarini himoya qiluvchi mutaxassis.", source: "Advokatura to'g'risidagi qonun" },
         { term: "Afv etish", definition: "Jinoiy javobgarlikdan yoki jazodan ozod qilish yoxud tayinlangan jazoni yengillashtirish.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
-        { term: "Da'vo muddati", definition: "Shaxs o'zining buzilgan huquqini da'vo qo'zg'ash yo'li bilan himoya qilishi mumkin bo'lgan muddat.", source: "Fuqarolik kodeksi" },
-        { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
-        { term: "Fuqarolik", definition: "Shaxsning muayyan davlat bilan siyosiy-huquqiy aloqasi, ularning o'zaro huquq va burchlari majmui.", source: "O'zbekiston Respublikasi qonunchiligi" },
-        { term: "Guvoh", definition: "Jinoyat ishi bo'yicha ahamiyatga molika holatlarni bilishi mumkin bo'lgan jismoniy shaxs.", source: "Jinoyat-protsessual kodeksi" },
-        { term: "Hokimiyat", definition: "Davlat organlari va mansabdor shaxslarning jamiyat hayotini boshqarishdagi vakolatlari va huquqiy kuchi.", source: "Konstitutsiyaviy huquq" },
-        { term: "Imunitet", definition: "Ayrim shaxslar yoki organlarning umumiy qoidalardan istisno tariqasida ayrim majburiyatlar yoki javobgarlikdan ozod qilinishi.", source: "Xalqaro va milliy huquq" },
-        { term: "Jinoyat", definition: "Jinoyat kodeksida nazarda tutilgan, ijtimoiy xavfli bo'lgan aybdor qilmish.", source: "Jinoyat kodeksi" },
-        { term: "Konsessiya", definition: "Davlatning o'ziga tegishli obyektlarni shartnoma asosida muayyan muddatga xususiy shaxslarga boshqarish yoki qurish uchun berishi.", source: "Iqtisodiy huquq" },
-        { term: "Litsenziya", definition: "Muayyan faoliyat turi bilan shug'ullanish uchun vakolatli organ tomonidan beriladigan maxsus ruxsatnoma.", source: "Tadbirkorlik huquqi" },
-        { term: "Muomalaga layoqatli", definition: "Fuqaroning o'z harakatlari bilan o'ziga huquqlar olish va o'z zimmasiga burchlar yuklay olish layoqati.", source: "Fuqarolik kodeksi" },
-        { term: "Notarius", definition: "Yuridik shaxslar va fuqarolarning huquqlari hamda qonuniy manfaatlarini himoya qilish uchun huquqiy hujjatlarni tasdiqlovchi shaxs.", source: "Notariat to'g'risidagi qonun" },
-        { term: "Ombudsman", definition: "Inson huquqlari bo'yicha vakil, fuqarolarning huquq va erkinliklariga rioya etilishini nazorat qiluvchi parlament instituti.", source: "Maxsus qonun" },
-        { term: "Pretsedent", definition: "Muayyan ish bo'yicha chiqarilgan va keyinchalik shunga o'xshash ishlar uchun majburiy yoki namuna bo'ladigan sud qarori.", source: "Huquq nazariyasi" },
-        { term: "Reabilitatsiya", definition: "Noqonuniy ravishda jinoiy javobgarlikka tortilgan yoki huquqlari buzilgan shaxsning huquqlari va obro'sini tiklash.", source: "Jinoyat-protsessual kodeksi" },
-        { term: "Sanatsiya", definition: "Moliyaviy qiyinchilikka uchragan korxona yoki tashkilotni inqirozdan qutqarish bo'yicha ko'riladigan sog'lomlashtirish choralari.", source: "Iqtisodiy huquq" },
-        { term: "Talabnoma", definition: "Shaxsning o'z huquqlarini tiklash yoki buzilgan majburiyatlarni bajarish bo'yicha ikkinchi tarafga qo'yadigan yozma e'tirozi.", source: "Fuqarolik protsessual kodeksi" },
+        { term: "Aksiyadorlik jamiyati", definition: "Ustav kapitali aksiyalarga bo'lingan, qatnashchilari uning majburiyatlari bo'yicha javobgar bo'lmaydigan tijorat tashkiloti.", source: "Fuqarolik kodeksi" },
+        { term: "Aliment", definition: "Voyaga yetmagan bolalarga yoki mehnatga layoqatsiz oila a'zolariga to'lanadigan majburiy pul mablag'lari.", source: "Oila kodeksi" },
+        { term: "Amnistiya", definition: "Jinoyat sodir etgan shaxslarni jinoiy javobgarlikdan yoki jazodan to'la yoxud qisman ozod qilish akti.", source: "Jinoyat kodeksi" },
+        { term: "Apellyatsiya", definition: "Sudning qonuniy kuchga kirmagan hal qiluv qarori ustidan yuqori turuvchi sudga shikoyat qilish huquqi.", source: "Protsessual kodekslar" },
+        { term: "Arbitraj", definition: "Mulkiy va iqtisodiy nizolarni hal qilish uchun tuziladigan maxsus sud organi yoki hakamlar sudi.", source: "Iqtisodiy protsessual kodeks" },
+        { term: "Auksion", definition: "Mulk yoki mulkiy huquqlarni eng yuqori narx taklif qilgan shaxsga sotish ochiq savdo turi.", source: "Fuqarolik kodeksi" },
+        { term: "Aybsizlik prezumpsiyasi", definition: "Shaxsning aybi qonuniy tartibda isbotlanmaguncha va sudning qonuniy hukmi chiqmaguncha u aybsiz hisoblanishi prinsipi.", source: "Konstitutsiya va JPK" },
+        
+        { term: "Bankrotlik", definition: "Qarzdorning o'z kreditorlarining pul majburiyatlari bo'yicha talablarini qanoatlantirishga qodir emasligi.", source: "Bankrotlik to'g'risidagi qonun" },
+        { term: "Bayonnoma", definition: "Tergov harakati, sud majlisi yoki yig'ilish jarayoni va natijalari qayd etiladigan rasmiy hujjat.", source: "Protsessual huquq" },
+        { term: "Bojxona", definition: "Davlat chegarasidan tovarlar o'tkazilishini tartibga soluvchi va boj yig'imlarini undiruvchi organ.", source: "Bojxona kodeksi" },
+        { term: "Byudjet", definition: "Davlatning daromadlari va xarajatlari ro'yxatini o'z ichiga olgan asosiy moliyaviy reja.", source: "Byudjet kodeksi" },
+        
         { term: "Vasiylik", definition: "O'n to'rt yoshga to'lmagan yetim bolalarni yoki muomalaga layoqatsiz deb topilgan fuqarolarni himoya qilish shakli.", source: "Oila kodeksi" },
+        { term: "Vositachilik", definition: "Bir shaxsning topshirig'iga ko'ra ikkinchi shaxsning manfaati yo'lida shartnoma tuzish bo'yicha xizmat ko'rsatishi.", source: "Fuqarolik kodeksi" },
+        
+        { term: "Davlat", definition: "Muayyan hududda siyosiy hokimiyatni amalga oshiruvchi, boshqaruv apparatiga ega bo'lgan suveren tashkilot.", source: "Konstitutsiyaviy huquq" },
+        { term: "Da'vo muddati", definition: "Shaxs o'zining buzilgan huquqini da'vo qo'zg'ash yo'li bilan himoya qilishi mumkin bo'lgan muddat.", source: "Fuqarolik kodeksi" },
+        { term: "Delegatsiya", definition: "Vakolatli shaxslar guruhi bo'lib, muayyan vazifalarni bajarish uchun boshqa joyga yoki tashkilotga yuboriladi.", source: "Xalqaro huquq" },
+        { term: "Deputat", definition: "Vakillik organiga saylangan va fuqarolarning huquqlarini qonun chiqarish jarayonida himoya qiluvchi shaxs.", source: "Saylov qonunchiligi" },
+        { term: "Direktiv", definition: "Yuqori turuvchi organ tomonidan quyi tashkilotlarga beriladigan majburiy ko'rsatma yoki yo'riqnoma.", source: "Boshqaruv huquqi" },
+        { term: "Diskriminatsiya", definition: "Shaxslarni irqi, tili, dini yoki jinsiga qarab kamsitish va huquqlarini cheklashning taqiqlanishi.", source: "Inson huquqlari" },
+        { term: "Divident", definition: "Aksiyadorlik jamiyati foydasidan uning aksiyadorlariga har yili to'lanadigan ulush.", source: "Tadbirkorlik huquqi" },
+        { term: "Doktrina", definition: "Huquqiy nazariya, ta'limot yoki olimlarning huquqiy tizimni talqin qilishdagi ilmiy yondashuvlari.", source: "Huquq nazariyasi" },
+        { term: "Donatsiya", definition: "Ehson qilish, ya'ni mol-mulkni foydali maqsadlarda tekinga boshqa shaxsga topshirish.", source: "Fuqarolik kodeksi" },
+        { term: "Dovul", definition: "Tabiiy ofat bo'lib, fuqarolik-huquqiy munosabatlarda yengib bo'lmaydigan kuch (fors-major) sifatida baholanishi mumkin.", source: "Fuqarolik kodeksi" },
+        
+        { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
+        { term: "Ekspertiza", definition: "Maxsus bilim va fan sohalarida tekshiruv o'tkazib, xulosa berish jarayoni.", source: "Protsessual kodekslar" },
+        { term: "Ekstrakrad", definition: "Jinoyat sodir etgan shaxsni jinoiy javobgarlikka tortish uchun boshqa davlatga topshirish.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Emigratsiya", definition: "Fuqarolarning o'z mamlakatini tark etib, boshqa davlatga doimiy yashash uchun ko'chib ketishi.", source: "Migratsiya qonunchiligi" },
+        { term: "Empirik", definition: "Tajriba va amaliy kuzatishlarga asoslangan huquqiy tadqiqot usuli.", source: "Huquqshunoslik metodologiyasi" },
+        { term: "Endosament", definition: "Vekselsimon qimmatli qog'ozlar orqali huquqlarni boshqa shaxsga o'tkazish haqida yoziladigan yozuv.", source: "Moliya huquqi" },
+        { term: "Epitsentr", definition: "Huquqbuzarlik yoki favqulodda vaziyat sodir bo'lgan markaziy nuqta.", source: "Maxsus huquq" },
+        { term: "Erkinlik", definition: "Shaxsning qonun bilan taqiqlanmagan harakatlarni amalga oshirishdagi tabiiy imkoniyatlari.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
+        { term: "Estap", definition: "Mahbuslarni qo'riqlash ostida bir joydan ikkinchi joyga ko'chirish tartibi.", source: "Jinoyat-ijroiya kodeksi" },
+        { term: "Etika", definition: "Professional axloq qoidalari, jumladan sudyalar, advokatlar va prokurorlarning kasbiy odob-axloq me'yorlari.", source: "Kasbiy deontologiya" },
+        
+        { term: "Fuqarolik", definition: "Shaxsning muayyan davlat bilan siyosiy-huquqiy aloqasi, ularning o'zaro huquq va burchlari majmui.", source: "O'zbekiston Respublikasi qonunchiligi" },
+        
+        { term: "Guvoh", definition: "Jinoyat ishi bo'yicha ahamiyatga molika holatlarni bilishi mumkin bo'lgan jismoniy shaxs.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Garant", definition: "Birovning majburiyatini bajarish uchun kafillik beruvchi shaxs yoki tashkilot.", source: "Fuqarolik kodeksi" },
+        { term: "Genotsid", definition: "Milliy, etnik, irqiy yoki diniy guruhlarni to'la yoki qisman yo'q qilishga qaratilgan og'ir jinoyat.", source: "Jinoyat kodeksi" },
+        
+        { term: "Hokimiyat", definition: "Davlat organlari va mansabdor shaxslarning jamiyat hayotini boshqarishdagi vakolatlari va huquqiy kuchi.", source: "Konstitutsiyaviy huquq" },
+        { term: "Hukm", definition: "Sud tomonidan jinoyat ishi bo'yicha aybdorlik yoki aybsizlikni e'lon qilib chiqariladigan asosiy qaror.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Homiylik", definition: "Jismoniy yoki yuridik shaxslarning xayriya maqsadlarida bepul yordam ko'rsatishi.", source: "Homiylik to'g'risidagi qonun" },
+        
+        { term: "Imunitet", definition: "Ayrim shaxslar yoki organlarning umumiy qoidalardan istisno tariqasida ayrim majburiyatlar yoki javobgarlikdan ozod qilinishi.", source: "Xalqaro va milliy huquq" },
+        { term: "Inson huquqlari", definition: "Har bir shaxsning tug'ilishidan boshlab tegishli bo'lgan ajralmas huquq va erkinliklar majmui.", source: "Inson huquqlari umumjahon deklaratsiyasi" },
+        { term: "Insofsizlik", definition: "Fuqarolik muomalasida boshqalarning huquqlarini buzuvchi va qasddan zarar yetkazuvchi harakatlar.", source: "Fuqarolik kodeksi" },
+        { term: "Intellektual mulk", definition: "Ilmiy, adabiy, badiiy asarlar va ixtirolarga bo'lgan shaxsiy mulkiy va nomulkiy huquqlar.", source: "Fuqarolik kodeksi" },
+        { term: "Ipoteka", definition: "Ko'chmas mulkni garovga qo'yish asosida bankdan kredit olish huquqiy shakli.", source: "Ipoteka to'g'risidagi qonun" },
+        
+        { term: "Jinoyat", definition: "Jinoyat kodeksida nazarda tutilgan, ijtimoiy xavfli bo'lgan aybdor qilmish.", source: "Jinoyat kodeksi" },
+        { term: "Jurisprudensiya", definition: "Huquqshunoslik fanlari majmui, qonunlarni o'rganish va amaliyotda qo'llash sohasi.", source: "Huquqshunoslik" },
+        { term: "Jarima", definition: "Huquqbuzar zimmasiga sud yoki vakolatli organ tomonidan yuklatiladigan majburiy pul to'lovi.", source: "Ma'muriy va Jinoyat kodeksi" },
+        
+        { term: "Konsessiya", definition: "Davlatning o'ziga tegishli obyektlarni shartnoma asosida muayyan muddatga xususiy shaxslarga boshqarish yoki qurish uchun berishi.", source: "Iqtisodiy huquq" },
+        { term: "Konstitutsiya", definition: "Davlatning asosiy qonuni bo'lib, jamiyat va davlat tuzumining huquqiy asoslarini belgilaydi.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
+        { term: "Kontrabanda", definition: "Taqiqlangan yoki cheklangan tovarlarni bojxona nazoratidan yashirincha olib o'tish.", source: "Jinoyat kodeksi" },
+        { term: "Korrupsiya", definition: "Mansab mavqeidan shaxsiy manfaatlar yo'lida foydalanish bilan bog'liq jinoyatlar majmui.", source: "Korrupsiyaga qarshi kurashish qonuni" },
+        { term: "Kreditor", definition: "Qarzdordan pul mablag'lari yoki mulkni talab qilish huquqiga ega bo'lgan shaxs.", source: "Fuqarolik kodeksi" },
+        
+        { term: "Litsenziya", definition: "Muayyan faoliyat turi bilan shug'ullanish uchun vakolatli organ tomonidan beriladigan maxsus ruxsatnoma.", source: "Tadbirkorlik huquqi" },
+        { term: "Legitimlik", definition: "Davlat hokimiyati va uning qarorlarining xalq tomonidan tan olinishi va qo'llab-quvvatlanishi.", source: "Siyosiy-huquqiy fanlar" },
+        { term: "Lizing", definition: "Mol-mulkni sotib olib, uni keyinchalik sotib olish sharti bilan uzoq muddatli ijaraga berish.", source: "Fuqarolik kodeksi" },
+        
+        { term: "Muomalaga layoqatli", definition: "Fuqaroning o'z harakatlari bilan o'ziga huquqlar olish va o'z zimmasiga burchlar yuklay olish layoqati.", source: "Fuqarolik kodeksi" },
+        { term: "Moratoriy", definition: "Muayyan harakatlarni bajarishni yoki to'lovlarni amalga oshirishni davlat tomonidan vaqtincha to'xtatib turish.", source: "Moliya va fuqarolik huquqi" },
+        { term: "Monopoliya", definition: "Bozorda yagona tovar yetkazib beruvchi yoki ishlab chiqaruvchining ustun mavqega ega bo'lishi.", source: "Raqobat to'g'risidagi qonun" },
+        { term: "Mediafiksatsiya", definition: "Huquqiy jarayonlarni audio va video vositalari yordamida yozib olish.", source: "Protsessual huquq" },
+        
+        { term: "Notarius", definition: "Yuridik shaxslar va fuqarolarning huquqlari hamda qonuniy manfaatlarini himoya qilish uchun huquqiy hujjatlarni tasdiqlovchi shaxs.", source: "Notariat to'g'risidagi qonun" },
+        { term: "Norma", definition: "Davlat tomonidan o'rnatilgan yoki ruxsat etilgan, umumiy majburiy bo'lgan qoidalar.", source: "Huquq nazariyasi" },
+        { term: "Nikoh", definition: "Erkak va ayol o'rtasidagi ixtiyoriy va teng huquqli ittifoq bo'lib, oila qurish maqsadida tuziladi.", source: "Oila kodeksi" },
+        
+        { term: "Ombudsman", definition: "Inson huquqlari bo'yicha vakil, fuqarolarning huquq va erkinliklariga rioya etilishini nazorat qiluvchi parlament instituti.", source: "Maxsus qonun" },
+        { term: "Obyekt", definition: "Huquqiy munosabatlar qaratilgan moddiy yoki nomoddiy ne'matlar.", source: "Fuqarolik kodeksi" },
+        { term: "Obligatsiya", definition: "Egasi uning nominal qiymatini belgilangan muddatda olish huquqini beradigan qimmatli qog'oz.", source: "Moliya huquqi" },
+        
+        { term: "Pretsedent", definition: "Muayyan ish bo'yicha chiqarilgan va keyinchalik shunga o'xshash ishlar uchun majburiy yoki namuna bo'ladigan sud qarori.", source: "Huquq nazariyasi" },
+        { term: "Prokuratura", definition: "Qonunlarning aniq va bir xilda bajarilishini nazorat qiluvchi davlat organlari tizimi.", source: "Prokuratura to'g'risidagi qonun" },
+        { term: "Pakt", definition: "Xalqaro darajada tuziladigan muhim shartnoma yoki bitim turi.", source: "Xalqaro huquq" },
+        { term: "Patent", definition: "Ixtiroga bo'lgan mualliflik huquqini va uning monopolligini tasdiqlovchi rasmiy hujjat.", source: "Fuqarolik kodeksi" },
+        { term: "Preambula", definition: "Qonun yoki xalqaro shartnomaning kirish qismi bo'lib, uning maqsadi va vazifalarini tushuntiradi.", source: "Konstitutsiyaviy huquq" },
+        
+        { term: "Qaror", definition: "Davlat organlari yoki mansabdor shaxslar tomonidan o'z vakolatlari doirasida qabul qilinadigan rasmiy huquqiy hujjat.", source: "Boshqaruv huquqi" },
+        { term: "Qonun", definition: "Oliy vakillik organi tomonidan qabul qilinadigan, eng oliy yuridik kuchga ega bo'lgan normativ-huquqiy hujjat.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
+        { term: "Qarzdor", definition: "Kreditor oldida muayyan majburiyatlarni bajarishi shart bo'lgan shaxs.", source: "Fuqarolik kodeksi" },
+        { term: "Qasddan sodir etish", definition: "Shaxs o'z qilmishining ijtimoiy xavfli tusini anglagan holda sodir etgan huquqbuzarligi.", source: "Jinoyat kodeksi" },
+        
+        { term: "Reabilitatsiya", definition: "Noqonuniy ravishda jinoiy javobgarlikka tortilgan yoki huquqlari buzilgan shaxsning huquqlari va obro'sini tiklash.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Reyderlik", definition: "Korxonani noqonuniy ravishda bosib olish va mulkdorlarni o'z mulkidan mahrum qilish harakatlari.", source: "Iqtisodiy jinoyatlar" },
+        { term: "Rekvizisiya", definition: "Favqulodda vaziyatlarda davlat ehtiyojlari uchun fuqarolarning mol-mulkini haq to'lagan holda olib qo'yish.", source: "Fuqarolik kodeksi" },
+        { term: "Referendum", definition: "Muhim davlat masalalari bo'yicha xalq ovoz berish yo'li bilan qaror qabul qilishi.", source: "Referendum to'g'risidagi qonun" },
+        
+        { term: "Sanatsiya", definition: "Moliyaviy qiyinchilikka uchragan korxona yoki tashkilotni inqirozdan qutqarish bo'yicha ko'riladigan sog'lomlashtirish choralari.", source: "Iqtisodiy huquq" },
+        { term: "Servitut", definition: "O'zgalarning yer uchastkasidan cheklangan tarzda foydalanish huquqi.", source: "Yer kodeksi" },
+        { term: "Subyekt", definition: "Huquqiy munosabatlarda ishtirok etish huquqiga ega bo'lgan jismoniy yoki yuridik shaxslar.", source: "Fuqarolik kodeksi" },
+        { term: "Suverenitet", definition: "Davlat hokimiyatining o'z ichki ishlarida mustaqilligi va tashqi siyosatda ustuvorligi.", source: "Konstitutsiyaviy huquq" },
+        { term: "Sud", definition: "Odil sudlovni amalga oshiruvchi va huquqiy nizolarni hal qiluvchi maxsus davlat organi.", source: "Sudlar to'g'risidagi qonun" },
+        
+        { term: "Talabnoma", definition: "Shaxsning o'z huquqlarini tiklash yoki buzilgan majburiyatlarni bajarish bo'yicha ikkinchi tarafga qo'yadigan yozma e'tirozi.", source: "Fuqarolik protsessual kodeksi" },
+        { term: "Tabiiy huquq", definition: "Insonlarga tug'ilishidan berilgan va hech kim tortib ololmaydigan huquqlar tizimi.", source: "Huquq nazariyasi" },
+        { term: "Testament", definition: "Fuqaroning o'z mol-mulkini vafot etgan taqdirda taqsimlash haqidagi vasiyatnomasi.", source: "Fuqarolik kodeksi" },
+        { term: "Tergov", definition: "Jinoyat sodir etilgan holatlarni aniqlash maqsadida o'tkaziladigan protsessual harakatlar majmui.", source: "Jinoyat-protsessual kodeksi" },
+        
+        { term: "Utilizatsiya", definition: "Yaroqsiz holga kelgan chiqindilarni qayta ishlash yoki yo'q qilish jarayoni.", source: "Ekologik huquq" },
+        { term: "Uzufrukt", definition: "O'zgalar mulkidan foydalanish va undan keladigan daromadni olish huquqi.", source: "Fuqarolik kodeksi" },
+        
+        { term: "Vaqtinchalik saqlash", definition: "Mol-mulkni yoki shaxslarni vaqtincha nazorat ostida ushlab turish tartibi.", source: "Ma'muriy huquq" },
+        { term: "Veto", definition: "Qabul qilingan qonunni imzolashdan bosh tortish yoki uni to'xtatib qo'yish huquqi.", source: "Konstitutsiyaviy huquq" },
+        
+        { term: "Xalqaro huquq", definition: "Davlatlararo munosabatlarni tartibga soluvchi huquqiy tamoyillar va normalar tizimi.", source: "Xalqaro huquq" },
+        { term: "Xarajat", definition: "Muayyan faoliyatni amalga oshirish yoki majburiyatlarni bajarish uchun sarflanadigan mablag'lar.", source: "Moliya huquqi" },
+        { term: "Xususiy mulk", definition: "Fuqarolar yoki yuridik shaxslarga tegishli bo'lgan va qonun bilan himoya qilinadigan mulk shakli.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
+        
         { term: "Yurisdiksiya", definition: "Sud yoki boshqa davlat organlarining huquqiy masalalarni hal qilish, qonunbuzarliklarga nisbatan chora ko'rish vakolati.", source: "Huquqiy atamalar lug'ati" },
-        { term: "Zarar", definition: "Huquqi buzilgan shaxsning huquqlarini tiklash uchun qilgan yoki qilishi lozim bo'lgan xarajatlari, mol-mulkining yo'qolishi.", source: "Fuqarolik kodeksi" }
+        { term: "Yuridik shaxs", definition: "Mulk huquqiga ega bo'lgan, o'z nomidan majburiyatlar olib boruvchi tashkilot yoki korxona.", source: "Fuqarolik kodeksi" },
+        
+        { term: "Zarar", definition: "Huquqi buzilgan shaxsning huquqlarini tiklash uchun qilgan yoki qilishi lozim bo'lgan xarajatlari, mol-mulkining yo'qolishi.", source: "Fuqarolik kodeksi" },
+        { term: "Zavod", definition: "Sanoat mahsulotlarini ishlab chiqaruvchi yirik yuridik shaxs maqomidagi korxona.", source: "Tadbirkorlik huquqi" }
     ];
 
     let currentLetter = 'ALL';
