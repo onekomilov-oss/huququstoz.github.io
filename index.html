@@ -191,7 +191,7 @@ header {
   transform: rotate(90deg);
 }
 
-/* Asosiy Flashcard Karti (Yumshoq va yengil surish uchun moslashtirildi) */
+/* Asosiy Flashcard Karti */
 .flashcard {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -199,15 +199,11 @@ header {
   padding: 50px 40px;
   border-radius: 28px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-  cursor: grab;
+  cursor: pointer;
   user-select: none;
   text-align: center;
-  transition: background 0.6s ease, border-color 0.6s ease, transform 0.15s ease-out, opacity 0.15s ease-out;
+  transition: background 0.6s ease, border-color 0.6s ease, transform 0.2s ease, opacity 0.2s ease;
   touch-action: pan-y;
-}
-
-.flashcard:active {
-  cursor: grabbing;
 }
 
 .quote-text {
@@ -436,7 +432,7 @@ footer {
     <div class="flashcard" id="flashcard">
       <p class="quote-text" id="quoteText">"Adolat — davlatning poydevori."</p>
       <p class="quote-author" id="quoteAuthor">— Alisher Navoiy</p>
-      <div class="card-counter" id="cardCounter">1 / 5 (Yengil suring 👈 👉)</div>
+      <div class="card-counter" id="cardCounter">1 / 5 (Chap: 👈 Oldinga | O'ng: 👉 Orqaga)</div>
     </div>
   </div>
 </div>
@@ -481,7 +477,7 @@ footer {
   </div>
 </footer>
 
-<!-- JAVASCRIPT: Ultra yumshoq va yengil surish (Smooth Drag & Swipe) -->
+<!-- JAVASCRIPT: Chap va O'ng tomonni bosganda o'tish mexanikasi -->
 <script>
   const quotes = [
     { text: "Adolat — davlatning poydevori.", author: "Alisher Navoiy" },
@@ -526,7 +522,7 @@ footer {
   function updateCard() {
     quoteTextElem.innerText = `"${quotes[currentIndex].text}"`;
     quoteAuthorElem.innerText = `— ${quotes[currentIndex].author}`;
-    counterElem.innerText = `${currentIndex + 1} / ${quotes.length} (Yengil suring 👈 👉)`;
+    counterElem.innerText = `${currentIndex + 1} / ${quotes.length} (Chap: 👈 Oldinga | O'ng: 👉 Orqaga)`;
 
     let index = currentIndex % textColors.length;
     quoteTextElem.style.color = textColors[index];
@@ -534,61 +530,21 @@ footer {
     cardElement.style.borderColor = cardBorderColors[index];
   }
 
-  // O'ta yumshoq va sezgir surish (Drag & Swipe) mexanikasi
-  let startX = 0;
-  let currentX = 0;
-  let isDragging = false;
-  let diffX = 0;
+  // Karta ustiga bosganda (Click): Chap taraf -> Oldinga, O'ng taraf -> Orqaga
+  cardElement.addEventListener("click", (e) => {
+    const rect = cardElement.getBoundingClientRect();
+    const clickX = e.clientX - rect.left; // Bosilgan joyning x koordinatasi
+    const cardWidth = rect.width;
 
-  function dragStart(x) {
-    isDragging = true;
-    startX = x;
-    cardElement.style.transition = "none"; // Tortganda kechikish bo'lmasligi uchun
-  }
-
-  function dragMove(x) {
-    if (!isDragging) return;
-    currentX = x;
-    diffX = currentX - startX;
-    
-    // Yengil va yumshoq ergashishi uchun transform va shaffoflik
-    cardElement.style.transform = `translateX(${diffX}px) rotate(${diffX * 0.03}deg)`;
-    cardElement.style.opacity = Math.max(1 - Math.abs(diffX) / 400, 0.4);
-  }
-
-  function dragEnd() {
-    if (!isDragging) return;
-    isDragging = false;
-    
-    // Qaytish animatsiyasini yoqish
-    cardElement.style.transition = "transform 0.3s ease, opacity 0.3s ease";
-
-    // Agar 40 pikseldan ko'proq surilsa - keyingi/oldingi songa o'tadi
-    if (diffX > 40) {
-      currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
-      updateCard();
-    } else if (diffX < -40) {
+    if (clickX < cardWidth / 2) {
+      // Chap tomon bosildi -> Oldinga
       currentIndex = (currentIndex + 1) % quotes.length;
-      updateCard();
+    } else {
+      // O'ng tomon bosildi -> Orqaga
+      currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
     }
-
-    // Joyiga qaytarish
-    cardElement.style.transform = "translateX(0px) rotate(0deg)";
-    cardElement.style.opacity = "1";
-    diffX = 0;
-  }
-
-  // Touch (Telefon ekranlari uchun)
-  cardElement.addEventListener("touchstart", (e) => dragStart(e.touches[0].clientX));
-  cardElement.addEventListener("touchmove", (e) => dragMove(e.touches[0].clientX));
-  cardElement.addEventListener("touchend", dragEnd);
-
-  // Mouse (Kompyuter uchun)
-  cardElement.addEventListener("mousedown", (e) => dragStart(e.clientX));
-  window.addEventListener("mousemove", (e) => {
-    if (isDragging) dragMove(e.clientX);
+    updateCard();
   });
-  window.addEventListener("mouseup", dragEnd);
 
   updateCard();
 </script>
