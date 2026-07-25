@@ -13,7 +13,7 @@
 <meta property="og:image" content="huquq.jpg">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
 
-<!-- Google Fonts: Qiyishaytirilgan (Italic/Handwriting) va zamonaviy shriftlar -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- FontAwesome Ikonkalar Kutubxonasi -->
@@ -129,98 +129,133 @@ header {
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
 }
 
-/* SIRLI SAHIFA (FLASH-CARD & SLIDER) BO'LIMI */
-.sirli-section {
+/* SIRLI SAHIFA RAMKA (TRIGGER) BO'LIMI */
+.sirli-trigger-section {
   padding: 50px 20px 20px 20px;
   display: flex;
   justify-content: center;
 }
 
-.sirli-container {
-  width: 100%;
-  max-width: 850px;
-  text-align: center;
+.sirli-frame-btn {
+  background: var(--glass-bg);
+  border: 2px dashed var(--primary-purple);
+  backdrop-filter: blur(12px);
+  padding: 22px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.section-title {
-  font-size: 28px;
-  margin-bottom: 25px;
+.sirli-frame-btn:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25);
+}
+
+.sirli-frame-btn i {
+  font-size: 24px;
+  color: var(--accent-cyan);
+}
+
+.sirli-frame-btn span {
+  font-size: 20px;
+  font-weight: 600;
   background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* FLASHCARD MODAL / OVERLAY CONTAINER */
+.flashcard-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* CAROUSEL & FLASH-CARD CONTAINER */
-.flashcard-slider {
+.flashcard-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.flashcard-wrapper {
   position: relative;
+  width: 90%;
+  max-width: 650px;
+  transform: scale(0.8);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flashcard-modal.active .flashcard-wrapper {
+  transform: scale(1);
+}
+
+/* X - Yopish tugmasi */
+.close-btn {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 260px;
-  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+  transition: all 0.3s ease;
 }
 
+.close-btn:hover {
+  background: #f43f5e;
+  border-color: #f43f5e;
+  transform: rotate(90deg);
+}
+
+/* Asosiy Flashcard Karti */
 .flashcard {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 40px 30px;
-  border-radius: 24px;
-  width: 100%;
-  max-width: 700px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
+  backdrop-filter: blur(25px);
+  padding: 50px 40px;
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  cursor: grab;
   user-select: none;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  text-align: center;
+  transition: background 0.5s ease, border-color 0.5s ease, transform 0.2s ease;
+  touch-action: pan-y;
 }
 
-.flashcard:hover {
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 25px 60px rgba(139, 92, 246, 0.2);
+.flashcard:active {
+  cursor: grabbing;
 }
 
-/* Bosganda sodir bo'ladigan animatsiya */
-.flashcard.pulse-anim {
-  transform: scale(0.97);
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 35px rgba(6, 182, 212, 0.4);
-}
-
-/* Chapga / O'ngga surish animatsiyalari */
-.flashcard.slide-left {
-  animation: slideLeft 0.35s ease forwards;
-}
-
-.flashcard.slide-right {
-  animation: slideRight 0.35s ease forwards;
-}
-
-@keyframes slideLeft {
-  0% { opacity: 1; transform: translateX(0); }
-  50% { opacity: 0; transform: translateX(-40px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideRight {
-  0% { opacity: 1; transform: translateX(0); }
-  50% { opacity: 0; transform: translateX(40px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-/* Hikmat matni (qiyishaytirilgan shrift) va muallif (qalin shrift) */
 .quote-text {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 23px;
+  font-size: 25px;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   transition: color 0.4s ease;
 }
 
@@ -231,40 +266,10 @@ header {
   color: var(--text-main);
 }
 
-/* Slider tugmalari */
-.slider-controls {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  align-items: center;
-}
-
-.slider-btn {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  color: var(--text-main);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 16px;
-}
-
-.slider-btn:hover {
-  background: var(--primary-purple);
-  border-color: var(--primary-purple);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
-}
-
 .card-counter {
-  font-size: 14px;
+  margin-top: 20px;
+  font-size: 13px;
   color: var(--text-muted);
-  font-weight: 500;
 }
 
 /* HERO SECTION */
@@ -282,7 +287,6 @@ header {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   padding: 50px 35px;
   border-radius: 24px;
   max-width: 850px;
@@ -458,25 +462,25 @@ footer {
   </div>
 </header>
 
-<!-- SIRLI SAHIFA BO'LIMI (ENG BIRINCHI O'RINDA) -->
-<section class="sirli-section">
-  <div class="sirli-container">
-    <h2 class="section-title"><i class="fa-solid fa-lock-open"></i> Sirli Sahifa</h2>
-    
-    <div class="flashcard-slider">
-      <div class="flashcard" id="flashcard">
-        <p class="quote-text" id="quoteText">"Adolat — davlatning poydevori."</p>
-        <p class="quote-author" id="quoteAuthor">— Alisher Navoiy</p>
-      </div>
-    </div>
-
-    <div class="slider-controls">
-      <button class="slider-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-      <span class="card-counter" id="cardCounter">1 / 5</span>
-      <button class="slider-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
+<!-- SIRLI SAHIFA RAMKA (TRIGGER) BO'LIMI -->
+<section class="sirli-trigger-section">
+  <div class="sirli-frame-btn" id="openSirliBtn">
+    <i class="fa-solid fa-lock-open"></i>
+    <span>Sirli Sahifa</span>
   </div>
 </section>
+
+<!-- FLASHCARD MODAL (OCHILADIGAN OYNA) -->
+<div class="flashcard-modal" id="flashcardModal">
+  <div class="flashcard-wrapper">
+    <button class="close-btn" id="closeSirliBtn"><i class="fa-solid fa-xmark"></i></button>
+    <div class="flashcard" id="flashcard">
+      <p class="quote-text" id="quoteText">"Adolat — davlatning poydevori."</p>
+      <p class="quote-author" id="quoteAuthor">— Alisher Navoiy</p>
+      <div class="card-counter" id="cardCounter">1 / 5 (Suring 👈 👉)</div>
+    </div>
+  </div>
+</div>
 
 <!-- HERO SECTION -->
 <section class="hero">
@@ -518,9 +522,8 @@ footer {
   </div>
 </footer>
 
-<!-- JAVASCRIPT: Kelajakda o'zingiz kod yozishingiz va o'zgartirishingiz uchun -->
+<!-- JAVASCRIPT: Ochilish, Yopish va Swipe (Surish) hamda Rang o'zgarishlari -->
 <script>
-  // Hikmatli so'zlar bazasi (kelajakda o'zingiz yangi so'zlarni qo'shishingiz mumkin)
   const quotes = [
     { text: "Adolat — davlatning poydevori.", author: "Alisher Navoiy" },
     { text: "Qonun qattiq, lekin u qonun.", author: "Rim maqoli" },
@@ -529,60 +532,114 @@ footer {
     { text: "Qonun ustuvor bo'lgan joyda tinchlik va osoyishtalik hukmronlik qiladi.", author: "Sharq donishmandligi" }
   ];
 
-  // Har bir hikmat matni uchun ranglar palitrasi
-  const colors = ["#a78bfa", "#06b6d4", "#f43f5e", "#10b981", "#fbbf24"];
+  // Shrift ranglari va Flashcard fon ranglari kombinatsiyalari
+  const textColors = ["#a78bfa", "#06b6d4", "#f43f5e", "#10b981", "#fbbf24"];
+  const cardBgColors = [
+    "rgba(139, 92, 246, 0.06)", 
+    "rgba(6, 182, 212, 0.06)", 
+    "rgba(244, 63, 94, 0.06)", 
+    "rgba(16, 185, 129, 0.06)", 
+    "rgba(251, 191, 36, 0.06)"
+  ];
+  const cardBorderColors = [
+    "rgba(139, 92, 246, 0.2)", 
+    "rgba(6, 182, 212, 0.2)", 
+    "rgba(244, 63, 94, 0.2)", 
+    "rgba(16, 185, 129, 0.2)", 
+    "rgba(251, 191, 36, 0.2)"
+  ];
 
   let currentIndex = 0;
 
+  const openBtn = document.getElementById("openSirliBtn");
+  const closeBtn = document.getElementById("closeSirliBtn");
+  const modal = document.getElementById("flashcardModal");
   const cardElement = document.getElementById("flashcard");
   const quoteTextElem = document.getElementById("quoteText");
   const quoteAuthorElem = document.getElementById("quoteAuthor");
   const counterElem = document.getElementById("cardCounter");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
 
-  function updateCardContent() {
-    quoteTextElem.innerText = `"${quotes[currentIndex].text}"`;
-    quoteAuthorElem.innerText = `— ${quotes[currentIndex].author}`;
-    
-    // Matnga har xil rang berish
-    quoteTextElem.style.color = colors[currentIndex % colors.length];
-    counterElem.innerText = `${currentIndex + 1} / ${quotes.length}`;
-  }
-
-  // Kartochka ustiga bosganda animatsiya effekti
-  cardElement.addEventListener("click", () => {
-    cardElement.classList.add("pulse-anim");
-    setTimeout(() => {
-      cardElement.classList.remove("pulse-anim");
-    }, 300);
+  // Modalni ochish va yopish
+  openBtn.addEventListener("click", () => modal.classList.add("active"));
+  closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.remove("active");
   });
 
-  // Keyingi kartaga o'tish
-  function nextCard() {
-    cardElement.classList.add("slide-right");
-    setTimeout(() => {
-      currentIndex = (currentIndex + 1) % quotes.length;
-      updateCardContent();
-      cardElement.classList.remove("slide-right");
-    }, 200);
+  function updateCard() {
+    quoteTextElem.innerText = `"${quotes[currentIndex].text}"`;
+    quoteAuthorElem.innerText = `— ${quotes[currentIndex].author}`;
+    counterElem.innerText = `${currentIndex + 1} / ${quotes.length} (Suring 👈 👉)`;
+
+    // Ba'zida shrift rangi, ba'zida card foni o'zgarishi
+    let index = currentIndex % textColors.length;
+    quoteTextElem.style.color = textColors[index];
+    cardElement.style.background = cardBgColors[index];
+    cardElement.style.borderColor = cardBorderColors[index];
   }
 
-  // Oldingi kartaga o'tish
-  function prevCard() {
-    cardElement.classList.add("slide-left");
-    setTimeout(() => {
+  // Sahifani (Flashcardni) o'ngga/chapga surish (Swipe / Drag) mexanikasi
+  let startX = 0;
+  let isDragging = false;
+
+  cardElement.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  });
+
+  cardElement.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    let currentX = e.touches[0].clientX;
+    let diff = currentX - startX;
+    cardElement.style.transform = `translateX(${diff}px)`;
+  });
+
+  cardElement.addEventListener("touchend", (e) => {
+    if (!isDragging) return;
+    let endX = e.changedTouches[0].clientX;
+    let diff = endX - startX;
+
+    if (diff > 50) {
+      // O'ngga surilsa (oldingi)
       currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
-      updateCardContent();
-      cardElement.classList.remove("slide-left");
-    }, 200);
-  }
+      updateCard();
+    } else if (diff < -50) {
+      // Chapga surilsa (keyingi)
+      currentIndex = (currentIndex + 1) % quotes.length;
+      updateCard();
+    }
+    cardElement.style.transform = "translateX(0px)";
+    isDragging = false;
+  });
 
-  nextBtn.addEventListener("click", nextCard);
-  prevBtn.addEventListener("click", prevCard);
+  // Sichqoncha orqali surish (Kompyuter uchun ham)
+  cardElement.addEventListener("mousedown", (e) => {
+    startX = e.clientX;
+    isDragging = true;
+  });
 
-  // Dastlabki yuklanish
-  updateCardContent();
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    let diff = e.clientX - startX;
+    cardElement.style.transform = `translateX(${diff}px)`;
+  });
+
+  window.addEventListener("mouseup", (e) => {
+    if (!isDragging) return;
+    let diff = e.clientX - startX;
+
+    if (diff > 50) {
+      currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+      updateCard();
+    } else if (diff < -50) {
+      currentIndex = (currentIndex + 1) % quotes.length;
+      updateCard();
+    }
+    cardElement.style.transform = "translateX(0px)";
+    isDragging = false;
+  });
+
+  updateCard();
 </script>
 
 </body>
