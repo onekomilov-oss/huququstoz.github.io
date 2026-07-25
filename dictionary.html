@@ -9,7 +9,7 @@
     
     <style>
         .legal-dictionary-section {
-            padding: 90px 20px;
+            padding: 90px 10px; /* 20px ni 10px ga o'zgartirdik, telefonda yaxshi ko'rinishi uchun */
             background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
             min-height: 100vh;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -25,7 +25,8 @@
         }
 
         .legal-dictionary-section .container {
-            max-width: 1200px;
+            max-width: 100%; /* 1200px ni 100% ga o'zgartirdik - ekranni to'liq qoplaydi */
+            padding: 0 15px; /* Ikki chetidan ozgina, chiroyli bo'shliq qoldiradi */
             margin: 0 auto;
         }
 
