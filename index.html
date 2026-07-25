@@ -61,7 +61,7 @@ header {
 
 .container {
   width: 90%;
-  max-width: 1150px;
+  max-width: 1250px;
   margin: auto;
 }
 
@@ -106,16 +106,17 @@ header {
 .nav-link {
   text-decoration: none;
   color: var(--text-main);
-  padding: 10px 18px;
+  padding: 10px 16px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .nav-link i {
@@ -127,47 +128,6 @@ header {
   border-color: var(--primary-purple);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
-}
-
-/* SIRLI SAHIFA RAMKA (TRIGGER) BO'LIMI */
-.sirli-trigger-section {
-  padding: 50px 20px 20px 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.sirli-frame-btn {
-  background: var(--glass-bg);
-  border: 2px dashed var(--primary-purple);
-  backdrop-filter: blur(12px);
-  padding: 22px 40px;
-  border-radius: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  transition: all 0.4s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.sirli-frame-btn:hover {
-  background: rgba(139, 92, 246, 0.1);
-  border-color: var(--accent-cyan);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25);
-}
-
-.sirli-frame-btn i {
-  font-size: 24px;
-  color: var(--accent-cyan);
-}
-
-.sirli-frame-btn span {
-  font-size: 20px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* FLASHCARD MODAL / OVERLAY CONTAINER */
@@ -279,7 +239,7 @@ header {
   justify-content: center;
   text-align: center;
   min-height: 55vh;
-  padding: 40px 20px;
+  padding: 60px 20px 40px 20px;
   position: relative;
 }
 
@@ -416,14 +376,17 @@ footer {
 }
 
 /* RESPONSIVE DESIGN */
+@media(max-width: 992px) {
+  .nav { flex-direction: column; gap: 15px; }
+  .social { width: 100%; justify-content: center; flex-wrap: wrap; }
+}
+
 @media(max-width: 768px) {
   .logo h2 { font-size: 20px; }
   .hero-card { padding: 30px 20px; }
   .hero h1 { font-size: 32px; }
   .hero p { font-size: 16px; }
-  .nav { flex-direction: column; gap: 15px; }
-  .social { width: 100%; justify-content: center; }
-  .nav-link { padding: 8px 12px; font-size: 13px; }
+  .nav-link { padding: 8px 12px; font-size: 12px; }
   .footer-content { justify-content: center; text-align: center; }
   .quote-text { font-size: 20px; }
 }
@@ -440,7 +403,7 @@ footer {
     <div class="social">
       <a href="kutubxona.html" class="nav-link">
         <i class="fa-solid fa-book-open"></i>
-        <span>Elektron Kutubxona</span>
+        <span>Kutubxona</span>
       </a>
       <a href="quiz.html" class="nav-link">
         <i class="fa-solid fa-circle-question"></i>
@@ -448,7 +411,12 @@ footer {
       </a>
       <a href="dictionary.html" class="nav-link">
         <i class="fa-solid fa-graduation-cap"></i>
-        <span>Yuridik Lug'at</span>
+        <span>Lug'at</span>
+      </a>
+      <!-- Sirli Sahifa yuqori menyu qatoriga qo'shildi -->
+      <a class="nav-link" id="openSirliBtn">
+        <i class="fa-solid fa-lock-open"></i>
+        <span>Sirli Sahifa</span>
       </a>
       <a href="https://instagram.com/huququstoz" id="insta-link" class="nav-link" target="_blank">
         <i class="fa-brands fa-instagram"></i>
@@ -461,14 +429,6 @@ footer {
     </div>
   </div>
 </header>
-
-<!-- SIRLI SAHIFA RAMKA (TRIGGER) BO'LIMI -->
-<section class="sirli-trigger-section">
-  <div class="sirli-frame-btn" id="openSirliBtn">
-    <i class="fa-solid fa-lock-open"></i>
-    <span>Sirli Sahifa</span>
-  </div>
-</section>
 
 <!-- FLASHCARD MODAL (OCHILADIGAN OYNA) -->
 <div class="flashcard-modal" id="flashcardModal">
@@ -522,7 +482,7 @@ footer {
   </div>
 </footer>
 
-<!-- JAVASCRIPT: Ochilish, Yopish va Swipe (Surish) hamda Rang o'zgarishlari -->
+<!-- JAVASCRIPT: Ochilish, Yopish, Swipe va Rang o'zgarishlari -->
 <script>
   const quotes = [
     { text: "Adolat — davlatning poydevori.", author: "Alisher Navoiy" },
@@ -532,7 +492,6 @@ footer {
     { text: "Qonun ustuvor bo'lgan joyda tinchlik va osoyishtalik hukmronlik qiladi.", author: "Sharq donishmandligi" }
   ];
 
-  // Shrift ranglari va Flashcard fon ranglari kombinatsiyalari
   const textColors = ["#a78bfa", "#06b6d4", "#f43f5e", "#10b981", "#fbbf24"];
   const cardBgColors = [
     "rgba(139, 92, 246, 0.06)", 
@@ -571,14 +530,13 @@ footer {
     quoteAuthorElem.innerText = `— ${quotes[currentIndex].author}`;
     counterElem.innerText = `${currentIndex + 1} / ${quotes.length} (Suring 👈 👉)`;
 
-    // Ba'zida shrift rangi, ba'zida card foni o'zgarishi
     let index = currentIndex % textColors.length;
     quoteTextElem.style.color = textColors[index];
     cardElement.style.background = cardBgColors[index];
     cardElement.style.borderColor = cardBorderColors[index];
   }
 
-  // Sahifani (Flashcardni) o'ngga/chapga surish (Swipe / Drag) mexanikasi
+  // Swipe mexanikasi
   let startX = 0;
   let isDragging = false;
 
@@ -600,11 +558,9 @@ footer {
     let diff = endX - startX;
 
     if (diff > 50) {
-      // O'ngga surilsa (oldingi)
       currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
       updateCard();
     } else if (diff < -50) {
-      // Chapga surilsa (keyingi)
       currentIndex = (currentIndex + 1) % quotes.length;
       updateCard();
     }
@@ -612,7 +568,6 @@ footer {
     isDragging = false;
   });
 
-  // Sichqoncha orqali surish (Kompyuter uchun ham)
   cardElement.addEventListener("mousedown", (e) => {
     startX = e.clientX;
     isDragging = true;
