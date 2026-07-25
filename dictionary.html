@@ -1,5 +1,5 @@
 <!-- Yuridik lug'at bo'limi -->
-<section class="legal-dictionary-section">
+<section class="legal-dictionary-section" id="legalDictionaryApp">
     <div class="container">
         <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> Yuridik Lug'at</h2>
         <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga qat'iy moslashtirilgan eng muhim atamalar bazasi</p>
@@ -8,37 +8,37 @@
         <div class="dictionary-controls">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="dictionarySearch" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)..." oninput="filterDictionary()">
+                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Afv etish, Da'vo muddati)...">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
-            <div class="alphabet-filter" id="alphabetFilter">
-                <button type="button" onclick="filterByLetter('ALL', this)" class="active">Barchasi</button>
-                <button type="button" onclick="filterByLetter('A', this)">A</button>
-                <button type="button" onclick="filterByLetter('B', this)">B</button>
-                <button type="button" onclick="filterByLetter('D', this)">D</button>
-                <button type="button" onclick="filterByLetter('E', this)">E</button>
-                <button type="button" onclick="filterByLetter('F', this)">F</button>
-                <button type="button" onclick="filterByLetter('G', this)">G</button>
-                <button type="button" onclick="filterByLetter('H', this)">H</button>
-                <button type="button" onclick="filterByLetter('I', this)">I</button>
-                <button type="button" onclick="filterByLetter('J', this)">J</button>
-                <button type="button" onclick="filterByLetter('K', this)">K</button>
-                <button type="button" onclick="filterByLetter('L', this)">L</button>
-                <button type="button" onclick="filterByLetter('M', this)">M</button>
-                <button type="button" onclick="filterByLetter('N', this)">N</button>
-                <button type="button" onclick="filterByLetter('O', this)">O</button>
-                <button type="button" onclick="filterByLetter('P', this)">P</button>
-                <button type="button" onclick="filterByLetter('R', this)">R</button>
-                <button type="button" onclick="filterByLetter('S', this)">S</button>
-                <button type="button" onclick="filterByLetter('T', this)">T</button>
-                <button type="button" onclick="filterByLetter('V', this)">V</button>
-                <button type="button" onclick="filterByLetter('Y', this)">Y</button>
-                <button type="button" onclick="filterByLetter('Z', this)">Z</button>
+            <div class="alphabet-filter" id="legalAlphabetFilter">
+                <button type="button" data-letter="ALL" class="active">Barchasi</button>
+                <button type="button" data-letter="A">A</button>
+                <button type="button" data-letter="B">B</button>
+                <button type="button" data-letter="D">D</button>
+                <button type="button" data-letter="E">E</button>
+                <button type="button" data-letter="F">F</button>
+                <button type="button" data-letter="G">G</button>
+                <button type="button" data-letter="H">H</button>
+                <button type="button" data-letter="I">I</button>
+                <button type="button" data-letter="J">J</button>
+                <button type="button" data-letter="K">K</button>
+                <button type="button" data-letter="L">L</button>
+                <button type="button" data-letter="M">M</button>
+                <button type="button" data-letter="N">N</button>
+                <button type="button" data-letter="O">O</button>
+                <button type="button" data-letter="P">P</button>
+                <button type="button" data-letter="R">R</button>
+                <button type="button" data-letter="S">S</button>
+                <button type="button" data-letter="T">T</button>
+                <button type="button" data-letter="V">V</button>
+                <button type="button" data-letter="Y">Y</button>
+                <button type="button" data-letter="Z">Z</button>
             </div>
         </div>
 
         <!-- Lug'at kartochkalari paneli -->
-        <div class="dictionary-grid" id="dictionaryGrid"></div>
+        <div class="dictionary-grid" id="legalDictionaryGrid"></div>
     </div>
 </section>
 
@@ -51,12 +51,12 @@
     color: #f8fafc;
 }
 
-.container {
+.legal-dictionary-section .container {
     max-width: 1150px;
     margin: 0 auto;
 }
 
-.section-title {
+.legal-dictionary-section .section-title {
     text-align: center;
     font-size: 2.8rem;
     color: #f8fafc;
@@ -71,12 +71,12 @@
     -webkit-text-fill-color: transparent;
 }
 
-.section-title i {
+.legal-dictionary-section .section-title i {
     color: #a78bfa;
     -webkit-text-fill-color: initial;
 }
 
-.section-subtitle {
+.legal-dictionary-section .section-subtitle {
     text-align: center;
     color: #94a3b8;
     margin-bottom: 45px;
@@ -87,7 +87,7 @@
     line-height: 1.6;
 }
 
-.dictionary-controls {
+.legal-dictionary-section .dictionary-controls {
     max-width: 850px;
     margin: 0 auto 45px auto;
     display: flex;
@@ -95,12 +95,12 @@
     gap: 24px;
 }
 
-.search-box {
+.legal-dictionary-section .search-box {
     position: relative;
     width: 100%;
 }
 
-.search-box .search-icon {
+.legal-dictionary-section .search-box .search-icon {
     position: absolute;
     left: 20px;
     top: 50%;
@@ -109,7 +109,7 @@
     font-size: 1.1rem;
 }
 
-.search-box input {
+.legal-dictionary-section .search-box input {
     width: 100%;
     padding: 16px 24px 16px 52px;
     border-radius: 16px;
@@ -124,25 +124,25 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.search-box input::placeholder {
+.legal-dictionary-section .search-box input::placeholder {
     color: #94a3b8;
 }
 
-.search-box input:focus {
+.legal-dictionary-section .search-box input:focus {
     border-color: #8b5cf6;
     background: rgba(255, 255, 255, 0.07);
     box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
     transform: translateY(-2px);
 }
 
-.alphabet-filter {
+.legal-dictionary-section .alphabet-filter {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
 }
 
-.alphabet-filter button {
+.legal-dictionary-section .alphabet-filter button {
     padding: 9px 15px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -155,14 +155,14 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.alphabet-filter button:hover {
+.legal-dictionary-section .alphabet-filter button:hover {
     background: rgba(139, 92, 246, 0.15);
     border-color: rgba(139, 92, 246, 0.4);
     color: #ffffff;
     transform: translateY(-2px);
 }
 
-.alphabet-filter button.active {
+.legal-dictionary-section .alphabet-filter button.active {
     background: linear-gradient(135deg, #7c3aed, #4f46e5);
     color: #ffffff;
     border-color: #8b5cf6;
@@ -170,17 +170,17 @@
     transform: translateY(-2px);
 }
 
-.dictionary-grid {
+.legal-dictionary-section .dictionary-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 25px;
 }
 
-.dict-card {
+.legal-dictionary-section .dict-card {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 258, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 28px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -192,7 +192,7 @@
     overflow: hidden;
 }
 
-.dict-card::before {
+.legal-dictionary-section .dict-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -204,18 +204,18 @@
     transition: opacity 0.3s ease;
 }
 
-.dict-card:hover {
+.legal-dictionary-section .dict-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
     border-color: rgba(139, 92, 246, 0.3);
     background: rgba(255, 255, 255, 0.06);
 }
 
-.dict-card:hover::before {
+.legal-dictionary-section .dict-card:hover::before {
     opacity: 1;
 }
 
-.dict-term {
+.legal-dictionary-section .dict-term {
     font-size: 1.4rem;
     font-weight: 700;
     color: #f8fafc;
@@ -223,14 +223,14 @@
     letter-spacing: -0.3px;
 }
 
-.dict-definition {
+.legal-dictionary-section .dict-definition {
     font-size: 0.98rem;
     color: #94a3b8;
     line-height: 1.7;
     margin-bottom: 20px;
 }
 
-.dict-source {
+.legal-dictionary-section .dict-source {
     font-size: 0.82rem;
     color: #06b6d4;
     font-weight: 600;
@@ -244,90 +244,88 @@
 </style>
 
 <script>
-// Lug'at ma'lumotlar bazasi
-const globalDictionaryData = [
-    { term: "Afv etish", definition: "Jinoiy javobgarlikdan yoki jazodan ozod qilish yoxud tayinlangan jazoni yengillashtirish.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
-    { term: "Da'vo muddati", definition: "Shaxs o'zining buzilgan huquqini da'vo qo'zg'ash yo'li bilan himoya qilishi mumkin bo'lgan muddat.", source: "Fuqarolik kodeksi" },
-    { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
-    { term: "Fuqarolik", definition: "Shaxsning muayyan davlat bilan siyosiy-huquqiy aloqasi, ularning o'zaro huquq va burchlari majmui.", source: "O'zbekiston Respublikasi qonunchiligi" },
-    { term: "Guvoh", definition: "Jinoyat ishi bo'yicha ahamiyatga molika holatlarni bilishi mumkin bo'lgan jismoniy shaxs.", source: "Jinoyat-protsessual kodeksi" },
-    { term: "Hokimiyat", definition: "Davlat organlari va mansabdor shaxslarning jamiyat hayotini boshqarishdagi vakolatlari va huquqiy kuchi.", source: "Konstitutsiyaviy huquq" },
-    { term: "Imunitet", definition: "Ayrim shaxslar yoki organlarning umumiy qoidalardan istisno tariqasida ayrim majburiyatlar yoki javobgarlikdan ozod qilinishi.", source: "Xalqaro va milliy huquq" },
-    { term: "Jinoyat", definition: "Jinoyat kodeksida nazarda tutilgan, ijtimoiy xavfli bo'lgan aybdor qilmish.", source: "Jinoyat kodeksi" },
-    { term: "Konsessiya", definition: "Davlatning o'ziga tegishli obyektlarni shartnoma asosida muayyan muddatga xususiy shaxslarga boshqarish yoki qurish uchun berishi.", source: "Iqtisodiy huquq" },
-    { term: "Litsenziya", definition: "Muayyan faoliyat turi bilan shug'ullanish uchun vakolatli organ tomonidan beriladigan maxsus ruxsatnoma.", source: "Tadbirkorlik huquqi" },
-    { term: "Muomalaga layoqatli", definition: "Fuqaroning o'z harakatlari bilan o'ziga huquqlar olish va o'z zimmasiga burchlar yuklay olish layoqati.", source: "Fuqarolik kodeksi" },
-    { term: "Notarius", definition: "Yuridik shaxslar va fuqarolarning huquqlari hamda qonuniy manfaatlarini himoya qilish uchun huquqiy hujjatlarni tasdiqlovchi shaxs.", source: "Notariat to'g'risidagi qonun" },
-    { term: "Ombudsman", definition: "Inson huquqlari bo'yicha vakil, fuqarolarning huquq va erkinliklariga rioya etilishini nazorat qiluvchi parlament instituti.", source: "Maxsus qonun" },
-    { term: "Pretsedent", definition: "Muayyan ish bo'yicha chiqarilgan va keyinchalik shunga o'xshash ishlar uchun majburiy yoki namuna bo'ladigan sud qarori.", source: "Huquq nazariyasi" },
-    { term: "Reabilitatsiya", definition: "Noqonuniy ravishda jinoiy javobgarlikka tortilgan yoki huquqlari buzilgan shaxsning huquqlari va obro'sini tiklash.", source: "Jinoyat-protsessual kodeksi" },
-    { term: "Sanatsiya", definition: "Moliyaviy qiyinchilikka uchragan korxona yoki tashkilotni inqirozdan qutqarish bo'yicha ko'riladigan sog'lomlashtirish choralari.", source: "Iqtisodiy huquq" },
-    { term: "Talabnoma", definition: "Shaxsning o'z huquqlarini tiklash yoki buzilgan majburiyatlarni bajarish bo'yicha ikkinchi tarafga qo'yadigan yozma e'tirozi.", source: "Fuqarolik protsessual kodeksi" },
-    { term: "Vasiylik", definition: "O'n to'rt yoshga to'lmagan yetim bolalarni yoki muomalaga layoqatsiz deb topilgan fuqarolarni himoya qilish shakli.", source: "Oila kodeksi" },
-    { term: "Yurisdiksiya", definition: "Sud yoki boshqa davlat organlarining huquqiy masalalarni hal qilish, qonunbuzarliklarga nisbatan chora ko'rish vakolati.", source: "Huquqiy atamalar lug'ati" },
-    { term: "Zarar", definition: "Huquqi buzilgan shaxsning huquqlarini tiklash uchun qilgan yoki qilishi lozim bo'lgan xarajatlari, mol-mulkining yo'qolishi.", source: "Fuqarolik kodeksi" }
-];
+(function() {
+    const dictionaryData = [
+        { term: "Afv etish", definition: "Jinoiy javobgarlikdan yoki jazodan ozod qilish yoxud tayinlangan jazoni yengillashtirish.", source: "O'zbekiston Respublikasi Konstitutsiyasi" },
+        { term: "Da'vo muddati", definition: "Shaxs o'zining buzilgan huquqini da'vo qo'zg'ash yo'li bilan himoya qilishi mumkin bo'lgan muddat.", source: "Fuqarolik kodeksi" },
+        { term: "Emansipatsiya", definition: "O'n olti yoshga to'lgan voyaga yetmagan shaxs o'zining mehnat shartnomasi yoki tadbirkorlik faoliyati bilan shug'ullanishi natijasida to'la muomalaga layoqatli deb e'lon qilinishi.", source: "Fuqarolik kodeksi" },
+        { term: "Fuqarolik", definition: "Shaxsning muayyan davlat bilan siyosiy-huquqiy aloqasi, ularning o'zaro huquq va burchlari majmui.", source: "O'zbekiston Respublikasi qonunchiligi" },
+        { term: "Guvoh", definition: "Jinoyat ishi bo'yicha ahamiyatga molika holatlarni bilishi mumkin bo'lgan jismoniy shaxs.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Hokimiyat", definition: "Davlat organlari va mansabdor shaxslarning jamiyat hayotini boshqarishdagi vakolatlari va huquqiy kuchi.", source: "Konstitutsiyaviy huquq" },
+        { term: "Imunitet", definition: "Ayrim shaxslar yoki organlarning umumiy qoidalardan istisno tariqasida ayrim majburiyatlar yoki javobgarlikdan ozod qilinishi.", source: "Xalqaro va milliy huquq" },
+        { term: "Jinoyat", definition: "Jinoyat kodeksida nazarda tutilgan, ijtimoiy xavfli bo'lgan aybdor qilmish.", source: "Jinoyat kodeksi" },
+        { term: "Konsessiya", definition: "Davlatning o'ziga tegishli obyektlarni shartnoma asosida muayyan muddatga xususiy shaxslarga boshqarish yoki qurish uchun berishi.", source: "Iqtisodiy huquq" },
+        { term: "Litsenziya", definition: "Muayyan faoliyat turi bilan shug'ullanish uchun vakolatli organ tomonidan beriladigan maxsus ruxsatnoma.", source: "Tadbirkorlik huquqi" },
+        { term: "Muomalaga layoqatli", definition: "Fuqaroning o'z harakatlari bilan o'ziga huquqlar olish va o'z zimmasiga burchlar yuklay olish layoqati.", source: "Fuqarolik kodeksi" },
+        { term: "Notarius", definition: "Yuridik shaxslar va fuqarolarning huquqlari hamda qonuniy manfaatlarini himoya qilish uchun huquqiy hujjatlarni tasdiqlovchi shaxs.", source: "Notariat to'g'risidagi qonun" },
+        { term: "Ombudsman", definition: "Inson huquqlari bo'yicha vakil, fuqarolarning huquq va erkinliklariga rioya etilishini nazorat qiluvchi parlament instituti.", source: "Maxsus qonun" },
+        { term: "Pretsedent", definition: "Muayyan ish bo'yicha chiqarilgan va keyinchalik shunga o'xshash ishlar uchun majburiy yoki namuna bo'ladigan sud qarori.", source: "Huquq nazariyasi" },
+        { term: "Reabilitatsiya", definition: "Noqonuniy ravishda jinoiy javobgarlikka tortilgan yoki huquqlari buzilgan shaxsning huquqlari va obro'sini tiklash.", source: "Jinoyat-protsessual kodeksi" },
+        { term: "Sanatsiya", definition: "Moliyaviy qiyinchilikka uchragan korxona yoki tashkilotni inqirozdan qutqarish bo'yicha ko'riladigan sog'lomlashtirish choralari.", source: "Iqtisodiy huquq" },
+        { term: "Talabnoma", definition: "Shaxsning o'z huquqlarini tiklash yoki buzilgan majburiyatlarni bajarish bo'yicha ikkinchi tarafga qo'yadigan yozma e'tirozi.", source: "Fuqarolik protsessual kodeksi" },
+        { term: "Vasiylik", definition: "O'n to'rt yoshga to'lmagan yetim bolalarni yoki muomalaga layoqatsiz deb topilgan fuqarolarni himoya qilish shakli.", source: "Oila kodeksi" },
+        { term: "Yurisdiksiya", definition: "Sud yoki boshqa davlat organlarining huquqiy masalalarni hal qilish, qonunbuzarliklarga nisbatan chora ko'rish vakolati.", source: "Huquqiy atamalar lug'ati" },
+        { term: "Zarar", definition: "Huquqi buzilgan shaxsning huquqlarini tiklash uchun qilgan yoki qilishi lozim bo'lgan xarajatlari, mol-mulkining yo'qolishi.", source: "Fuqarolik kodeksi" }
+    ];
 
-let activeSelectedLetter = 'ALL';
+    let currentLetter = 'ALL';
 
-function renderDictionaryGrid(dataArray) {
-    const gridContainer = document.getElementById('dictionaryGrid');
-    if (!gridContainer) return;
-    
-    gridContainer.innerHTML = '';
+    const gridContainer = document.getElementById('legalDictionaryGrid');
+    const searchInput = document.getElementById('legalSearchInput');
+    const alphabetButtons = document.querySelectorAll('#legalAlphabetFilter button');
 
-    if (dataArray.length === 0) {
-        gridContainer.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px);">
-                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #a78bfa; margin-bottom: 15px;"></i>
-                <p style="color: #94a3b8; font-size: 1.15rem;">Hech qanday atama topilmadi.</p>
-            </div>
-        `;
-        return;
+    if (!gridContainer || !searchInput) return;
+
+    function render(data) {
+        gridContainer.innerHTML = '';
+        if (data.length === 0) {
+            gridContainer.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px);">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #a78bfa; margin-bottom: 15px;"></i>
+                    <p style="color: #94a3b8; font-size: 1.15rem;">Hech qanday atama topilmadi.</p>
+                </div>
+            `;
+            return;
+        }
+
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'dict-card';
+            card.innerHTML = `
+                <div>
+                    <h3 class="dict-term">${item.term}</h3>
+                    <p class="dict-definition">${item.definition}</p>
+                </div>
+                <span class="dict-source"><i class="fa-solid fa-bookmark" style="margin-right: 5px;"></i>${item.source}</span>
+            `;
+            gridContainer.appendChild(card);
+        });
     }
 
-    dataArray.forEach(item => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'dict-card';
-        cardElement.innerHTML = `
-            <div>
-                <h3 class="dict-term">${item.term}</h3>
-                <p class="dict-definition">${item.definition}</p>
-            </div>
-            <span class="dict-source"><i class="fa-solid fa-bookmark" style="margin-right: 5px;"></i>${item.source}</span>
-        `;
-        gridContainer.appendChild(cardElement);
-    });
-}
+    function filterData() {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        const filtered = dictionaryData.filter(item => {
+            const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
+            const matchesLetter = currentLetter === 'ALL' || item.term.toUpperCase().startsWith(currentLetter);
+            return matchesSearch && matchesLetter;
+        });
 
-function filterDictionary() {
-    const searchInputElem = document.getElementById('dictionarySearch');
-    if (!searchInputElem) return;
-    
-    const queryText = searchInputElem.value.toLowerCase().trim();
-    
-    const filteredResults = globalDictionaryData.filter(item => {
-        const matchesQuery = item.term.toLowerCase().includes(queryText) || item.definition.toLowerCase().includes(queryText);
-        const matchesAlpha = activeSelectedLetter === 'ALL' || item.term.toUpperCase().startsWith(activeSelectedLetter);
-        return matchesQuery && matchesAlpha;
-    });
-
-    renderDictionaryGrid(filteredResults);
-}
-
-function filterByLetter(letterKey, buttonElement) {
-    activeSelectedLetter = letterKey;
-    
-    const allButtons = document.querySelectorAll('.alphabet-filter button');
-    allButtons.forEach(btn => btn.classList.remove('active'));
-    
-    if (buttonElement) {
-        buttonElement.classList.add('active');
+        render(filtered);
     }
 
-    filterDictionary();
-}
+    searchInput.addEventListener('input', filterData);
 
-// Sahifa yuklanganda barcha so'zlarni chiqarish
-renderDictionaryGrid(globalDictionaryData);
+    alphabetButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            alphabetButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentLetter = this.getAttribute('data-letter');
+            filterData();
+        });
+    });
+
+    // Boshlang'ich yuklash
+    render(dictionaryData);
+})();
 </script>
