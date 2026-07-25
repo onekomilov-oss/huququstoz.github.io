@@ -191,7 +191,7 @@ header {
   transform: rotate(90deg);
 }
 
-/* Asosiy Flashcard Karti */
+/* Asosiy Flashcard Karti (Yumshoq va yengil surish uchun moslashtirildi) */
 .flashcard {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -202,7 +202,7 @@ header {
   cursor: grab;
   user-select: none;
   text-align: center;
-  transition: background 0.5s ease, border-color 0.5s ease, transform 0.2s ease;
+  transition: background 0.6s ease, border-color 0.6s ease, transform 0.15s ease-out, opacity 0.15s ease-out;
   touch-action: pan-y;
 }
 
@@ -216,7 +216,7 @@ header {
   font-size: 25px;
   line-height: 1.6;
   margin-bottom: 25px;
-  transition: color 0.4s ease;
+  transition: color 0.5s ease;
 }
 
 .quote-author {
@@ -413,7 +413,6 @@ footer {
         <i class="fa-solid fa-graduation-cap"></i>
         <span>Lug'at</span>
       </a>
-      <!-- Sirli Sahifa yuqori menyu qatoriga qo'shildi -->
       <a class="nav-link" id="openSirliBtn">
         <i class="fa-solid fa-lock-open"></i>
         <span>Sirli Sahifa</span>
@@ -430,14 +429,14 @@ footer {
   </div>
 </header>
 
-<!-- FLASHCARD MODAL (OCHILADIGAN OYNA) -->
+<!-- FLASHCARD MODAL -->
 <div class="flashcard-modal" id="flashcardModal">
   <div class="flashcard-wrapper">
     <button class="close-btn" id="closeSirliBtn"><i class="fa-solid fa-xmark"></i></button>
     <div class="flashcard" id="flashcard">
       <p class="quote-text" id="quoteText">"Adolat — davlatning poydevori."</p>
       <p class="quote-author" id="quoteAuthor">— Alisher Navoiy</p>
-      <div class="card-counter" id="cardCounter">1 / 5 (Suring 👈 👉)</div>
+      <div class="card-counter" id="cardCounter">1 / 5 (Yengil suring 👈 👉)</div>
     </div>
   </div>
 </div>
@@ -482,7 +481,7 @@ footer {
   </div>
 </footer>
 
-<!-- JAVASCRIPT: Ochilish, Yopish, Swipe va Rang o'zgarishlari -->
+<!-- JAVASCRIPT: Ultra yumshoq va yengil surish (Smooth Drag & Swipe) -->
 <script>
   const quotes = [
     { text: "Adolat — davlatning poydevori.", author: "Alisher Navoiy" },
@@ -518,7 +517,6 @@ footer {
   const quoteAuthorElem = document.getElementById("quoteAuthor");
   const counterElem = document.getElementById("cardCounter");
 
-  // Modalni ochish va yopish
   openBtn.addEventListener("click", () => modal.classList.add("active"));
   closeBtn.addEventListener("click", () => modal.classList.remove("active"));
   modal.addEventListener("click", (e) => {
@@ -528,7 +526,7 @@ footer {
   function updateCard() {
     quoteTextElem.innerText = `"${quotes[currentIndex].text}"`;
     quoteAuthorElem.innerText = `— ${quotes[currentIndex].author}`;
-    counterElem.innerText = `${currentIndex + 1} / ${quotes.length} (Suring 👈 👉)`;
+    counterElem.innerText = `${currentIndex + 1} / ${quotes.length} (Yengil suring 👈 👉)`;
 
     let index = currentIndex % textColors.length;
     quoteTextElem.style.color = textColors[index];
@@ -536,63 +534,61 @@ footer {
     cardElement.style.borderColor = cardBorderColors[index];
   }
 
-  // Swipe mexanikasi
+  // O'ta yumshoq va sezgir surish (Drag & Swipe) mexanikasi
   let startX = 0;
+  let currentX = 0;
   let isDragging = false;
+  let diffX = 0;
 
-  cardElement.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
+  function dragStart(x) {
     isDragging = true;
-  });
+    startX = x;
+    cardElement.style.transition = "none"; // Tortganda kechikish bo'lmasligi uchun
+  }
 
-  cardElement.addEventListener("touchmove", (e) => {
+  function dragMove(x) {
     if (!isDragging) return;
-    let currentX = e.touches[0].clientX;
-    let diff = currentX - startX;
-    cardElement.style.transform = `translateX(${diff}px)`;
-  });
+    currentX = x;
+    diffX = currentX - startX;
+    
+    // Yengil va yumshoq ergashishi uchun transform va shaffoflik
+    cardElement.style.transform = `translateX(${diffX}px) rotate(${diffX * 0.03}deg)`;
+    cardElement.style.opacity = Math.max(1 - Math.abs(diffX) / 400, 0.4);
+  }
 
-  cardElement.addEventListener("touchend", (e) => {
+  function dragEnd() {
     if (!isDragging) return;
-    let endX = e.changedTouches[0].clientX;
-    let diff = endX - startX;
+    isDragging = false;
+    
+    // Qaytish animatsiyasini yoqish
+    cardElement.style.transition = "transform 0.3s ease, opacity 0.3s ease";
 
-    if (diff > 50) {
+    // Agar 40 pikseldan ko'proq surilsa - keyingi/oldingi songa o'tadi
+    if (diffX > 40) {
       currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
       updateCard();
-    } else if (diff < -50) {
+    } else if (diffX < -40) {
       currentIndex = (currentIndex + 1) % quotes.length;
       updateCard();
     }
-    cardElement.style.transform = "translateX(0px)";
-    isDragging = false;
-  });
 
-  cardElement.addEventListener("mousedown", (e) => {
-    startX = e.clientX;
-    isDragging = true;
-  });
+    // Joyiga qaytarish
+    cardElement.style.transform = "translateX(0px) rotate(0deg)";
+    cardElement.style.opacity = "1";
+    diffX = 0;
+  }
 
+  // Touch (Telefon ekranlari uchun)
+  cardElement.addEventListener("touchstart", (e) => dragStart(e.touches[0].clientX));
+  cardElement.addEventListener("touchmove", (e) => dragMove(e.touches[0].clientX));
+  cardElement.addEventListener("touchend", dragEnd);
+
+  // Mouse (Kompyuter uchun)
+  cardElement.addEventListener("mousedown", (e) => dragStart(e.clientX));
   window.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    let diff = e.clientX - startX;
-    cardElement.style.transform = `translateX(${diff}px)`;
+    if (isDragging) dragMove(e.clientX);
   });
-
-  window.addEventListener("mouseup", (e) => {
-    if (!isDragging) return;
-    let diff = e.clientX - startX;
-
-    if (diff > 50) {
-      currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
-      updateCard();
-    } else if (diff < -50) {
-      currentIndex = (currentIndex + 1) % quotes.length;
-      updateCard();
-    }
-    cardElement.style.transform = "translateX(0px)";
-    isDragging = false;
-  });
+  window.addEventListener("mouseup", dragEnd);
 
   updateCard();
 </script>
