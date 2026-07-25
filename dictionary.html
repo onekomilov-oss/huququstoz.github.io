@@ -2,13 +2,13 @@
 <section class="legal-dictionary-section" id="legalDictionaryApp">
     <div class="container">
         <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> Yuridik Lug'at</h2>
-        <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga va amaldagi huquq tizimiga to'liq moslashtirilgan muhim atamalar bazasi</p>
+        <p class="section-subtitle">O'zbekiston Respublikasining qonun hujjatlariga va amaldagi huquq tizimiga to'liq moslashtirilgan kengaytirilgan atamalar bazasi</p>
         
         <!-- Qidirish va Filtrlash paneli -->
         <div class="dictionary-controls">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Yuridik shaxs, Apellyatsiya, Servitut)...">
+                <input type="text" id="legalSearchInput" placeholder="Atamani qidirish (masalan: Adliya, Apellyatsiya, Servitut)...">
             </div>
             <!-- Alifbo harflari bo'yicha filter -->
             <div class="alphabet-filter" id="legalAlphabetFilter">
@@ -52,6 +52,13 @@
     min-height: 100vh;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     color: #f8fafc;
+    box-sizing: border-box;
+}
+
+.legal-dictionary-section *, 
+.legal-dictionary-section *::before, 
+.legal-dictionary-section *::after {
+    box-sizing: border-box;
 }
 
 .legal-dictionary-section .container {
@@ -110,6 +117,7 @@
     transform: translateY(-50%);
     color: #a78bfa;
     font-size: 1.1rem;
+    pointer-events: none;
 }
 
 .legal-dictionary-section .search-box input {
