@@ -17,7 +17,7 @@
             background-color: #0f172a !important;
         }
 
-        .legal-dictionary-section {
+.legal-dictionary-section {
             padding: 90px 20px;
             background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
             min-height: 100vh;
@@ -25,13 +25,15 @@
             color: #f8fafc;
             box-sizing: border-box;
             
-            /* Mana bu qism sahifadagi barcha cheklovlarni chetlab o'tib, ekranni to'liq egallaydi */
+            /* Ekranni to'liq egallash va chetlarini yopish uchun majburiy xususiyatlar */
             width: 100vw !important;
+            max-width: 100vw !important;
             position: relative !important;
             left: 50% !important;
             right: 50% !important;
             margin-left: -50vw !important;
             margin-right: -50vw !important;
+            overflow-x: hidden !important;
         }
         }
 
