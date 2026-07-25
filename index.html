@@ -19,8 +19,411 @@
 <!-- FontAwesome Ikonkalar Kutubxonasi -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Tashqi CSS dizayn fayli -->
-<link rel="stylesheet" href="style.css">
+<style>
+/* ZAMONAVIY GLASSMORPHISM DIZAYN */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --primary-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVIGATION HEADER */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 16px 0;
+  z-index: 1000;
+}
+
+.container {
+  width: 90%;
+  max-width: 1150px;
+  margin: auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-purple);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.logo h2 {
+  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-main);
+  padding: 10px 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link i {
+  color: #a78bfa;
+}
+
+.nav-link:hover {
+  background: var(--glass-hover);
+  border-color: var(--primary-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+}
+
+/* SIRLI SAHIFA (FLASH-CARD & SLIDER) BO'LIMI */
+.sirli-section {
+  padding: 50px 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.sirli-container {
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, #a78bfa, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* CAROUSEL & FLASH-CARD CONTAINER */
+.flashcard-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  margin-bottom: 20px;
+}
+
+.flashcard {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 40px 30px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.flashcard:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 25px 60px rgba(139, 92, 246, 0.2);
+}
+
+/* Bosganda sodir bo'ladigan animatsiya */
+.flashcard.pulse-anim {
+  transform: scale(0.97);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 35px rgba(6, 182, 212, 0.4);
+}
+
+/* Chapga / O'ngga surish animatsiyalari */
+.flashcard.slide-left {
+  animation: slideLeft 0.35s ease forwards;
+}
+
+.flashcard.slide-right {
+  animation: slideRight 0.35s ease forwards;
+}
+
+@keyframes slideLeft {
+  0% { opacity: 1; transform: translateX(0); }
+  50% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  0% { opacity: 1; transform: translateX(0); }
+  50% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Hikmat matni (qiyishaytirilgan shrift) va muallif (qalin shrift) */
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 23px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  transition: color 0.4s ease;
+}
+
+.quote-author {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}
+
+/* Slider tugmalari */
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.slider-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.slider-btn:hover {
+  background: var(--primary-purple);
+  border-color: var(--primary-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+.card-counter {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* HERO SECTION */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 55vh;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.hero-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 50px 35px;
+  border-radius: 24px;
+  max-width: 850px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.hero h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 35px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.primary {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: white;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+}
+
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+}
+
+.secondary {
+  background: var(--glass-bg);
+  border: 1px solid var(--primary-purple);
+  color: white;
+}
+
+.secondary:hover {
+  background: rgba(124, 58, 237, 0.15);
+  transform: translateY(-3px);
+}
+
+/* ABOUT SECTION */
+.about {
+  padding: 40px 20px 60px 20px;
+  position: relative;
+}
+
+.about-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 45px 35px;
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #c084fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.about p {
+  line-height: 1.8;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* FOOTER */
+footer {
+  margin-top: auto;
+  padding: 30px 0;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.admin-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-link:hover {
+  color: var(--accent-cyan);
+}
+
+/* RESPONSIVE DESIGN */
+@media(max-width: 768px) {
+  .logo h2 { font-size: 20px; }
+  .hero-card { padding: 30px 20px; }
+  .hero h1 { font-size: 32px; }
+  .hero p { font-size: 16px; }
+  .nav { flex-direction: column; gap: 15px; }
+  .social { width: 100%; justify-content: center; }
+  .nav-link { padding: 8px 12px; font-size: 13px; }
+  .footer-content { justify-content: center; text-align: center; }
+  .quote-text { font-size: 20px; }
+}
+</style>
 </head>
 <body>
 
@@ -94,6 +497,7 @@
   </div>
 </section>
 
+<!-- ABOUT SECTION -->
 <section class="about">
   <div class="about-card">
     <h2 id="about-title"><i class="fa-solid fa-user-graduate"></i> Men haqimda</h2>
@@ -114,8 +518,72 @@
   </div>
 </footer>
 
-<!-- Kelajakda o'zingiz kod yozishingiz uchun mo'ljallangan alohida JavaScript fayl havolasi -->
-<script src="sirli-sahifa.js"></script>
+<!-- JAVASCRIPT: Kelajakda o'zingiz kod yozishingiz va o'zgartirishingiz uchun -->
+<script>
+  // Hikmatli so'zlar bazasi (kelajakda o'zingiz yangi so'zlarni qo'shishingiz mumkin)
+  const quotes = [
+    { text: "Adolat — davlatning poydevori.", author: "Alisher Navoiy" },
+    { text: "Qonun qattiq, lekin u qonun.", author: "Rim maqoli" },
+    { text: "Haqiqiy erkinlik qonunga itoat etishdan boshlanadi.", author: "Jan-Jak Russo" },
+    { text: "Davlatning buyukligi uning fuqarolarining odilligi bilan o'lchanadi.", author: "Aristotel" },
+    { text: "Qonun ustuvor bo'lgan joyda tinchlik va osoyishtalik hukmronlik qiladi.", author: "Sharq donishmandligi" }
+  ];
+
+  // Har bir hikmat matni uchun ranglar palitrasi
+  const colors = ["#a78bfa", "#06b6d4", "#f43f5e", "#10b981", "#fbbf24"];
+
+  let currentIndex = 0;
+
+  const cardElement = document.getElementById("flashcard");
+  const quoteTextElem = document.getElementById("quoteText");
+  const quoteAuthorElem = document.getElementById("quoteAuthor");
+  const counterElem = document.getElementById("cardCounter");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
+
+  function updateCardContent() {
+    quoteTextElem.innerText = `"${quotes[currentIndex].text}"`;
+    quoteAuthorElem.innerText = `— ${quotes[currentIndex].author}`;
+    
+    // Matnga har xil rang berish
+    quoteTextElem.style.color = colors[currentIndex % colors.length];
+    counterElem.innerText = `${currentIndex + 1} / ${quotes.length}`;
+  }
+
+  // Kartochka ustiga bosganda animatsiya effekti
+  cardElement.addEventListener("click", () => {
+    cardElement.classList.add("pulse-anim");
+    setTimeout(() => {
+      cardElement.classList.remove("pulse-anim");
+    }, 300);
+  });
+
+  // Keyingi kartaga o'tish
+  function nextCard() {
+    cardElement.classList.add("slide-right");
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % quotes.length;
+      updateCardContent();
+      cardElement.classList.remove("slide-right");
+    }, 200);
+  }
+
+  // Oldingi kartaga o'tish
+  function prevCard() {
+    cardElement.classList.add("slide-left");
+    setTimeout(() => {
+      currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+      updateCardContent();
+      cardElement.classList.remove("slide-left");
+    }, 200);
+  }
+
+  nextBtn.addEventListener("click", nextCard);
+  prevBtn.addEventListener("click", prevCard);
+
+  // Dastlabki yuklanish
+  updateCardContent();
+</script>
 
 </body>
 </html>
