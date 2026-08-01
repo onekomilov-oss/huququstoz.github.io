@@ -595,15 +595,14 @@ footer {
           </div>
           <i class="fa-solid fa-landmark"></i>
         </div>
-        <!-- KELAJAKDA YANGI MAVZUNI SHU YERGA OSONLIKCHA QO'SHIB KETAVERASIZ:
+        <!-- KONSTITUTSIYA ASOSLARI QO'SHILDI -->
         <div class="topic-card" onclick="selectTopic('konstitutsiya', this)">
           <div class="topic-info">
             <h4>Konstitutsiya Asoslari</h4>
-            <p>25 ta savol • Asosiy qonun qoidalari</p>
+            <p>30 ta savol • Asosiy qonun qoidalari</p>
           </div>
           <i class="fa-solid fa-book"></i>
         </div>
-        -->
       </div>
 
       <!-- TIMER MODE SELECTOR -->
@@ -796,13 +795,159 @@ const allQuizData = {
       options: ["Ha, belgilangan", "Yo‘q", "Ixtiyoriy", "Faqat xalqaro o'yinlarda"],
       correct: 0
     }
-  ]
-  /* Yangi mavzu qo'shish namunasi:
-  ,
+  ],
   konstitutsiya: [
-    { q: "Savol matni?", options: ["A", "B", "C", "D"], correct: 0 }
+    {
+      q: "1. O‘zbekiston Respublikasining amaldagi Konstitutsiyasi qachon qabul qilingan?",
+      options: ["1992-yil 8-dekabr", "2023-yil 30-aprel", "1991-yil 31-avgust", "1993-yil 2-iyul"],
+      correct: 1
+    },
+    {
+      q: "2. O‘zbekiston Respublikasi Konstitutsiyasi nechta bob va nechta moddadan iborat (yangi tahrirda)?",
+      options: ["6 ta bob, 128 ta modda", "27 ta bob, 155 ta modda", "26 ta bob, 161 ta modda", "28 ta bob, 140 ta modda"],
+      correct: 1
+    },
+    {
+      q: "3. O‘zbekiston Respublikasi — boshqaruv shakliga ko‘ra qanday davlat?",
+      options: ["Federativ respublika", "Boshqaruvi prezidentlik bo'lgan unitar respublika", "Boshqaruvi parlamentar shaklga ega bo'lgan respublika", "Boshqaruv shakli bo'yicha suveren demokratik respublika (Prezident boshchiligidagi unitar respublika)"],
+      correct: 3
+    },
+    {
+      q: "4. O‘zbekiston Respublikasida davlat hokimiyatining birlamchi manbai nima?",
+      options: ["O‘zbekiston Respublikasining Prezidenti", "O‘zbekiston Respublikasining Oliy Majlisi", "O‘zbekiston Respublikasi xalqi", "Vazirlar Mahkamasi"],
+      correct: 2
+    },
+    {
+      q: "5. O‘zbekiston Respublikasining davlat tili nima?",
+      options: ["Rus tili", "O‘zbek tili", "O‘zbek va rus tillari", "Qoraqalpoq va o'zbek tili"],
+      correct: 1
+    },
+    {
+      q: "6. O‘zbekiston Respublikasining davlat ramzlari qaysilar?",
+      options: ["Faqat Bayroq va Gerb", "Bayroq, Gerb, Madhiya", "Bayroq, Gerb, Madhiya, Konstitutsiya", "Bayroq, Gerb, Madhiya, Konstitutsiya va Parda"],
+      correct: 1
+    },
+    {
+      q: "7. O‘zbekiston Respublikasi hududida qonun ustuvorligi qanday ta'minlanadi?",
+      options: ["Konstitutsiya va qonunlarning so‘zsiz ustunligi", "Faqat Prezident farmonlari asosida", "Vazirlar Mahkamasi qarorlari bilan", "Mahalliy hokimiyat ko'rsatmasi bilan"],
+      correct: 0
+    },
+    {
+      q: "8. O‘zbekiston Respublikasi Oliy Majlisi necha palatadan iborat?",
+      options: ["Bir palatali", "Ikki palatali: Qonunchilik palatasi va Senat", "Uch palatali", "Senat va Xalq deputatlari kengashi"],
+      correct: 1
+    },
+    {
+      q: "9. O‘zbekiston Respublikasi Prezidenti lavozimiga necha yoshdan kichik bo‘lmagan shaxs saylanishi mumkin?",
+      options: ["30 yosh", "35 yosh", "40 yosh", "45 yosh"],
+      correct: 1
+    },
+    {
+      q: "10. O‘zbekiston Respublikasi Prezidenti necha yil muddatga saylanadi?",
+      options: ["5 yil", "4 yil", "7 yil", "6 yil"],
+      correct: 2
+    },
+    {
+      q: "11. O‘zbekiston Respublikasida o‘lim jazosi taqiqlanganmi?",
+      options: ["Ha, qat'iyan taqiqlangan", "Yo‘q, o‘ta og‘ir jinoyatlar uchun qo‘llaniladi", "Faqat harbiy holatda ruxsat etiladi", "Sud qarori bilan berilishi mumkin"],
+      correct: 0
+    },
+    {
+      q: "12. Har bir shaxs qanday huquqqa ega emas (notog‘ri javobni toping)?",
+      options: ["Mehnat qilish huquqiga", "Malakali tibbiy xizmat olish huquqiga", "Boshqalarning mulkini tortib olish huquqiga", "Ta'lim olish huquqiga"],
+      correct: 2
+    },
+    {
+      q: "13. O‘zbekiston Respublikasi fuqarolari qaysi yoshdan boshlab saylash huquqiga ega bo‘ladilar?",
+      options: ["16 yosh", "18 yosh", "21 yosh", "25 yosh"],
+      correct: 1
+    },
+    {
+      q: "14. Konstitutsiyaga ko‘ra, O‘zbekiston – bu ...",
+      options: ["Ijtimoiy davlat", "Diniy davlat", "Monarxiya", "Faqat sanoat davlati"],
+      correct: 0
+    },
+    {
+      q: "15. O‘zbekistonda jamoat birlashmalariga kimlar kirmasligi mumkin?",
+      options: ["Siyosiy partiyalar", "Kasaba uyushmalari", "Ommaviy harakatlar", "Qonunga xilof ravishda tuzilgan qurollangan birlashmalar"],
+      correct: 3
+    },
+    {
+      q: "16. Mulkdor o‘z mol-mulkiga o‘z xohishicha egalik qiladi, undan foydalanadi va uni tasarruf etadi. Mulk nima bilan himoyalanadi?",
+      options: ["Faqat mahalliy hokimiyat bilan", "Davlat tomonidan", "Faqat xususiy sug'urta bilan", "Xalq nazorati bilan"],
+      correct: 1
+    },
+    {
+      q: "17. Qoraqalpog‘iston Respublikasi O‘zbekiston Respublikasi tarkibiga kiradimi?",
+      options: ["Ha, suveren respublika sifatida kiradi", "Yo‘q, u mustaqil davlat", "U mustaqil viloyat maqomiga ega", "U shartnoma asosidagi hudud"],
+      correct: 0
+    },
+    {
+      q: "18. O‘zbekiston Respublikasining Oliy Majlisi Qonunchilik palatasiga deputat saylanish uchun necha yoshga to‘lgan bo‘lishi kerak?",
+      options: ["18 yosh", "21 yosh", "25 yosh", "30 yosh"],
+      correct: 2
+    },
+    {
+      q: "19. Sud hokimiyati O‘zbekistonda kimdan mustaqil holda ish yuritadi?",
+      options: ["Qon chiqaruvchi va ijro etuvchi hokimiyatlardan, siyosiy partiyalardan", "Faqat hokimlardan", "Faqat xalqdan", "OAVdan"],
+      correct: 0
+    },
+    {
+      q: "20. O‘zbekiston Respublikasida fuqarolarning huquq va erkinliklari nima bilan kafolatlanadi?",
+      options: ["Faqat xalqaro tashkilotlar bilan", "Konstitutsiya va qonunlar bilan", "Ixtiyoriy kelishuvlar bilan", "Oila byudjeti bilan"],
+      correct: 1
+    },
+    {
+      q: "21. O‘zbekiston tashqi siyosatining asosiy prinsipi nima?",
+      options: ["Boshqa davlatlarning ishlariga aralashmaslik, tinchliksevarlik", "Chet el hududlarini qo'shib olish", "Harbiy ittifoqlarga birinchi bo'lib kirish", "Iqtisodiy yakkalanish"],
+      correct: 0
+    },
+    {
+      q: "22. Davlat ta'lim tizimida umumiy o‘rta ta'lim olish qanday ta'minlanadi?",
+      options: ["Pullik asosda", "Bepul", "Faqat imtihondan o'tganlarga bepul", "Kredit asosida"],
+      correct: 1
+    },
+    {
+      q: "23. O‘zbekiston Respublikasida senzura nima qilinadi?",
+      options: ["Ruxsat etiladi", "Taqiqlanadi", "Faqat internetda cheklanadi", "Ixtiyoriy"],
+      correct: 1
+    },
+    {
+      q: "24. Kimlar majburiy harbiy xizmatni o‘tashlari shart?",
+      options: ["O‘zbekiston Respublikasining fuqarosi bo‘lgan yigitlar (qonunda belgilangan tartibda)", "Barcha fuqarolar, jumladan ayollar ham", "Faqat shartnoma xohlovchilar", "Chet el fuqarolari ham"],
+      correct: 0
+    },
+    {
+      q: "25. Konstitutsiyaga binoan nikoh narsaga asoslanadi?",
+      options: ["O‘zaro rozilik va teng huquqlilikka", "Ota-onaning qaroriga", "Moddiy manfaatdorlikka", "Faqat an'analarga"],
+      correct: 0
+    },
+    {
+      q: "26. Davlat fuqarolarning sog‘lig‘ini saqlash uchun nima qiladi?",
+      options: ["Tibbiy xizmatlarning barcha turlarini bepul qiladi", "Tibbiy xizmatning davlat tomonidan kafolatlangan hajmini bepul ko'rsatadi", "Faqat dorilarni bepul beradi", "Shifoxonalarni xususiylashtiradi"],
+      correct: 1
+    },
+    {
+      q: "27. Konstitutsiyaga o‘zgartishlar va qo‘shimchalar qanday kiritiladi?",
+      options: ["Prezident qarori bilan", "Oliy Majlis qonuni yoki referendum orqali", "Vazirlar Mahkamasi taklifiga binoan", "Sud qarori bilan"],
+      correct: 1
+    },
+    {
+      q: "28. O‘zbekiston Respublikasining poytaxti qaysi shahar?",
+      options: ["Samarkand", "Buxoro", "Toshkent", "Namangan"],
+      correct: 2
+    },
+    {
+      q: "29. O‘zbekiston Respublikasi Vazirlar Mahkamasi kimga hisobdor?",
+      options: ["Oliy Majlisga va Prezidentga", "Faqat xalqqa", "Sudga", "Birlashgan Millatlar Tashkilotiga"],
+      correct: 0
+    },
+    {
+      q: "30. O‘zbekiston Respublikasining Konstitutsiyasi qanday yuridik kuchga ega?",
+      options: ["Oliy yuridik kuchga ega", "Oddiy qonunlar bilan bir xil kuchga ega", "Tavsiyaviy xususiyatga ega", "Mahalliy qonunlar ustun turadi"],
+      correct: 0
+    }
   ]
-  */
 };
 
 let selectedTopicKey = 'madhiya';
