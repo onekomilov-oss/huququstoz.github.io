@@ -222,19 +222,63 @@ header {
   color: #fff;
 }
 
+/* TOPIC SELECTION CARDS */
+.topics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 20px 0 25px;
+}
+
+.topic-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 18px 22px;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topic-card:hover, .topic-card.selected {
+  background: rgba(168, 85, 247, 0.18);
+  border-color: var(--primary-glow);
+  box-shadow: 0 0 20px var(--glass-glow);
+  transform: translateY(-2px);
+}
+
+.topic-info h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.topic-info p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.topic-card i {
+  font-size: 20px;
+  color: var(--accent-cyan);
+}
+
 /* TIMER SELECTOR (MODES) */
 .timer-modes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 12px;
-  margin: 20px 0 30px;
+  margin: 15px 0 25px;
 }
 
 .mode-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  padding: 14px;
-  border-radius: 16px;
+  padding: 12px;
+  border-radius: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
@@ -248,20 +292,19 @@ header {
 }
 
 .mode-card i {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--accent-cyan);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .mode-card h4 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .mode-card p {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
-  margin-top: 2px;
 }
 
 /* QUESTION CONTENT */
@@ -392,34 +435,34 @@ header {
 /* START SCREEN */
 .start-screen {
   text-align: center;
-  padding: 10px;
+  padding: 5px;
 }
 
 .start-icon {
-  width: 85px;
-  height: 85px;
+  width: 70px;
+  height: 70px;
   background: rgba(168, 85, 247, 0.12);
   border: 2px solid var(--primary-glow);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 36px;
+  margin: 0 auto 15px;
+  font-size: 30px;
   color: var(--primary-glow);
-  box-shadow: 0 0 30px var(--glass-glow);
+  box-shadow: 0 0 25px var(--glass-glow);
 }
 
 .start-title {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .start-desc {
   color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* RESULT SCREEN */
@@ -535,35 +578,55 @@ footer {
 
 <main class="quiz-wrapper">
   <div class="quiz-box" id="quizBox">
-    <!-- Dastlabki boshlash ekrani -->
+    <!-- Dastlabki mavzu va timer tanlash ekrani -->
     <div class="start-screen animate__animated animate__fadeIn">
       <div class="start-icon">
-        <i class="fa-solid fa-hourglass-half"></i>
+        <i class="fa-solid fa-list-check"></i>
       </div>
-      <h1 class="start-title">Davlat Madhiyasi Qonunchiligi Quizi</h1>
-      <p class="start-desc">O'zingizga qulay timer vaqtini tanlang va Davlat madhiyasi bo'yicha barcha 30 ta qonuniy savolni sinovdan o'tkazing!</p>
+      <h1 class="start-title">Huquqiy Testlar Markazi</h1>
+      <p class="start-desc">Sinovdan o'tmoqchi bo'lgan test yo'nalishini va qulay vaqt rejimini tanlang.</p>
       
+      <!-- MAVZULARNI TANLASH -->
+      <div class="topics-grid" id="topicsGrid">
+        <div class="topic-card selected" onclick="selectTopic('madhiya', this)">
+          <div class="topic-info">
+            <h4>O'zbekiston Respublikasi Davlat Madhiyasi</h4>
+            <p>30 ta savol • Qonunchilik va matn tahlili</p>
+          </div>
+          <i class="fa-solid fa-landmark"></i>
+        </div>
+        <!-- KELAJAKDA YANGI MAVZUNI SHU YERGA OSONLIKCHA QO'SHIB KETAVERASIZ:
+        <div class="topic-card" onclick="selectTopic('konstitutsiya', this)">
+          <div class="topic-info">
+            <h4>Konstitutsiya Asoslari</h4>
+            <p>25 ta savol • Asosiy qonun qoidalari</p>
+          </div>
+          <i class="fa-solid fa-book"></i>
+        </div>
+        -->
+      </div>
+
       <!-- TIMER MODE SELECTOR -->
       <div class="timer-modes">
         <div class="mode-card" onclick="setTimerMode(10, this)">
           <i class="fa-solid fa-bolt"></i>
-          <h4>10 Sekund</h4>
-          <p>Ekstremal rejim</p>
+          <h4>10s</h4>
+          <p>Ekstremal</p>
         </div>
         <div class="mode-card selected" onclick="setTimerMode(20, this)">
           <i class="fa-solid fa-stopwatch"></i>
-          <h4>20 Sekund</h4>
-          <p>Standart rejim</p>
+          <h4>20s</h4>
+          <p>Standart</p>
         </div>
         <div class="mode-card" onclick="setTimerMode(30, this)">
           <i class="fa-solid fa-clock"></i>
-          <h4>30 Sekund</h4>
-          <p>Maksimal rejim</p>
+          <h4>30s</h4>
+          <p>Maksimal</p>
         </div>
         <div class="mode-card" onclick="setTimerMode(0, this)">
           <i class="fa-solid fa-infinity"></i>
-          <h4>Sekundomer</h4>
-          <p>Vaqt cheklovsiz</p>
+          <h4>Erkin</h4>
+          <p>Cheklovsiz</p>
         </div>
       </div>
 
@@ -580,160 +643,171 @@ footer {
 </footer>
 
 <script>
-const quizData = [
-  {
-    q: "1. O‘zbekiston Respublikasining Davlat madhiyasi qachon qabul qilingan?",
-    options: ["1991-yil 31-avgust", "1992-yil 10-dekabr", "1992-yil 2-iyul", "1993-yil 8-dekabr"],
-    correct: 1
-  },
-  {
-    q: "2. Davlat madhiyasining matnini kim yozgan?",
-    options: ["Erkin Vohidov", "Abdulla Oripov", "Cho‘lpon", "Zulfiya"],
-    correct: 1
-  },
-  {
-    q: "3. Davlat madhiyasining musiqasini kim bastalagan?",
-    options: ["Mutal Burhonov", "Tursun Ali", "Ikrom Akbarov", "Suleyvan Yudakov"],
-    correct: 0
-  },
-  {
-    q: "4. Davlat madhiyasiga zo‘r ehtirom bilan qarash kimning burchidir?",
-    options: ["Faqat davlat xizmatchilarining", "O‘zbekiston Respublikasi har bir fuqarosining vatanparvarlik burchidir", "Faqat sportchilarning", "Faqat harbiylarning"],
-    correct: 1
-  },
-  {
-    q: "5. O‘zbekiston Respublikasining Davlat madhiyasi to‘g‘risidagi Qonun nechanchi yildagi qonun bilan tasdiqlangan (soni)?",
-    options: ["768-XII-son", "450-I-son", "120-II-son", "980-XII-son"],
-    correct: 0
-  },
-  {
-    q: "6. Prezident lavozimiga kirishish chog‘ida madhiya qachon ijro etiladi?",
-    options: ["Qasamyod qabul qilishidan oldin", "Qasamyod qabul qilganidan so‘ng", "Tadbir boshida umuman", "Tadbir yakunida"],
-    correct: 1
-  },
-  {
-    q: "7. Parlament palatalari majlislarining qaysi paytida madhiya yangraydi?",
-    options: ["Faqat ochilishi chog‘ida", "Ochilishi hamda yopilishi chog‘ida", "Tanaffus paytida", "Faqat yopilishida"],
-    correct: 1
-  },
-  {
-    q: "8. Kechayu kunduz ishlaydigan davlat teleradiokompaniyalari madhiyani qaysi vaqtlarda qo‘yishlari shart?",
-    options: ["Soat 6:00 da va 24:00 da", "Faqat ertalab", "Har soatda", "Kechqurun soat 20:00 da"],
-    correct: 0
-  },
-  {
-    q: "9. Yangi yil kechasida davlat televideniyesida madhiya qaysi soatda ijro etiladi?",
-    options: ["00:00 da", "Soat 24 da", "23:00 da", "01:00 da"],
-    correct: 1
-  },
-  {
-    q: "10. Xorijiy davlat rahbarlarini kutib olish chog‘ida O‘zbekiston madhiyasi qachon ijro etiladi?",
-    options: ["O‘zbekiston madhiyasi oldin chalinadi", "Xorijiy davlat madhiyasi ijro qilib bo‘linganidan keyin", "Bir vaqtning o‘zida", "Navbatma-navbat ikkita marta"],
-    correct: 1
-  },
-  {
-    q: "11. Ta'lim muassasalarida madhiya qaysi paytda yangraydi?",
-    options: ["Yangi o‘quv yili boshlanishi va o‘quv yili tugashi marosimlarida", "Har kuni dars boshida", "Faqat imtihonlarda", "Har hafta boshida"],
-    correct: 0
-  },
-  {
-    q: "12. Sport musobaqalarida madhiya qachon ijro etiladi?",
-    options: ["O‘yin oxirida", "Chempionatlar vaqtida hamda g‘oliblarni mukofotlash marosimlarida", "Faqat musobaqa ochilishida", "Har birgoldan keyin ixtiyoriy"],
-    correct: 1
-  },
-  {
-    q: "13. Saylov yoki referendum kunlari ovoz berish binolarida madhiya ijro etiladimi?",
-    options: ["B) Ha, qonunda belgilangan", "A) Yo‘q", "C) Faqat yakunida", "D) Faqat poytaxtda"],
-    correct: 0
-  },
-  {
-    q: "14. Madhiya qanday shakllarda ijro etilishi mumkin?",
-    options: ["Faqat xor tomonidan", "Orkestr, xor, ham orkestr ham xor yoki vokal-cholg‘u asboblari bilan", "Faqat yakkaxon ovozda", "Faqat cholg‘u asbobida"],
-    correct: 1
-  },
-  {
-    q: "15. Madhiya ijrosi qanday talabga javob berishi shart?",
-    options: ["Matn va musiqiy tahririga aynan muvofiq bo‘lishi lozim", "Erkin o‘zgartirishlar kiritish mumkin", "Faqat qisqartirib aytish mumkin", "Musiqasini o‘zgartirsa bo‘ladi"],
-    correct: 0
-  },
-  {
-    q: "16. Madhiyaning ilk misrasi nima bilan boshlanadi?",
-    options: ["Oltin bu vodiylar", "Serquyosh hur o‘lkam, elga baxt, najot", "Bag‘ri keng o‘zbekning", "Mangu yashna"],
-    correct: 1
-  },
-  {
-    q: "17. Madhiyada \"Oltin bu vodiylar\" so‘zlaridan keyin qaysi misra keladi?",
-    options: ["Jon O‘zbekiston", "Tinchlik posboni", "Erkin yosh avlodlar", "Porloq istiqbol"],
-    correct: 0
-  },
-  {
-    q: "18. Madhiyada \"Ajdodlar mardona ruhi\" kimga yor ekanligi aytiladi?",
-    options: ["Yoshlarga", "Senga yor", "El-yurtga", "Farzandlarga"],
-    correct: 1
-  },
-  {
-    q: "19. Madhiyada \"Istiqlol mash'ali\" nima deb atalgan?",
-    options: ["Tinchlik posboni", "Erkin o‘lka", "Olamni mahliyo aylagan diyor", "Nurli osmon"],
-    correct: 0
-  },
-  {
-    q: "20. Madhiya matnida qaysi so‘z takrorlanib keluvchi naqarot qismiga kiradi?",
-    options: ["Oltin bu vodiylar - jon O‘zbekiston", "Serquyosh hur o‘lkam", "Yashnagay to abad", "Hur o‘lka"],
-    correct: 0
-  },
-  {
-    q: "21. O‘zbekiston Respublikasining Davlat madhiyasi nimaning ramzi hisoblanadi?",
-    options: ["Davlat suverenitetining ramzi", "Faqat madaniy meros", "Tarixiy sana", "Sport yutug‘i"],
-    correct: 0
-  },
-  {
-    q: "22. Monumentlar va yodgorliklarning ochilishi marosimida madhiya ijro etiladimi?",
-    options: ["Ha, ijro etiladi", "Yo‘q", "Faqat poytaxtda", "Ixtiyoriy"],
-    correct: 0
-  },
-  {
-    q: "23. Harbiy marosimlarni o‘tkazish vaqtida madhiya qanday tartibda ijro etiladi?",
-    options: ["Qurolli Kuchlarning umumharbiy ustavlariga muvofiq", "Erkin tartibda", "Faqat bayramlarda", "Maxsus farmon bilan"],
-    correct: 0
-  },
-  {
-    q: "24. Madhiya matnida qaysi kasb egalari yoki ijod turi tilga olingan?",
-    options: ["Ilmu fan, ijod", "Hunarmandchilik", "Dehqonchilik", "Tadbirkorlik"],
-    correct: 0
-  },
-  {
-    q: "25. Madhiyada o‘zbek xalqining qanday iymoni haqida yozilgan?",
-    options: ["O‘chmas iymoni", "Buyuk iymoni", "Mustahkam iymoni", "Mangu iymoni"],
-    correct: 0
-  },
-  {
-    q: "26. O‘zbekistonda turgan boshqa shaxslar (chet el fuqarolari) ham madhiyani hurmat qilishi shartmi?",
-    options: ["Ha, shart", "Majburiy emas", "Faqat diplomatlar uchun", "Tavsiya etiladi"],
-    correct: 0
-  },
-  {
-    q: "27. Umummilliy bayramlarga bag‘ishlangan tantanali yig‘ilishlarning qaysi qismida madhiya yangraydi?",
-    options: ["Ochilishi chog‘ida", "Yakunida", "O‘rtasida", "Tanaffusda"],
-    correct: 0
-  },
-  {
-    q: "28. Madhiyada O‘zbekistonni qanday diyor deb ta'riflashgan?",
-    options: ["Olamni mahliyo aylagan diyor", "Jahonga mashhur diyor", "Jannatmonand diyor", "Go‘zal diyor"],
-    correct: 0
-  },
-  {
-    q: "29. Madhiyada yosh avlodlar nima deb ta'riflangan?",
-    options: ["Erkin, yosh avlodlar senga zo‘r qanot", "Kelajak bunyodkori", "Jasur o‘g‘lonlar", "Shijoatli yoshlar"],
-    correct: 0
-  },
-  {
-    q: "30. Davlat bayrog‘ini ko‘tarish marosimlarida madhiya ijro etilishi qonun-qoidalarida belgilanganmi?",
-    options: ["Ha, belgilangan", "Yo‘q", "Ixtiyoriy", "Faqat xalqaro o'yinlarda"],
-    correct: 0
-  }
-];
+// BARCHA TEST BAZASI (Yangi mavzularni shu yerga qo'shib ketasiz)
+const allQuizData = {
+  madhiya: [
+    {
+      q: "1. O‘zbekiston Respublikasining Davlat madhiyasi qachon qabul qilingan?",
+      options: ["1991-yil 31-avgust", "1992-yil 10-dekabr", "1992-yil 2-iyul", "1993-yil 8-dekabr"],
+      correct: 1
+    },
+    {
+      q: "2. Davlat madhiyasining matnini kim yozgan?",
+      options: ["Erkin Vohidov", "Abdulla Oripov", "Cho‘lpon", "Zulfiya"],
+      correct: 1
+    },
+    {
+      q: "3. Davlat madhiyasining musiqasini kim bastalagan?",
+      options: ["Mutal Burhonov", "Tursun Ali", "Ikrom Akbarov", "Suleyvan Yudakov"],
+      correct: 0
+    },
+    {
+      q: "4. Davlat madhiyasiga zo‘r ehtirom bilan qarash kimning burchidir?",
+      options: ["Faqat davlat xizmatchilarining", "O‘zbekiston Respublikasi har bir fuqarosining vatanparvarlik burchidir", "Faqat sportchilarning", "Faqat harbiylarning"],
+      correct: 1
+    },
+    {
+      q: "5. O‘zbekiston Respublikasining Davlat madhiyasi to‘g‘risidagi Qonun nechanchi yildagi qonun bilan tasdiqlangan (soni)?",
+      options: ["768-XII-son", "450-I-son", "120-II-son", "980-XII-son"],
+      correct: 0
+    },
+    {
+      q: "6. Prezident lavozimiga kirishish chog‘ida madhiya qachon ijro etiladi?",
+      options: ["Qasamyod qabul qilishidan oldin", "Qasamyod qabul qilganidan so‘ng", "Tadbir boshida umuman", "Tadbir yakunida"],
+      correct: 1
+    },
+    {
+      q: "7. Parlament palatalari majlislarining qaysi paytida madhiya yangraydi?",
+      options: ["Faqat ochilishi chog‘ida", "Ochilishi hamda yopilishi chog‘ida", "Tanaffus paytida", "Faqat yopilishida"],
+      correct: 1
+    },
+    {
+      q: "8. Kechayu kunduz ishlaydigan davlat teleradiokompaniyalari madhiyani qaysi vaqtlarda qo‘yishlari shart?",
+      options: ["Soat 6:00 da va 24:00 da", "Faqat ertalab", "Har soatda", "Kechqurun soat 20:00 da"],
+      correct: 0
+    },
+    {
+      q: "9. Yangi yil kechasida davlat televideniyesida madhiya qaysi soatda ijro etiladi?",
+      options: ["00:00 da", "Soat 24 da", "23:00 da", "01:00 da"],
+      correct: 1
+    },
+    {
+      q: "10. Xorijiy davlat rahbarlarini kutib olish chog‘ida O‘zbekiston madhiyasi qachon ijro etiladi?",
+      options: ["O‘zbekiston madhiyasi oldin chalinadi", "Xorijiy davlat madhiyasi ijro qilib bo‘linganidan keyin", "Bir vaqtning o‘zida", "Navbatma-navbat ikkita marta"],
+      correct: 1
+    },
+    {
+      q: "11. Ta'lim muassasalarida madhiya qaysi paytda yangraydi?",
+      options: ["Yangi o‘quv yili boshlanishi va o‘quv yili tugashi marosimlarida", "Har kuni dars boshida", "Faqat imtihonlarda", "Har hafta boshida"],
+      correct: 0
+    },
+    {
+      q: "12. Sport musobaqalarida madhiya qachon ijro etiladi?",
+      options: ["O‘yin oxirida", "Chempionatlar vaqtida hamda g‘oliblarni mukofotlash marosimlarida", "Faqat musobaqa ochilishida", "Har birgoldan keyin ixtiyoriy"],
+      correct: 1
+    },
+    {
+      q: "13. Saylov yoki referendum kunlari ovoz berish binolarida madhiya ijro etiladimi?",
+      options: ["B) Ha, qonunda belgilangan", "A) Yo‘q", "C) Faqat yakunida", "D) Faqat poytaxtda"],
+      correct: 0
+    },
+    {
+      q: "14. Madhiya qanday shakllarda ijro etilishi mumkin?",
+      options: ["Faqat xor tomonidan", "Orkestr, xor, ham orkestr ham xor yoki vokal-cholg‘u asboblari bilan", "Faqat yakkaxon ovozda", "Faqat cholg‘u asbobida"],
+      correct: 1
+    },
+    {
+      q: "15. Madhiya ijrosi qanday talabga javob berishi shart?",
+      options: ["Matn va musiqiy tahririga aynan muvofiq bo‘lishi lozim", "Erkin o‘zgartirishlar kiritish mumkin", "Faqat qisqartirib aytish mumkin", "Musiqasini o‘zgartirsa bo‘ladi"],
+      correct: 0
+    },
+    {
+      q: "16. Madhiyaning ilk misrasi nima bilan boshlanadi?",
+      options: ["Oltin bu vodiylar", "Serquyosh hur o‘lkam, elga baxt, najot", "Bag‘ri keng o‘zbekning", "Mangu yashna"],
+      correct: 1
+    },
+    {
+      q: "17. Madhiyada \"Oltin bu vodiylar\" so‘zlaridan keyin qaysi misra keladi?",
+      options: ["Jon O‘zbekiston", "Tinchlik posboni", "Erkin yosh avlodlar", "Porloq istiqbol"],
+      correct: 0
+    },
+    {
+      q: "18. Madhiyada \"Ajdodlar mardona ruhi\" kimga yor ekanligi aytiladi?",
+      options: ["Yoshlarga", "Senga yor", "El-yurtga", "Farzandlarga"],
+      correct: 1
+    },
+    {
+      q: "19. Madhiyada \"Istiqlol mash'ali\" nima deb atalgan?",
+      options: ["Tinchlik posboni", "Erkin o‘lka", "Olamni mahliyo aylagan diyor", "Nurli osmon"],
+      correct: 0
+    },
+    {
+      q: "20. Madhiya matnida qaysi so‘z takrorlanib keluvchi naqarot qismiga kiradi?",
+      options: ["Oltin bu vodiylar - jon O‘zbekiston", "Serquyosh hur o‘lkam", "Yashnagay to abad", "Hur o‘lka"],
+      correct: 0
+    },
+    {
+      q: "21. O‘zbekiston Respublikasining Davlat madhiyasi nimaning ramzi hisoblanadi?",
+      options: ["Davlat suverenitetining ramzi", "Faqat madaniy meros", "Tarixiy sana", "Sport yutug‘i"],
+      correct: 0
+    },
+    {
+      q: "22. Monumentlar va yodgorliklarning ochilishi marosimida madhiya ijro etiladimi?",
+      options: ["Ha, ijro etiladi", "Yo‘q", "Faqat poytaxtda", "Ixtiyoriy"],
+      correct: 0
+    },
+    {
+      q: "23. Harbiy marosimlarni o‘tkazish vaqtida madhiya qanday tartibda ijro etiladi?",
+      options: ["Qurolli Kuchlarning umumharbiy ustavlariga muvofiq", "Erkin tartibda", "Faqat bayramlarda", "Maxsus farmon bilan"],
+      correct: 0
+    },
+    {
+      q: "24. Madhiya matnida qaysi kasb egalari yoki ijod turi tilga olingan?",
+      options: ["Ilmu fan, ijod", "Hunarmandchilik", "Dehqonchilik", "Tadbirkorlik"],
+      correct: 0
+    },
+    {
+      q: "25. Madhiyada o‘zbek xalqining qanday iymoni haqida yozilgan?",
+      options: ["O‘chmas iymoni", "Buyuk iymoni", "Mustahkam iymoni", "Mangu iymoni"],
+      correct: 0
+    },
+    {
+      q: "26. O‘zbekistonda turgan boshqa shaxslar (chet el fuqarolari) ham madhiyani hurmat qilishi shartmi?",
+      options: ["Ha, shart", "Majburiy emas", "Faqat diplomatlar uchun", "Tavsiya etiladi"],
+      correct: 0
+    },
+    {
+      q: "27. Umummilliy bayramlarga bag‘ishlangan tantanali yig‘ilishlarning qaysi qismida madhiya yangraydi?",
+      options: ["Ochilishi chog‘ida", "Yakunida", "O‘rtasida", "Tanaffusda"],
+      correct: 0
+    },
+    {
+      q: "28. Madhiyada O‘zbekistonni qanday diyor deb ta'riflashgan?",
+      options: ["Olamni mahliyo aylagan diyor", "Jahonga mashhur diyor", "Jannatmonand diyor", "Go‘zal diyor"],
+      correct: 0
+    },
+    {
+      q: "29. Madhiyada yosh avlodlar nima deb ta'riflangan?",
+      options: ["Erkin, yosh avlodlar senga zo‘r qanot", "Kelajak bunyodkori", "Jasur o‘g‘lonlar", "Shijoatli yoshlar"],
+      correct: 0
+    },
+    {
+      q: "30. Davlat bayrog‘ini ko‘tarish marosimlarida madhiya ijro etilishi qonun-qoidalarida belgilanganmi?",
+      options: ["Ha, belgilangan", "Yo‘q", "Ixtiyoriy", "Faqat xalqaro o'yinlarda"],
+      correct: 0
+    }
+  ]
+  /* Yangi mavzu qo'shish namunasi:
+  ,
+  konstitutsiya: [
+    { q: "Savol matni?", options: ["A", "B", "C", "D"], correct: 0 }
+  ]
+  */
+};
 
-let selectedTimerLimit = 20; // standart 20 soniya
+let selectedTopicKey = 'madhiya';
+let selectedTimerLimit = 20; 
+let quizData = [];
 let currentIdx = 0;
 let score = 0;
 let timer = null;
@@ -756,6 +830,12 @@ function playBeep(freq = 600, duration = 0.1) {
   } catch(e){}
 }
 
+function selectTopic(key, cardEl) {
+  selectedTopicKey = key;
+  document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('selected'));
+  cardEl.classList.add('selected');
+}
+
 function setTimerMode(seconds, cardEl) {
   selectedTimerLimit = seconds;
   document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
@@ -765,6 +845,11 @@ function setTimerMode(seconds, cardEl) {
 const quizBox = document.getElementById('quizBox');
 
 function startQuiz() {
+  quizData = allQuizData[selectedTopicKey];
+  if(!quizData || quizData.length === 0) {
+    alert("Bu mavzuda hozircha testlar mavjud emas!");
+    return;
+  }
   currentIdx = 0;
   score = 0;
   userAnswers = [];
@@ -828,12 +913,11 @@ function renderQuestion() {
   }
 }
 
-// BARKAMOL ORQA SANOQ (COUNTDOWN) TAYMERI
 function runCountdownTimer() {
   timeLeft = selectedTimerLimit;
   const timerText = document.getElementById('timerText');
   const circleProgress = document.getElementById('circleProgress');
-  const maxDash = 138; // 2 * PI * 22 radius
+  const maxDash = 138;
 
   timerText.innerText = `${timeLeft}s`;
 
@@ -841,12 +925,11 @@ function runCountdownTimer() {
     timeLeft--;
     timerText.innerText = `${timeLeft}s`;
 
-    // Halqa aylanasini qisqartirish
     const offset = maxDash - (timeLeft / selectedTimerLimit) * maxDash;
     if(circleProgress) {
       circleProgress.style.strokeDashoffset = offset;
       if (timeLeft <= 5) {
-        circleProgress.style.stroke = '#f43f5e'; // qizil ogohlantirish
+        circleProgress.style.stroke = '#f43f5e';
         playBeep(750, 0.1);
       }
     }
@@ -854,12 +937,11 @@ function runCountdownTimer() {
     if (timeLeft <= 0) {
       clearInterval(timer);
       playBeep(300, 0.3);
-      selectAnswer(-1); // Vaqt tugadi
+      selectAnswer(-1);
     }
   }, 1000);
 }
 
-// SEKUNDOMER REJIMI (CHEKSIZ)
 function runStopwatch() {
   stopwatchElapsed = 0;
   const timerText = document.getElementById('timerText');
@@ -950,7 +1032,7 @@ function showResults() {
 
       <button class="btn-next" onclick="location.reload()" style="margin: auto;">
         <i class="fa-solid fa-rotate-right"></i>
-        <span>Qayta Boshlash</span>
+        <span>Bosh Sahifaga Qaytish</span>
       </button>
     </div>
   `;
