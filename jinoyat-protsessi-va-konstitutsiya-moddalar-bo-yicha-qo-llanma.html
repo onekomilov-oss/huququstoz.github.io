@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jinoyat protsessi va Konstitutsiya — qo'llanma | @huququstoz</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --navy:#1B2A4A; --navy2:#24365C; --gold:#C9A227; --gold-soft:#F3E8C9;
+    --ink:#1F2430; --muted:#5B6472; --line:#E3E7EF; --bg:#F7F8FB;
+    --red:#C0504D; --teal:#2E8B8B; --purple:#6B5B95;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:"Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.6; font-size:14px;
+  }
+  .page{
+    width:210mm; min-height:297mm; margin:0 auto; background:#fff;
+    padding:16mm 15mm 21mm 15mm; position:relative; overflow:hidden;
+    page-break-after:always; box-shadow:0 2px 14px rgba(27,42,74,.12);
+  }
+  @media print{
+    body{background:#fff;}
+    .page{box-shadow:none; margin:0; width:auto; min-height:auto;}
+  }
+
+  /* Branding */
+  .brandbar{
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:2.5px solid var(--navy); padding-bottom:8px; margin-bottom:14px;
+  }
+  .brandbar .left{display:flex; align-items:center; gap:9px;}
+  .brandbar .btitle{font-weight:800; color:var(--navy); font-size:11.5px; letter-spacing:.4px; text-transform:uppercase;}
+  .brandbar .btitle span{color:var(--gold);}
+  .brand{
+    font-weight:700; color:#fff; background:var(--navy); border-radius:20px;
+    padding:5px 14px; font-size:13px; letter-spacing:.5px;
+  }
+  .brand b{color:var(--gold);}
+  .pageno{
+    position:absolute; bottom:7mm; left:15mm; right:15mm;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:6px;
+  }
+  .pageno .tag{font-weight:700; color:var(--navy);}
+  .pageno .tag b{color:var(--gold);}
+
+  /* Cover */
+  .cover{display:flex; flex-direction:column; min-height:255mm;}
+  .cover-top{text-align:center; padding-top:10mm;}
+  .cover .kicker{
+    display:inline-block; background:var(--gold-soft); color:#7a621a; font-weight:700;
+    padding:6px 18px; border-radius:20px; font-size:13px; letter-spacing:1px; margin-bottom:10mm;
+  }
+  .cover h1{font-size:38px; line-height:1.18; color:var(--navy); font-weight:900; letter-spacing:-.5px;}
+  .cover h1 .gold{color:var(--gold);}
+  .cover .sub{font-size:15px; color:var(--muted); margin-top:5mm; max-width:135mm; margin-left:auto; margin-right:auto;}
+  .scales{margin:8mm auto 0; display:block;}
+  .chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:9mm;}
+  .chips span{
+    background:var(--navy); color:#fff; font-size:12px; font-weight:600;
+    padding:6px 14px; border-radius:18px; border:1.5px solid var(--gold);
+  }
+  .chips span i{color:var(--gold); font-style:normal; margin-right:5px;}
+  .cover-meta{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10mm;}
+  .cover-meta .card{
+    background:var(--bg); border:1px solid var(--line); border-left:4px solid var(--gold);
+    border-radius:10px; padding:11px 13px; text-align:left; font-size:12.5px;
+  }
+  .cover-meta .card b{color:var(--navy); display:block; margin-bottom:2px; font-size:11px; text-transform:uppercase; letter-spacing:.5px;}
+  .cover-author{text-align:center; margin-top:11mm;}
+  .cover-author .avatar{
+    width:54px; height:54px; border-radius:50%; background:var(--navy); color:var(--gold);
+    display:inline-flex; align-items:center; justify-content:center; font-size:23px; font-weight:900;
+    border:3px solid var(--gold); margin-bottom:7px;
+  }
+  .cover-author .name{font-size:19px; font-weight:800; color:var(--navy);}
+  .cover-author .name b{color:var(--gold);}
+  .cover-author .role{font-size:12px; color:var(--muted);}
+
+  /* Typography */
+  h2.part{
+    background:linear-gradient(90deg, var(--navy), var(--navy2)); color:#fff;
+    padding:11px 16px; border-radius:10px; font-size:18px; font-weight:800;
+    border-left:8px solid var(--gold); margin:4px 0 14px;
+  }
+  h3.art{
+    color:var(--navy); font-size:16px; font-weight:800; margin:16px 0 7px;
+    padding-left:10px; border-left:5px solid var(--gold);
+  }
+  p{margin:5px 0;}
+  ul,ol{margin:5px 0 7px 22px;}
+  li{margin:3px 0;}
+  b, strong{color:var(--navy);}
+  .lead{font-size:13px; color:var(--muted); font-style:italic;}
+
+  .badge{
+    display:inline-block; background:var(--navy); color:#fff; font-size:10.5px; font-weight:700;
+    padding:1px 9px; border-radius:12px; vertical-align:middle; letter-spacing:.3px;
+  }
+  .badge.gold{background:var(--gold); color:#1b2431;}
+  .badge.teal{background:var(--teal);}
+  .badge.red{background:var(--red);}
+  .badge.purple{background:var(--purple);}
+
+  .box{
+    background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    padding:10px 14px; margin:9px 0; font-size:13px;
+  }
+  .box .boxtitle{font-weight:800; color:var(--navy); font-size:11.5px; text-transform:uppercase; letter-spacing:.6px; margin-bottom:4px;}
+  .box.gold{background:var(--gold-soft); border-color:#e0cf9a;}
+  .box.gold .boxtitle{color:#7a621a;}
+  .box.navy{background:var(--navy); color:#E8ECF5; border:none;}
+  .box.navy b{color:#fff;}
+  .box.navy .boxtitle{color:var(--gold);}
+
+  table{width:100%; border-collapse:collapse; margin:9px 0; font-size:12.5px;}
+  th{background:var(--navy); color:#fff; text-align:left; padding:7px 10px; font-size:12px; letter-spacing:.3px;}
+  td{padding:6px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#F4F6FA;}
+  td b{color:var(--navy);}
+
+  .callout{
+    border-left:4px solid var(--gold); background:var(--gold-soft);
+    padding:8px 12px; border-radius:0 8px 8px 0; margin:8px 0; font-size:12.5px;
+  }
+  .toc li{margin:7px 0; font-weight:600; color:var(--navy); font-size:14px; list-style:none;}
+  .toc li span{color:var(--muted); font-weight:400; font-size:12.5px;}
+
+  .case{
+    border:1px solid var(--line); border-radius:10px; padding:9px 13px; margin:8px 0;
+    background:#fff; font-size:13px; border-left:4px solid var(--teal);
+  }
+  .case .cnum{
+    display:inline-block; background:var(--teal); color:#fff; font-weight:800; font-size:11px;
+    padding:1px 9px; border-radius:10px; margin-right:6px;
+  }
+  .case b.ct{color:var(--navy);}
+
+  /* ===== Infographic pieces ===== */
+  .figure{
+    background:var(--bg); border:1px solid var(--line); border-radius:12px;
+    padding:12px; margin:10px 0; text-align:center;
+  }
+  .figure .figtitle{
+    font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase;
+    letter-spacing:.7px; margin-bottom:8px;
+  }
+  .flow{display:flex; align-items:stretch; justify-content:center; gap:0;}
+  .flow .step{
+    background:#fff; border:2px solid var(--navy); border-radius:10px;
+    padding:8px 6px; width:38mm; font-size:11.5px; color:var(--navy); font-weight:700;
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+  }
+  .flow .step .ic{font-size:17px; line-height:1;}
+  .flow .step small{font-weight:500; color:var(--muted); font-size:10px;}
+  .flow .arrow{
+    align-self:center; color:var(--gold); font-size:17px; font-weight:900; padding:0 5px;
+  }
+  .orgchart{display:flex; justify-content:center; gap:10px; margin-top:6px;}
+  .orgchart .org{
+    background:#fff; border:2px solid var(--navy2); border-radius:10px; width:31mm;
+    padding:8px 5px; font-size:11px; color:var(--navy); text-align:center;
+  }
+  .orgchart .org .ic{font-size:18px; display:block; margin-bottom:3px;}
+  .orgchart .org b{display:block; font-size:11.5px;}
+  .orgchart .org small{color:var(--muted); font-size:9.5px; display:block; margin-top:2px;}
+  .statrow{display:flex; gap:10px; justify-content:center; margin:8px 0;}
+  .stat{
+    background:var(--navy); color:#fff; border-radius:12px; padding:10px 14px; text-align:center;
+    border-bottom:4px solid var(--gold); min-width:38mm;
+  }
+  .stat .num{font-size:22px; font-weight:900; color:var(--gold); line-height:1.1;}
+  .stat .lbl{font-size:10.5px; opacity:.9; margin-top:2px;}
+  .daynight{
+    position:relative; height:26px; border-radius:14px; overflow:hidden;
+    background:linear-gradient(90deg,#1c2b4d 0%,#1c2b4d 8%, #e8b84b 10%, #f4d06f 33%, #7fb3e0 50%, #f4d06f 67%, #e8b84b 90%, #1c2b4d 92%,#1c2b4d 100%);
+    margin:6px 4px;
+  }
+  .daynight .forbid{
+    position:absolute; top:-2px; left:9%; right:9%; height:32px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .daynight .forbid span{
+    background:var(--red); color:#fff; font-size:10.5px; font-weight:800; padding:2px 12px;
+    border-radius:12px; letter-spacing:.5px; box-shadow:0 1px 4px rgba(0,0,0,.3);
+  }
+  .dnlabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin:2px 6px 0;}
+  .roles{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:6px;}
+  .roles .role{
+    background:#fff; border:1.5px solid var(--line); border-top:4px solid var(--purple);
+    border-radius:10px; padding:8px 9px; font-size:11.5px;
+  }
+  .roles .role b{display:block; font-size:12px; margin-bottom:1px;}
+  .roles .role small{color:var(--muted); font-size:10.5px;}
+  .roles .role .ic{float:right; font-size:16px; margin-left:4px;}
+  .warn{
+    background:#FDECEC; border:1px solid #F2C4C4; border-radius:10px; padding:10px 14px; margin:10px 0; font-size:13px;
+  }
+  .warn b{color:#9B2C2C;}
+  footer.doc{text-align:center; margin-top:12px; font-size:13px; color:var(--navy); font-weight:700;}
+  footer.doc b{color:var(--gold); font-size:15px;}
+  .bignum{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:22px; height:22px; border-radius:50%; background:var(--navy); color:var(--gold);
+    font-size:11.5px; font-weight:900; margin-right:6px; flex:none;
+  }
+  li .bignum{vertical-align:middle;}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1: COVER ============ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-top">
+      <div class="kicker">INFOGRAFIK QO'LLANMA · HUQUQ ASOSLARI</div>
+      <h1>Jinoyat protsessi va <span class="gold">Konstitutsiya</span><br>moddalar bo'yicha qo'llanma</h1>
+      <p class="sub">8-, 9- va 11-sinf darsliklaridagi mavzularga asos bo'lgan moddalar — oddiy tilda, sxema va infografikalar bilan</p>
+      <svg class="scales" width="110" height="96" viewBox="0 0 110 96" fill="none">
+        <rect x="52" y="8" width="6" height="66" rx="3" fill="#1B2A4A"/>
+        <rect x="26" y="8" width="58" height="6" rx="3" fill="#1B2A4A"/>
+        <circle cx="55" cy="8" r="6" fill="#C9A227"/>
+        <path d="M10 20 L26 56 H-6 Z" transform="translate(12,0)" fill="#24365C"/>
+        <path d="M94 20 L110 56 H78 Z" fill="#24365C"/>
+        <rect x="30" y="78" width="50" height="6" rx="3" fill="#1B2A4A"/>
+        <rect x="38" y="72" width="34" height="4" rx="2" fill="#C9A227"/>
+      </svg>
+      <div class="chips">
+        <span><i>⚖️</i>30+ modda</span>
+        <span><i>🧠</i>Eslab qolish sxemalari</span>
+        <span><i>📝</i>6 amaliy vaziyat</span>
+        <span><i>📊</i>Infografikalar</span>
+      </div>
+    </div>
+    <div>
+      <div class="cover-meta">
+        <div class="card"><b>Manba</b>Konstitutsiya (2023-yil 30-aprel tahriri) va JPK — 2026-yilgacha kiritilgan o'zgartirishlar bilan</div>
+        <div class="card"><b>Maqsad</b>Darslik mavzulariga asos bo'lgan moddalarni oddiy tilda tushuntirish</div>
+        <div class="card"><b>Auditoriya</b>Abituriyentlar hamda 8-, 9- va 11-sinf o'quvchilari</div>
+        <div class="card"><b>Rasmiy manba</b>Dolzarb tahrirni <b>lex.uz</b> saytida ham tekshirib turing</div>
+      </div>
+      <div class="cover-author">
+        <div class="avatar">H</div>
+        <div class="name">@<b>huququstoz</b></div>
+        <div class="role">Muallif · Huquqiy ta'lim kontenti</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>1</span></div>
+</div>
+
+<!-- ============ PAGE 2: TOC + HOW TO READ ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">QO'LLANMA · <span>MUNDARIJA</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h2 class="part">📑 Mundarija</h2>
+  <ul class="toc">
+    <li><span class="badge gold">I</span> &nbsp;Konstitutsiya moddalari <span>— 26, 27, 28, 29, 31, 47-moddalar</span></li>
+    <li><span class="badge gold">II</span> &nbsp;JPK: prinsiplar, organlar va ishtirokchilar <span>— 1, 11, 17, 20, 23, 24, 28–67</span></li>
+    <li><span class="badge gold">III</span> &nbsp;Dalillar va tergov harakatlari <span>— 85–88, 96–108, 157–161, 220–221</span></li>
+    <li><span class="badge gold">IV</span> &nbsp;Apellyatsiya, kassatsiya va voyaga yetmaganlar <span>— 497-1, 498, 548, 554</span></li>
+    <li><span class="badge gold">V</span> &nbsp;🧠 Tezkor eslab qolish jadvali</li>
+    <li><span class="badge gold">VI</span> &nbsp;📝 Amaliy vaziyatlar — 6 ta kazus</li>
+  </ul>
+
+  <h2 class="part" style="margin-top:14px">🔎 Qo'llanmani qanday o'qish kerak?</h2>
+  <div class="roles" style="grid-template-columns:repeat(2,1fr);">
+    <div class="role" style="border-top-color:var(--navy);"><span class="ic">📌</span><b>Modda belgilari</b><small><b>28-modda</b> — Konstitutsiya moddasi; <b>JPK 23</b> — kodeks moddasi. Har bir koida modda raqami bilan beriladi.</small></div>
+    <div class="role" style="border-top-color:var(--gold);"><span class="ic">💡</span><b>«Oddiy tilda» bloklari</b><small>Murakkab huquqiy qoidalarni kundalik tilda tushuntiradi — ularni birinchi o'qib chiqing.</small></div>
+    <div class="role" style="border-top-color:var(--teal);"><span class="ic">🧭</span><b>Schemalar va infografikalar</b><small>Jarayonlarni ketma-ket eslab qolish uchun vizual sxemalar.</small></div>
+    <div class="role" style="border-top-color:var(--red);"><span class="ic">⛔</span><b>«Taqiqlangan» bloklari</b><small>Qizil rang — bu harakatlar qonunan mumkin emas.</small></div>
+  </div>
+
+  <div class="figure" style="margin-top:14px;">
+    <div class="figtitle">🧭 Jinoyat protsessi — katta manzara</div>
+    <div class="flow">
+      <div class="step"><span class="ic">🚨</span>Jinoyat haqida xabar<small>voqea joyi, ariza</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="ic">🔎</span>Surishtiruv / tergov<small>dalillar to'planadi</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="ic">⚖️</span>Sud muhokamasi<small>hukm chiqariladi</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="ic">📜</span>Hukm<small>kuchga kiradi</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="ic">🔁</span>Shikoyat<small>apellyatsiya / kassatsiya</small></div>
+    </div>
+  </div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>2</span></div>
+</div>
+
+<!-- ============ PAGE 3: PART I — KONSTITUTSIYA ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">I QISM · <span>KONSTITUTSIYA MODDALARI</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">28-modda. Aybsizlik prezumpsiyasi <span class="badge">KONSTITUTSIYA</span></h3>
+  <p><b>Nima deyiladi:</b> Jinoyatda ayblanayotgan shaxs aybi qonunda belgilangan tartibda <b>oshkora sud muhokamasi</b> bilan isbotlanmaguncha va <b>sudning qonuniy kuchga kirgan hukmi</b> bilan aniqlanmaguncha <b>aybsiz hisoblanadi</b>.</p>
+  <div class="box"><div class="boxtitle">Asosiy qoidalar</div>
+    <ul>
+      <li>Aybdorlikka oid barcha shubhalar, agar ularni bartaraf etish imkoniyati tugagan bo'lsa, <b>shaxs foydasiga</b> hal qilinadi.</li>
+      <li>Gumon qilinuvchi, ayblanuvchi yoki sudlanuvchi <b>aybsizligini isbotlashi shart emas</b> va istalgan vaqtda <b>sukut saqlash huquqidan</b> foydalanishi mumkin.</li>
+      <li>Hech kim o'ziga va yaqin qarindoshlariga qarshi guvohlik berishga majbur emas.</li>
+      <li>Shaxsning o'z aybini tan olishi unga qarshi <b>yagona dalil</b> bo'lsa, uni aybdor deb topib bo'lmaydi.</li>
+      <li>Ozodlikdan mahrum etilgan shaxs inson sifatida hurmat qilinishi huquqiga ega.</li>
+    </ul>
+  </div>
+  <div class="figure">
+    <div class="figtitle">⚖️ Aybni kim isbotlaydi?</div>
+    <div class="flow">
+      <div class="step" style="border-color:var(--red); width:46mm;"><span class="ic">🏛️</span>DAVLAT (ayblov)<small>aybni isbotlashi SHART</small></div>
+      <div class="arrow">🆚</div>
+      <div class="step" style="border-color:var(--teal); width:46mm;"><span class="ic">🧍</span>SHAXS<small>o'zini oqlashi shart EMAS</small></div>
+    </div>
+  </div>
+  <div class="callout">💡 <b>Oddiy tilda:</b> aybni isbotlash kerak bo'lgan tomon — davlat. Inson o'zini oqlashga majbur emas.</div>
+
+  <h3 class="art">31-modda. Shaxsiy hayot va uy-joy daxlsizligi <span class="badge">KONSTITUTSIYA</span></h3>
+  <ul>
+    <li>Har kim shaxsiy hayoti daxlsizligi, shaxsiy va oilaviy sirga ega bo'lish huquqiga ega.</li>
+    <li>Yozishmalar, telefon suhbatlari va elektron xabarlar sir saqlanadi. Bu huquq faqat <b>qonunga muvofiq va sud qaroriga asosan</b> cheklanishi mumkin.</li>
+    <li>Har kim <b>uy-joy daxlsizligi</b> huquqiga ega.</li>
+  </ul>
+  <div class="box"><div class="boxtitle">Uy-joyga kirish qoidasi</div>
+    <ul>
+      <li>Hech kim uy-joyga unda yashovchilarning xohishiga qarshi kirishi mumkin emas.</li>
+      <li>Uy-joyga kirish, olib qo'yish va ko'zdan kechirish faqat <b>qonunda nazarda tutilgan hollarda va tartibda</b> mumkin.</li>
+      <li>Uy-joyda <b>tintuv</b> faqat qonunga muvofiq va <b>sud qaroriga asosan</b> o'tkaziladi.</li>
+    </ul>
+  </div>
+  <div class="callout">💡 <b>Oddiy tilda:</b> tergovchi «o'z xohishi bilan» uyga kira olmaydi — qonuniy asos va sud qarori kerak (istisno: JPK 158-1-moddadagi kechiktirib bo'lmaydigan holat).</div>
+
+  <h3 class="art">47-modda. Uy-joyli bo'lish huquqi <span class="badge">KONSTITUTSIYA</span></h3>
+  <ul>
+    <li>Har kim uy-joyli bo'lish huquqiga ega.</li>
+    <li>Hech kim <b>sud qarorisiz va qonunga zid tarzda</b> uy-joyidan mahrum etilishi mumkin emas.</li>
+    <li>Mulkdorga uy-joy qiymati va ko'rgan zararlari <b>oldindan hamda teng qiymatda</b> qoplanadi.</li>
+  </ul>
+  <div class="callout">💡 <b>Oddiy tilda:</b> uyni tortib olish uchun ikkita shart bor: sud qarori va oldindan teng qiymatda to'lov.</div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>3</span></div>
+</div>
+
+<!-- ============ PAGE 4: BOG'LIQ MODDALAR + II PRINSIPLAR ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">I–II QISM · <span>HIMoya KAFOLATLARI VA PRINSIPLAR</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">➕ Konstitutsiyaning himoya kafolatlari</h3>
+  <div class="roles" style="grid-template-columns:repeat(3,1fr);">
+    <div class="role" style="border-top-color:var(--red);"><span class="ic">🛡️</span><b>26-modda</b><small>Sha'n va qadr-qimmat daxlsiz. <b>Qiynoq va g'ayriinsoniy muomala taqiqlanadi</b>.</small></div>
+    <div class="role" style="border-top-color:var(--navy);"><span class="ic">🔓</span><b>27-modda</b><small>Erkinlik va daxlsizlik. Hibsga olish — faqat sud qaroriga ko'ra. Sud qarorisiz <b>48 soatdan ortiq</b> ushlab turilmaydi.</small></div>
+    <div class="role" style="border-top-color:var(--gold);"><span class="ic">👔</span><b>29-modda</b><small>Malakali yuridik yordam. Advokat — <b>ushlangan paytdan</b> boshlab. Qonunni buzib olingan dalillar yaroqsiz.</small></div>
+  </div>
+
+  <div class="statrow">
+    <div class="stat"><div class="num">48</div><div class="lbl">soat — sud qarorisiz ushlab turish limiti (27-modda)</div></div>
+    <div class="stat"><div class="num">⚖️</div><div class="lbl">sud qarori — hibsga olishning asosi (27-modda)</div></div>
+  </div>
+
+  <h3 class="art" style="margin-top:12px">1-modda. Jinoyat ishlarini yuritish tartibi <span class="badge outline" style="background:#fff;">JPK</span></h3>
+  <p>Respublika hududida jinoyat ishlarini yuritish tartibini <b>faqat JPK</b> belgilaydi. Bu tartib barcha sudlar, prokuratura, tergov va surishtiruv organlari, advokatura va fuqarolar uchun <b>yagona hamda majburiy</b>.</p>
+
+  <h3 class="art">11-modda. Qonuniylik <span class="badge" style="background:#fff; color:var(--navy); border:1.5px solid var(--navy);">JPK</span></h3>
+  <p>Sudya, prokuror, tergovchi, surishtiruvchi, himoyachi va ishda qatnashuvchi barcha shaxslar Konstitutsiya, JPK va boshqa qonun hujjatlariga <b>aniq rioya etishi shart</b>. Qonundan har qanday chekinish (sababi qanday bo'lmasin) qonuniylikni buzish hisoblanadi.</p>
+
+  <h3 class="art">17-modda. Shaxsning sha'ni va qadr-qimmatini hurmat qilish <span class="badge" style="background:#fff; color:var(--navy); border:1.5px solid var(--navy);">JPK</span></h3>
+  <ul>
+    <li>Hech kim qiynoqqa solinishi, zo'ravonlikka yoki inson qadrini kamsituvchi muomalaga duchor etilishi mumkin emas.</li>
+    <li>Shaxsiy hayotga oid ma'lumotlar tarqalishiga olib keladigan, sog'liqni xavf ostiga qo'yadigan, asossiz azob yetkazadigan harakat va qarorlar taqiqlanadi.</li>
+  </ul>
+
+  <h3 class="art">20-modda. Jinoyat ishlari yuritiladigan til <span class="badge" style="background:#fff; color:var(--navy); border:1.5px solid var(--navy);">JPK</span></h3>
+  <ul>
+    <li>Ish o'zbek, qoraqalpoq tilida yoki joydagi ko'pchilik aholi tilida yuritiladi.</li>
+    <li>Tilni bilmaydigan ishtirokchi <b>ona tilida</b> ariza, ko'rsatuv berish, shikoyat qilish va sudda so'zlash huquqiga ega, shuningdek <b>tarjimon</b> xizmatidan foydalanadi.</li>
+  </ul>
+
+  <h3 class="art">23-modda. Aybsizlik prezumpsiyasi <span class="badge" style="background:#fff; color:var(--navy); border:1.5px solid var(--navy);">JPK</span></h3>
+  <p>Konstitutsiyaning 28-moddasidagi qoidaning protsessual ifodasi: aybdorlik <b>qonuniy kuchga kirgan hukm</b> bilan aniqlanmaguncha shaxs aybsiz; barcha shubhalar shaxs foydasiga; aybsizligini isbotlash shart emas; faqat o'z aybini tan olishning o'zi yetarli dalil emas.</p>
+
+  <h3 class="art">24-modda. Himoyalanish huquqi bilan ta'minlash <span class="badge" style="background:#fff; color:var(--navy); border:1.5px solid var(--navy);">JPK</span></h3>
+  <p>Gumon qilinuvchi, ayblanuvchi va sudlanuvchi himoyalanish huquqiga ega. <b>Surishtiruvchi, tergovchi, prokuror va sud</b> ularga huquqlarini <b>tushuntirib berishi</b> va himoyalanish uchun haqiqiy imkoniyat yaratishi shart.</p>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>4</span></div>
+</div>
+
+<!-- ============ PAGE 5: ORGANLAR + ISHTIROKCHILAR ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">II QISM · <span>ORGANLAR VA ISHTIROKCHILAR</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">Jinoyat protsessini yurituvchi organlar</h3>
+  <div class="figure">
+    <div class="orgchart">
+      <div class="org"><span class="ic">⚖️</span><b>Sud</b><small>28-modda</small><small>odil sudlov</small></div>
+      <div class="org"><span class="ic">🎖️</span><b>Prokuror</b><small>34-modda</small><small>nazorat, ayblov</small></div>
+      <div class="org"><span class="ic">🕵️</span><b>Tergovchi</b><small>35-modda</small><small>dastlabki tergov</small></div>
+      <div class="org"><span class="ic">🔎</span><b>Surishtiruvchi</b><small>38-modda</small><small>surishtiruv</small></div>
+    </div>
+    <p style="font-size:11.5px; color:var(--muted); margin-top:8px;">Sud majlisi kotibi — <b>32-modda</b>: majlisni tayyorlaydi, ishtirokchilarni xabardor qiladi, <b>bayonnoma yuritadi</b>.</p>
+  </div>
+
+  <h3 class="art">Protsess ishtirokchilari</h3>
+  <div class="roles">
+    <div class="role"><span class="ic">🧍</span><b>45-modda · Ayblanuvchi</b><small>Jalb qilish to'g'risida <b>qaror chiqarilgan</b> shaxs. Sudda — <b>sudlanuvchi</b>, hukmdan keyin — <b>mahkum</b> yoki <b>oqlangan</b>.</small></div>
+    <div class="role"><span class="ic">🤔</span><b>47-modda · Gumon qilinuvchi</b><small>Ma'lumotlar bor, lekin ayblanuvchi qilib jalb etishga <b>yetarli emas</b>. Qarorni surishtiruvchi, tergovchi yoki prokuror chiqaradi.</small></div>
+    <div class="role"><span class="ic">👔</span><b>49-modda · Himoyachi</b><small><b>Advokat</b> — guvohnoma va order taqdim etgandan keyin ishga qo'yiladi.</small></div>
+    <div class="role"><span class="ic">💔</span><b>54-modda · Jabrlanuvchi</b><small><b>Ma'naviy, jismoniy yoki mulkiy zarar</b> ko'rgan shaxs. Voyaga yetmagan bo'lsa — <b>qonuniy vakili</b> qatnashadi.</small></div>
+    <div class="role"><span class="ic">👁️</span><b>65-modda · Guvoh</b><small>Holatni bilishi mumkin bo'lgan <b>har qanday shaxs</b> guvoh bo'lishi mumkin.</small></div>
+    <div class="role"><span class="ic">🔬</span><b>67-modda · Ekspert</b><small><b>Maxsus bilimga ega</b> shaxs, xulosa beradi. Tartib: JPK 172–187-moddalar.</small></div>
+  </div>
+
+  <div class="figure" style="background:var(--navy); border:none;">
+    <div class="figtitle" style="color:var(--gold);">🧠 ISHTIROKCHI «YO'L XARITASI» — atamalar qanday o'zgaradi?</div>
+    <div class="flow">
+      <div class="step" style="background:#fff;"><span class="ic">🤔</span>Gumon qilinuvchi<small>47-modda</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="background:#fff;"><span class="ic">🧍</span>Ayblanuvchi<small>45-modda</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="background:#fff;"><span class="ic">⚖️</span>Sudlanuvchi<small>sud bosqichi</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="background:#fff;"><span class="ic">📜</span>Mahkum / Oqlangan<small>hukmdan keyin</small></div>
+    </div>
+  </div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>5</span></div>
+</div>
+
+<!-- ============ PAGE 6: DALILLAR + TAQIQLAR ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">III QISM · <span>DALILLAR VA TAQIQLAR</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">85-modda. Isbot qilish <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p>Isbot qilish — ishni qonuniy, asosli va adolatli hal qilish uchun ahamiyatli holatlar haqida <b>haqiqatni aniqlash maqsadida</b> dalillarni <b>to'plash, tekshirish va baholash</b>.</p>
+  <div class="figure">
+    <div class="figtitle">🔍 Isbot qilish — 3 qadam</div>
+    <div class="flow">
+      <div class="step" style="border-color:var(--teal);"><span class="ic">📥</span>TO'PLASH<small>87-modda</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="border-color:var(--gold);"><span class="ic">✔️</span>TEKSHIRISH<small>dalillarni solishtirish</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="border-color:var(--navy);"><span class="ic">⚖️</span>BAHOLASH<small>sud/surishtiruv bahosi</small></div>
+    </div>
+  </div>
+
+  <h3 class="art">87-modda. Dalillar to'plash <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p>Dalillar tergov va sud harakatlari orqali to'planadi: so'roq qilish, yuzlashtirish, tanib olish uchun ko'rsatish, <b>olib qo'yish, tintuv, ko'zdan kechirish</b>, ekspertiza tayinlash, hujjat va elektron ma'lumotlarni qabul qilish, tezkor-qidiruv tadbirlari va boshqalar.</p>
+  <div class="box gold">⭐ <b>Muhim:</b> <b>himoyachi ham</b> dalil to'plash va taqdim etishga haqli — bu dalillar ish materiallariga qo'shiladi va majburiy baholanadi.</div>
+
+  <h3 class="art">88-modda. Isbotlashda taqiqlangan harakatlar <span class="badge red">⛔ TAQIQLANADI</span></h3>
+  <ol>
+    <li><span class="bignum">1</span>hayot va sog'liq uchun xavfli yoki sha'n va qadr-qimmatni kamsituvchi harakatlar;</li>
+    <li><span class="bignum">2</span><b>zo'rlik, po'pisa, aldash</b> yoki boshqa qonunga xilof yo'llar bilan ko'rsatuv olish;</li>
+    <li><span class="bignum">3</span><b>tungi vaqtda (22:00–06:00) tergov harakatlari</b>. Istisno: jinoyatning oldini olish, iz yo'qolishi, qochish xavfi, eksperimentda holatni qayta tiklash;</li>
+    <li><span class="bignum">4</span>shaxsni g'ayriqonuniy harakatga <b>undash</b> va shu sabab sodir etilgan jinoyat uchun ayblash;</li>
+    <li><span class="bignum">5</span>ayblanuvchi/gumon qilinuvchi sifatida jalb etishga asos bo'lgan shaxsni <b>guvoh sifatida</b> so'roq qilish;</li>
+    <li><span class="bignum">6</span><b>huquqlari tushuntirilguncha</b> ko'rsatuv olish;</li>
+    <li><span class="bignum">7</span>ushlangan shaxsning yaqin qarindoshlarini asossiz chaqirish va so'roq qilish.</li>
+  </ol>
+  <div class="figure">
+    <div class="figtitle">🌙 Tungi vaqt taqiqi — kun va tunda tergov</div>
+    <div class="daynight">
+      <div class="forbid"><span>⛔ 22:00 — 06:00 · TERGOV HARAKATLARI TAQIQLANADI</span></div>
+    </div>
+    <div class="dnlabels"><span>06:00</span><span>KUNDUZI — ruxsat ✅</span><span>22:00</span></div>
+  </div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>6</span></div>
+</div>
+
+<!-- ============ PAGE 7: SO'ROQ + TINTUV ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">III QISM · <span>SO'ROQ VA TINTUV</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">So'roq qilish — tartib sxemasi (JPK 96–108-moddalar)</h3>
+  <div class="figure">
+    <div class="figtitle">🧭 So'roq qanday o'tadi?</div>
+    <div class="flow" style="flex-wrap:wrap; row-gap:8px;">
+      <div class="step" style="width:24mm;"><span class="ic">✉️</span>Chaqiruv<small>96–97</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:24mm;"><span class="ic">🪪</span>Shaxsni aniqlash<small>98</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:24mm;"><span class="ic">🗣️</span>Til<small>99</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:26mm; border-color:var(--gold);"><span class="ic">📢</span>Huquqlarni tushuntirish<small>100</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:24mm;"><span class="ic">📖</span>Erkin hikoya<small>101</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:24mm;"><span class="ic">❓</span>Savollar<small>102–105</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:24mm;"><span class="ic">📝</span>Bayonnoma<small>106–108</small></div>
+    </div>
+    <p style="font-size:11px; color:var(--muted); margin-top:8px;">⛔ <b>102-modda:</b> <b>ishora qiluvchi savollar</b> berish taqiqlanadi. ⏱ <b>107-modda:</b> so'roq davomiyligi tartibga solinadi.</p>
+  </div>
+
+  <h3 class="art">157-modda. Olib qo'yish <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p>Narsa/hujjat <b>aynan kimda va qayerda ekani ma'lum</b> bo'lsa va qidirishga hojat bo'lmasa — surishtiruvchi, tergovchi va sud <b>olib qo'yishga</b> haqli.</p>
+
+  <h3 class="art">158-modda. Tintuv <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p>Biror joyda yoki shaxsda ish uchun ahamiyatli narsa bor deb o'ylashga <b>yetarli ma'lumot</b> bo'lsa, tintuv o'tkaziladi. Qidirilayotgan shaxs yoki murdani topish uchun ham mumkin.</p>
+  <div class="figure">
+    <div class="figtitle">⏱ Tintuvga ruxsat olish — vaqt chizig'i (158-1, 158-2-moddalar)</div>
+    <div class="flow">
+      <div class="step" style="width:34mm; border-color:var(--teal);"><span class="ic">📄</span>Qaror + prokurorga<small>iltimosnoma</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:34mm;"><span class="ic">👨‍⚖️</span>Tergov sudyasi<small>ko'rib chiqadi</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:34mm; border-color:var(--gold);"><span class="ic">🚨</span>Kechiktirib bo'lmaydigan holat<small>sud ruxsatisiz</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:34mm; border-color:var(--red);"><span class="ic">⏰</span>24 soat — xabar<small>48 soat — tekshiruv</small></div>
+    </div>
+    <p style="font-size:11px; color:var(--muted); margin-top:8px;">Qonunga xilof tintuv — olingan dalillar <b>nomaqbul</b> hisoblanadi.</p>
+  </div>
+
+  <h3 class="art">161-modda. Olib qo'yish va tintuv o'tkazish tartibi <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <ol>
+    <li>Tintuvdan oldin <b>qaror yoki ajrim</b> bilan tanishtiriladi, imzo qo'ydiriladi.</li>
+    <li>Binodagi shaxslarning chiqib ketishi va o'zaro gaplashishi taqiqlanishi mumkin.</li>
+    <li>Avval <b>ixtiyoriy berish</b> taklif qilinadi; rad etilsa — <b>majburan</b> olinadi; topilmasa — tintuv o'tkaziladi.</li>
+    <li>Natija <b>bayonnoma</b> bilan rasmiylashtiriladi.</li>
+  </ol>
+  <div class="callout">🔗 <b>Konstitutsiya bilan bog'liqlik:</b> 31-modda uy-joyda tintuvni faqat sud qaroriga asosan ruxsat etadi. JPK 158-moddadagi tartib shu talabni amalga oshiradi.</div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>7</span></div>
+</div>
+
+<!-- ============ PAGE 8: USHLASH + INSTANSIYALAR ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">III–IV QISM · <span>USHLASH VA INSTANSIYALAR</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">220–221-moddalar. Ushlab turish <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p><b>Maqsadi (220-modda):</b> gumon qilinuvchining jinoiy faoliyatiga barham berish, qochishi yoki dalillarni yo'qotishining oldini olish uchun <b>qisqa muddatga ozodlikdan mahrum qilish</b>.</p>
+  <div class="figure">
+    <div class="figtitle">🚨 221-modda: shaxs qachon ushlanadi?</div>
+    <div class="roles" style="grid-template-columns:repeat(2,1fr);">
+      <div class="role" style="border-top-color:var(--red);"><span class="ic">🎯</span><b>Jinoyat ustida</b><small>yoki sodir etganidan keyin darhol qo'lga tushsa</small></div>
+      <div class="role" style="border-top-color:var(--purple);"><span class="ic">👉</span><b>To'g'ridan-to'g'ri ko'rsatish</b><small>guvohlar yoki jabrlanuvchi ko'rsatsa</small></div>
+      <div class="role" style="border-top-color:var(--gold);"><span class="ic">👣</span><b>Yaqqol izlar</b><small>o'zida, kiyimida, yonida yoki uyida</small></div>
+      <div class="role" style="border-top-color:var(--teal);"><span class="ic">🏃</span><b>Qochish xavfi</b><small>qochmoqchi bo'lsa, manzili yo'q yoki shaxsi aniqlanmagan bo'lsa</small></div>
+    </div>
+  </div>
+  <div class="statrow">
+    <div class="stat"><div class="num">48</div><div class="lbl">soat — sud qarorisiz ushlab turish limiti (Konstitutsiya 27-modda)</div></div>
+    <div class="stat"><div class="num">📢</div><div class="lbl">ushlash chog'ida huquqlar tushuntiriladi</div></div>
+  </div>
+
+  <h3 class="art">497-1-modda. Apellyatsiya <span class="badge teal">JPK</span> &nbsp; <span style="font-weight:600; font-size:12px; color:var(--muted);">hukm kuchga kirmaganda</span></h3>
+  <p>Birinchi instansiya sudining <b>qonuniy kuchga kirmagan hukmlari</b> ustidan apellyatsiya tartibida <b>shikoyat berish yoki protest bildirish</b> mumkin. Sud muhokamasi ajrimlari ustidan ham hukm bilan bir vaqtda shikoyat beriladi.</p>
+  <div class="box"><div class="boxtitle">Kim shikoyat qiladi? (497-2-modda)</div>
+    <ul>
+      <li>📝 <b>Shikoyat:</b> mahkum, himoyachi, qonuniy vakil, jabrlanuvchi va vakili; oqlangan shaxs — oqlash qismi ustidan;</li>
+      <li>🖋️ <b>Protest:</b> prokuror va uning o'rinbosari;</li>
+      <li>💰 Fuqaroviy da'vogar va javobgar — hukmning fuqaroviy da'voga oid qismi ustidan.</li>
+    </ul>
+  </div>
+
+  <h3 class="art">498-modda. Kassatsiya <span class="badge purple">JPK</span></h3>
+  <p>Birinchi instansiya hukm va ajrimlari, agar <b>apellyatsiya tartibida ko'rilmagan bo'lsa</b>, kassatsiya tartibida qayta ko'rilishi mumkin (apellyatsiya hukmi ustidan shikoyat — 497-36-modda).</p>
+  <div class="figure">
+    <div class="figtitle">🪜 Instansiyalar narvoni — qaysi bosqichda qaysi shikoyat?</div>
+    <div class="flow">
+      <div class="step" style="border-color:var(--teal);"><span class="ic">⚖️</span>1-instansiya<small>hukm chiqadi</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="border-color:var(--gold);"><span class="ic">📤</span>APELLYATSIYA<small>hukm KUCHGA KIRMAGAN — 497-1</small></div>
+      <div class="arrow">→</div>
+      <div class="step" style="border-color:var(--purple);"><span class="ic">📥</span>KASSATSIYA<small>apellyatsiyada ko'rilmagan hukm — 498</small></div>
+    </div>
+  </div>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>8</span></div>
+</div>
+
+<!-- ============ PAGE 9: VOYAGA YETMAGANLAR + JADVAL ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">IV–V QISM · <span>VOYAGA YETMAGANLAR + TEZKOR JADVAL</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h3 class="art">548-modda. Voyaga yetmaganlar ishida isbotlanishi shart bo'lgan holatlar <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p>Umumiy holatlardan (JPK 82–84-moddalar) tashqari, quyidagilar <b>albatta isbotlanadi</b>:</p>
+  <div class="roles" style="grid-template-columns:repeat(4,1fr);">
+    <div class="role" style="border-top-color:var(--gold); text-align:center;"><span class="ic" style="float:none; display:block; font-size:18px;">🎂</span><b>Aniq yoshi</b><small>yil, oy, kun</small></div>
+    <div class="role" style="border-top-color:var(--teal); text-align:center;"><span class="ic" style="float:none; display:block; font-size:18px;">❤️</span><b>Salomatligi</b><small>shaxsiga xos xususiyatlar</small></div>
+    <div class="role" style="border-top-color:var(--purple); text-align:center;"><span class="ic" style="float:none; display:block; font-size:18px;">🏡</span><b>Turmush-tarbiya</b><small>yashash sharoitlari</small></div>
+    <div class="role" style="border-top-color:var(--red); text-align:center;"><span class="ic" style="float:none; display:block; font-size:18px;">👥</span><b>Dalolatchilar</b><small>katta yoshlilar bor-yo'qligi</small></div>
+  </div>
+
+  <h3 class="art">554-modda. Pedagog va psixologning ishtiroki <span class="badge" style="background:var(--navy);">JPK</span></h3>
+  <p>Voyaga yetmagan gumon qilinuvchi yoki ayblanuvchini so'roq qilishda <b>pedagog va (yoki) psixolog</b> ishtirok etishi mumkin — tergovchi/prokuror ixtiyoriga ko'ra yoki himoyachi, qonuniy vakil iltimosiga binoan.</p>
+  <div class="figure">
+    <div class="figtitle">🧑‍🏫 Pedagog/psixolog huquqlari</div>
+    <div class="flow">
+      <div class="step" style="width:34mm;"><span class="ic">❓</span>Savol berish<small>ruxsat bilan</small></div>
+      <div class="arrow">+</div>
+      <div class="step" style="width:34mm;"><span class="ic">📖</span>Bayonnoma bilan tanishish<small>so'roqdan keyin</small></div>
+      <div class="arrow">+</div>
+      <div class="step" style="width:34mm;"><span class="ic">✍️</span>Yozma fikr bildirish<small>bayonnomaga kiritiladi</small></div>
+    </div>
+    <p style="font-size:11px; color:var(--muted); margin-top:6px;">Huquqlar so'roqdan oldin tushuntiriladi va bayonnomada qayd etiladi. Ishtirokni ta'minlash — organning zimmasida.</p>
+  </div>
+
+  <h2 class="part" style="margin-top:12px">🧠 Tezkor eslab qolish jadvali</h2>
+  <table>
+    <tr><th>Mavzu</th><th style="width:22%">Konstitutsiya</th><th style="width:22%">JPK</th></tr>
+    <tr><td>Aybsizlik prezumpsiyasi</td><td><b>28</b></td><td><b>23</b></td></tr>
+    <tr><td>Himoyalanish huquqi</td><td><b>29</b></td><td><b>24, 49</b></td></tr>
+    <tr><td>Qiynoq va g'ayriinsoniy muomala taqiqi</td><td><b>26</b></td><td><b>17, 88</b></td></tr>
+    <tr><td>Uy-joy daxlsizligi</td><td><b>31</b></td><td><b>158, 161</b></td></tr>
+    <tr><td>Uy-joydan mahrum etilmaslik</td><td><b>47</b></td><td>—</td></tr>
+    <tr><td>Ushlab turish muddati (48 soat)</td><td><b>27</b></td><td><b>220, 221</b></td></tr>
+    <tr><td>Qonuniylik</td><td><b>15</b></td><td><b>11</b></td></tr>
+    <tr><td>Tungi vaqtda tergov taqiqi</td><td>—</td><td><b>88</b></td></tr>
+    <tr><td>Apellyatsiya / kassatsiya</td><td><b>29</b></td><td><b>497-1, 498</b></td></tr>
+    <tr><td>Voyaga yetmaganlar</td><td>—</td><td><b>548, 554</b></td></tr>
+  </table>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>9</span></div>
+</div>
+
+<!-- ============ PAGE 10: CASES + FOOTER ============ -->
+<div class="page">
+  <div class="brandbar">
+    <div class="left">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="10" y="2" width="4" height="18" rx="2" fill="#1B2A4A"/><rect x="4" y="4" width="16" height="3" rx="1.5" fill="#1B2A4A"/><path d="M4 7 L8 14 H0 Z" fill="#24365C"/><path d="M20 7 L24 14 H16 Z" fill="#24365C"/><rect x="8" y="20" width="8" height="2.5" rx="1.25" fill="#C9A227"/></svg>
+      <div class="btitle">VI QISM · <span>AMALIY VAZIYATLAR</span></div>
+    </div>
+    <div class="brand">@<b>huququstoz</b></div>
+  </div>
+
+  <h2 class="part">📝 Amaliy vaziyatlar</h2>
+
+  <div class="case"><span class="cnum">1</span><b class="ct">Tergovchi kechqurun soat 23:00 da so'roqqa chaqirdi.</b><br>
+  <b>JPK 88-modda:</b> tungi vaqtda (22:00–06:00) tergov harakatlari taqiqlanadi. Istisnolar ayrim holatlar bilan cheklangan (jinoyat oldini olish, iz yo'qolishi, qochish xavfi). Oddiy so'roq uchun bu asos emas.</div>
+
+  <div class="case"><span class="cnum">2</span><b class="ct">Politsiya xodimi qarorsiz uyga kirmoqchi.</b><br>
+  <b>Konstitutsiya 31-modda va JPK 161-modda:</b> kirish va tintuv uchun qaror yoki ajrim bo'lishi, shaxs unga imzo qo'yishi kerak. Tintuv uchun, odatda, sud ruxsati talab etiladi.</div>
+
+  <div class="case"><span class="cnum">3</span><b class="ct">Gumon qilinuvchi «hech narsa demayman» dedi.</b><br>
+  <b>Konstitutsiya 28-modda va JPK 23-modda:</b> u sukut saqlash huquqiga ega va aybsizligini isbotlashga majbur emas.</div>
+
+  <div class="case"><span class="cnum">4</span><b class="ct">Faqat «men aybdorman» degan gap bor, boshqa dalil yo'q.</b><br>
+  <b>Konstitutsiya 28-modda va JPK 23-modda:</b> o'z aybini tan olish yagona dalil bo'lsa, shaxs aybdor deb topilmaydi.</div>
+
+  <div class="case"><span class="cnum">5</span><b class="ct">16 yoshli o'smirni so'roq qilishmoqda.</b><br>
+  <b>JPK 554-modda:</b> pedagog yoki psixolog ishtirok etishi mumkin. <b>JPK 548-modda:</b> uning yoshi, turmush sharoiti va dalolatchi bor-yo'qligi isbotlanishi shart.</div>
+
+  <div class="case"><span class="cnum">6</span><b class="ct">Sud hukm chiqardi, lekin mahkum rozi emas.</b><br>
+  Hukm kuchga kirmaguncha <b>JPK 497-1 va 497-2-moddalariga</b> binoan mahkum yoki himoyachisi <b>apellyatsiya shikoyati</b> berishi, prokuror esa <b>protest</b> bildirishi mumkin.</div>
+
+  <div class="warn">⚠️ <b>Eslatma.</b> Bu qo'llanma yuridik maslahat o'rnini bosmaydi. Kodeksga o'zgartirishlar tez-tez kiritiladi — dolzarb tahrirni rasmiy manbada (<b>lex.uz</b>) tekshiring. Aniq huquqiy vaziyatda advokatga murojaat qiling.</div>
+
+  <footer class="doc">✍️ Muallif: @<b>huququstoz</b></footer>
+  <div class="pageno"><span class="tag">@<b>huququstoz</b> · Jinoyat protsessi va Konstitutsiya qo'llanmasi</span><span>10</span></div>
+</div>
+
+</body>
+</html>
