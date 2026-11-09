@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huquq Ustoz — Huquqiy Ta'lim Ekotizimi</title>
+<title>Huquq Ustoz — Huquqiy Ta'lim Platformasi</title>
 
 <!-- SEO & Social Meta Tags -->
 <meta name="description" content="Huquqiy savodxonlik, interaktiv quizlar, yuridik lug'at va elektron kutubxona platformasi.">
@@ -22,7 +22,7 @@
 <!-- External Flashcard CSS -->
 <link rel="stylesheet" href="css/flashcard.css">
 
-<!-- Import Maps for Three.js Modern ES Modules (Punkt 10: Kelajakbop standart) -->
+<!-- Import Maps for Three.js ES Modules -->
 <script type="importmap">
   {
     "imports": {
@@ -34,17 +34,17 @@
 
 <style>
 /* ==========================================================================
-   HUQUQ USTOZ — DESIGN SYSTEM V4.0 (CINEMATIC EDTECH EDITION)
+   HUQUQ USTOZ — DESIGN SYSTEM V5.0 (MASTERPIECE GOLD & MARBLE)
    ========================================================================== */
 
 :root {
   --font-heading: 'Satoshi', system-ui, -apple-system, sans-serif;
   --font-body: 'Geist', system-ui, -apple-system, sans-serif;
 
-  --bg-canvas: #080D18;
-  --surface-nav: rgba(17, 24, 39, 0.85);
-  --surface-card: #151F32;
-  --border-subtle: #263247;
+  --bg-canvas: #060A12;
+  --surface-nav: rgba(11, 16, 26, 0.85);
+  --surface-glass: rgba(21, 31, 50, 0.55);
+  --border-subtle: rgba(255, 255, 255, 0.08);
   --border-gold-glow: rgba(245, 184, 46, 0.45);
 
   --primary-gold: #F5B82E;
@@ -52,20 +52,18 @@
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
 
-  --radius-card: 20px;
+  --radius-card: 24px;
   --radius-btn: 12px;
   --radius-pill: 9999px;
 
-  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.6);
-  --shadow-gold: 0 4px 20px rgba(245, 184, 46, 0.3);
-  --blur-glass: blur(16px);
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.7);
+  --shadow-gold: 0 4px 25px rgba(245, 184, 46, 0.35);
+  --blur-glass: blur(20px);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--bg-canvas);
@@ -80,46 +78,43 @@ body {
   position: relative;
 }
 
-/* PUNKT 9: KURSOR ATROFIDAGI SEZILAR-SEZILMAS NUR DOIRASI */
+/* KURSOR CHIROĞI */
 .cursor-glow {
   position: fixed;
   top: 0;
   left: 0;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(245, 184, 46, 0.05) 0%, rgba(0,0,0,0) 70%);
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(245, 184, 46, 0.06) 0%, rgba(0,0,0,0) 70%);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  transition: opacity 0.3s ease;
 }
 
-/* PUNKT 7: PARALLAX GLOW SFERALAR */
+/* PARALLAX GLOW SFERALAR */
 .glow-sphere-1 {
   position: absolute;
-  top: -100px;
-  right: -50px;
-  width: 500px;
-  height: 500px;
+  top: -120px;
+  right: -80px;
+  width: 550px;
+  height: 550px;
   background: radial-gradient(circle, rgba(245, 184, 46, 0.12) 0%, rgba(0,0,0,0) 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
-  will-change: transform;
 }
 
 .glow-sphere-2 {
   position: absolute;
-  top: 45%;
-  left: -150px;
-  width: 550px;
-  height: 550px;
+  top: 40%;
+  left: -180px;
+  width: 600px;
+  height: 600px;
   background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(0,0,0,0) 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
-  will-change: transform;
 }
 
 .container { width: 90%; max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
@@ -190,10 +185,7 @@ header {
   gap: 10px;
   transition: all 0.2s ease;
 }
-.search-trigger-btn:hover {
-  border-color: var(--primary-gold);
-  color: var(--text-main);
-}
+.search-trigger-btn:hover { border-color: var(--primary-gold); color: var(--text-main); }
 .search-trigger-btn kbd {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--border-subtle);
@@ -218,11 +210,7 @@ header {
   font-size: 14px;
   transition: all 0.2s ease;
 }
-.social-btn:hover {
-  color: var(--primary-gold);
-  border-color: var(--primary-gold);
-  transform: translateY(-2px);
-}
+.social-btn:hover { color: var(--primary-gold); border-color: var(--primary-gold); transform: translateY(-2px); }
 
 .sirli-btn {
   background: transparent;
@@ -240,12 +228,8 @@ header {
 }
 .sirli-btn:hover { border-color: var(--primary-gold); color: var(--primary-gold); }
 
-/* HERO SECTION WITH CINEMATIC 3D CANVAS */
-.hero {
-  padding: 70px 0 50px 0;
-  position: relative;
-}
-
+/* HERO SECTION */
+.hero { padding: 75px 0 50px 0; position: relative; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -267,14 +251,26 @@ header {
   margin-bottom: 24px;
 }
 
+/* HARFLARNING JONLI OCHILISH ANIMATSIYASI */
 .hero h1 {
   font-family: var(--font-heading);
-  font-size: 50px;
+  font-size: 52px;
   line-height: 1.15;
   font-weight: 900;
   letter-spacing: -1.5px;
   margin-bottom: 20px;
   color: var(--text-main);
+}
+
+.hero h1 span.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) rotateX(-90deg);
+  animation: charFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes charFadeIn {
+  to { opacity: 1; transform: translateY(0) rotateX(0deg); }
 }
 
 .hero p {
@@ -286,7 +282,6 @@ header {
 }
 
 .hero-buttons { display: flex; align-items: center; gap: 16px; }
-
 .btn {
   text-decoration: none;
   padding: 14px 28px;
@@ -303,46 +298,21 @@ header {
 .btn-secondary { background: transparent; border: 1px solid var(--border-subtle); color: var(--text-main); }
 .btn-secondary:hover { border-color: var(--primary-gold); color: var(--primary-gold); transform: translateY(-2px); }
 
-/* 3D CANVAS & FALLBACK CONTAINER */
+/* 3D CANVAS & MARBLE STAGE CONTAINER */
 .hero-3d-wrapper {
   position: relative;
   width: 100%;
-  height: 440px;
+  height: 460px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: grab;
 }
+.hero-3d-wrapper:active { cursor: grabbing; }
 
-#canvas3d {
-  width: 100%;
-  height: 100%;
-  outline: none;
-}
+#canvas3d { width: 100%; height: 100%; outline: none; }
 
-/* PUNKT 11: FALLBACK REJIMI (WebGL yo'q bo'lsa) */
-.fallback-image {
-  display: none;
-  width: 300px;
-  height: 300px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 25px rgba(245, 184, 46, 0.4));
-}
-.webgl-failed .fallback-image { display: block; }
-.webgl-failed #canvas3d { display: none; }
-
-/* PUNKT 8: BO'LIMLARNING SUZIB CHIQISHI (REVEAL ON SCROLL) */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.reveal-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* FEATURES SECTION (3D Interactive Cards) */
+/* 9. SHISHA KARTALAR (GLASSMORPHISM 4.0) */
 .features { padding: 60px 0 80px 0; }
 .section-title { font-family: var(--font-heading); font-size: 32px; font-weight: 800; margin-bottom: 12px; }
 .section-desc { color: var(--text-muted); font-size: 16px; margin-bottom: 40px; }
@@ -355,37 +325,39 @@ header {
 }
 
 .feature-card {
-  background: var(--surface-card);
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
-  padding: 32px 24px;
+  padding: 34px 24px;
   text-decoration: none;
   color: var(--text-main);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
   will-change: transform;
 }
 
 .feature-card:hover {
   border-color: var(--border-gold-glow);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 184, 46, 0.15);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(245, 184, 46, 0.18);
 }
 
 .feature-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
   background: rgba(245, 184, 46, 0.08);
-  border: 1px solid rgba(245, 184, 46, 0.2);
+  border: 1px solid rgba(245, 184, 46, 0.25);
   color: var(--primary-gold);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
   margin-bottom: 24px;
-  transform: translateZ(20px);
+  transform: translateZ(25px);
 }
 
 .feature-card h3 {
@@ -393,7 +365,7 @@ header {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
-  transform: translateZ(15px);
+  transform: translateZ(20px);
 }
 
 .feature-card p {
@@ -402,7 +374,7 @@ header {
   line-height: 1.6;
   margin-bottom: 24px;
   flex-grow: 1;
-  transform: translateZ(10px);
+  transform: translateZ(12px);
 }
 
 .feature-link {
@@ -412,16 +384,17 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transform: translateZ(15px);
+  transform: translateZ(18px);
 }
 
 /* AUTHOR SECTION */
 .author-section { padding: 40px 0 90px 0; }
 .author-card {
-  background: var(--surface-card);
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-glass);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
-  padding: 40px;
+  padding: 44px;
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 40px;
@@ -435,6 +408,7 @@ header {
   object-fit: cover;
   border: 3px solid var(--primary-gold);
   margin-bottom: 16px;
+  box-shadow: 0 0 20px rgba(245, 184, 46, 0.2);
 }
 .author-name { font-family: var(--font-heading); font-size: 22px; font-weight: 800; }
 .author-role { color: var(--primary-gold); font-size: 13px; font-weight: 600; margin-top: 2px; }
@@ -448,7 +422,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(8, 13, 24, 0.85);
+  background: rgba(6, 10, 18, 0.85);
   backdrop-filter: blur(20px);
   z-index: 3000;
   display: flex;
@@ -460,15 +434,11 @@ header {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.search-modal.active {
-  opacity: 1;
-  visibility: visible;
-}
-
+.search-modal.active { opacity: 1; visibility: visible; }
 .search-container {
   width: 90%;
   max-width: 650px;
-  background: var(--surface-card);
+  background: #0E1626;
   border: 1px solid var(--border-gold-glow);
   border-radius: 20px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
@@ -476,10 +446,7 @@ header {
   transform: translateY(-20px);
   transition: transform 0.3s ease;
 }
-
-.search-modal.active .search-container {
-  transform: translateY(0);
-}
+.search-modal.active .search-container { transform: translateY(0); }
 
 .search-header {
   display: flex;
@@ -488,7 +455,6 @@ header {
   border-bottom: 1px solid var(--border-subtle);
   gap: 14px;
 }
-
 .search-header i { font-size: 20px; color: var(--primary-gold); }
 .search-input {
   width: 100%;
@@ -500,12 +466,7 @@ header {
   font-family: var(--font-body);
 }
 
-.search-results {
-  max-height: 360px;
-  overflow-y: auto;
-  padding: 12px;
-}
-
+.search-results { max-height: 360px; overflow-y: auto; padding: 12px; }
 .search-item {
   display: flex;
   align-items: center;
@@ -516,11 +477,7 @@ header {
   color: var(--text-main);
   transition: background 0.2s ease;
 }
-
-.search-item:hover {
-  background: rgba(245, 184, 46, 0.08);
-}
-
+.search-item:hover { background: rgba(245, 184, 46, 0.08); }
 .search-item-icon {
   width: 38px;
   height: 38px;
@@ -539,7 +496,7 @@ footer {
   margin-top: auto;
   padding: 30px 0;
   border-top: 1px solid var(--border-subtle);
-  background: #050810;
+  background: #03050A;
 }
 .footer-content { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 14px; }
 .admin-link { color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
@@ -550,7 +507,7 @@ footer {
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
   .hero p { margin-left: auto; margin-right: auto; }
   .hero-buttons { justify-content: center; }
-  .hero-3d-wrapper { height: 340px; }
+  .hero-3d-wrapper { height: 350px; }
 }
 
 @media(max-width: 768px) {
@@ -559,7 +516,6 @@ footer {
   .features-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 34px; }
   .footer-content { flex-direction: column; gap: 12px; text-align: center; }
-  .cursor-glow { display: none; }
 }
 </style>
 </head>
@@ -665,14 +621,14 @@ footer {
   </div>
 </div>
 
-<!-- HERO SECTION WITH CINEMATIC 3D CANVAS -->
+<!-- HERO SECTION WITH CINEMATIC 3D SCULPTURE -->
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-content">
       <div class="hero-badge">
         <i class="fa-solid fa-scale-balanced"></i> Huquqiy Ta'lim Platformasi
       </div>
-      <h1>Huquqiy bilim sari birgalikda.</h1>
+      <h1 id="animatedTitle">Huquqiy bilim sari birgalikda.</h1>
       <p>O‘zbekiston qonunchiligini o‘rganing, huquqiy bilimlaringizni mustahkamlang va imtihonlarga tizimli tayyorlaning. Talabalar, abituriyentlar va huquqshunoslikka qiziquvchilar uchun yagona ta'lim platformasi.</p>
       <div class="hero-buttons">
         <a href="kutubxona.html" class="btn btn-primary">
@@ -684,17 +640,15 @@ footer {
       </div>
     </div>
 
-    <!-- 3D WebGL Canvas Component -->
+    <!-- 3D WebGL Canvas & Stage -->
     <div class="hero-3d-wrapper" id="hero3DWrapper">
       <canvas id="canvas3d"></canvas>
-      <!-- Fallback Image for unsupported browsers -->
-      <img src="huquq.jpg" alt="Huquq Ustoz Scale" class="fallback-image">
     </div>
   </div>
 </section>
 
-<!-- FEATURES SECTION (3D Interactive Cards + Reveal on Scroll) -->
-<section class="features reveal-on-scroll">
+<!-- FEATURES SECTION (SHISHA KARTALAR) -->
+<section class="features">
   <div class="container">
     <h2 class="section-title">Platforma imkoniyatlari</h2>
     <p class="section-desc">Huquqshunoslikni tizimli o'rganish uchun kerakli barcha manbalar</p>
@@ -731,8 +685,8 @@ footer {
   </div>
 </section>
 
-<!-- AUTHOR SECTION (Reveal on Scroll) -->
-<section class="author-section reveal-on-scroll">
+<!-- AUTHOR SECTION -->
+<section class="author-section">
   <div class="container">
     <div class="author-card">
       <div class="author-avatar-box">
@@ -759,187 +713,209 @@ footer {
 <script src="data/quotes.js"></script>
 <script src="js/flashcard.js"></script>
 
-<!-- MODERN THREE.JS ENGINE WITH BLOOM, TONE MAPPING & PARTICLES (PUNKTLAR: 1, 2, 3, 4, 5, 6, 10, 11, 12) -->
+<!-- 3D SCULPTURE, POST-PROCESSING & INERTIA ENGINE -->
 <script type="module">
   import * as THREE from 'three';
   import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
   import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
   import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-  (function initCinematic3DHero() {
+  // 1. HARFLARNING KETMA-KET JONLI PAYDO BO'LISH ANIMATSIYASI
+  (function initAnimatedTitle() {
+    const title = document.getElementById('animatedTitle');
+    if (!title) return;
+    const text = title.textContent.trim();
+    title.textContent = '';
+    
+    [...text].forEach((char, index) => {
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      span.style.animationDelay = `${index * 0.03}s`;
+      title.appendChild(span);
+    });
+  })();
+
+  // 2. SCULPTED 3D SCALE & DRAMATIC LIGHTING ENGINE
+  (function initSculptedScale() {
     const wrapper = document.getElementById('hero3DWrapper');
     const canvas = document.getElementById('canvas3d');
     if (!canvas || !wrapper) return;
 
-    // WebGL qo'llab-quvvatlanishini tekshirish (Punkt 11: Fallback)
-    function isWebGLAvailable() {
-      try {
-        const c = document.createElement('canvas');
-        return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
-      } catch (e) {
-        return false;
-      }
-    }
-
-    if (!isWebGLAvailable()) {
-      wrapper.classList.add('webgl-failed');
-      return;
-    }
-
-    // 1. SCENE, CAMERA, RENDERER & TONE MAPPING (Punkt 1: ACESFilmic Tone Mapping)
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    camera.position.set(0, 0, 11);
+    const camera = new THREE.PerspectiveCamera(42, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    camera.position.set(0, 0, 10.5);
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     
-    // Kino kabi render qilish sozlamalari
+    // Kino Tonemapping (ACESFilmic)
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 1.3;
 
-    // 2. BLOOM EFFECT / POST-PROCESSING (Punkt 2: Yoritish Bloom)
+    // Post-processing Bloom
     const composer = new EffectComposer(renderer);
-    const renderPass = new RenderPass(scene, camera);
-    composer.addPass(renderPass);
-
-    // Nafis nur sochish (Bloom parameters: Resolution, Strength, Radius, Threshold)
+    composer.addPass(new RenderPass(scene, camera));
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(canvas.clientWidth, canvas.clientHeight),
-      0.35, // Strength (naza-sezilarli va qimmatbaho tuyuladi)
-      0.4,  // Radius
-      0.85  // Threshold
+      0.35, 0.4, 0.85
     );
     composer.addPass(bloomPass);
 
-    // 3. YORUĞLIK / LIGHTING
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // DRAMATIK YORUĞLIK REJISSURASI (Issiq Oltin + Sovuq Ko'k)
+    const topWarmLight = new THREE.DirectionalLight(0xf5b82e, 3.2);
+    topWarmLight.position.set(5, 8, 4);
+    scene.add(topWarmLight);
+
+    const bottomCoolLight = new THREE.DirectionalLight(0x38bdf8, 1.8);
+    bottomCoolLight.position.set(-6, -6, 2);
+    scene.add(bottomCoolLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const goldDirLight = new THREE.DirectionalLight(0xf5b82e, 2.5);
-    goldDirLight.position.set(5, 8, 5);
-    scene.add(goldDirLight);
-
-    const cyanPointLight = new THREE.PointLight(0x38bdf8, 1.5);
-    cyanPointLight.position.set(-6, -4, 3);
-    scene.add(cyanPointLight);
-
-    // 4. MAIN SCALE GROUP & MATERIALS
+    // SCULPTED MAIN GROUP
     const mainGroup = new THREE.Group();
     scene.add(mainGroup);
 
-    // PUNKT 4: KIRISH ANIMATSIYASI UCHUN DASTLABKI HOLAT
-    mainGroup.position.set(-4, 2, -6);
-    mainGroup.rotation.set(-0.5, -1.2, 0);
+    // Kirish animatsiyasi dastlabki holati
+    mainGroup.position.set(-3.5, 1.5, -5);
+    mainGroup.rotation.set(-0.4, -1.2, 0);
 
-    const goldMaterial = new THREE.MeshStandardMaterial({
-      color: 0xf5b82e,
-      metalness: 0.85,
-      roughness: 0.2,
-      envMapIntensity: 1.5
+    // QIMMATBAHO CONTRAST OLTIN MATERIAL
+    const brightGoldMat = new THREE.MeshStandardMaterial({
+      color: 0xf5b82e, metalness: 0.9, roughness: 0.18
+    });
+    const darkGoldMat = new THREE.MeshStandardMaterial({
+      color: 0xd97706, metalness: 0.85, roughness: 0.3
     });
 
-    // Meshlar
-    const baseMesh = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.8, 0.3, 32), goldMaterial);
-    baseMesh.position.y = -2.2;
-    mainGroup.add(baseMesh);
+    // POYDEVOR (NAQSHLI O'YILGAN PRAMIDA)
+    const baseGroup = new THREE.Group();
+    const b1 = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.8, 0.2, 32), darkGoldMat);
+    b1.position.y = -2.2;
+    const b2 = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.4, 0.2, 32), brightGoldMat);
+    b2.position.y = -2.0;
+    baseGroup.add(b1, b2);
+    mainGroup.add(baseGroup);
 
-    const colMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.28, 4.2, 32), goldMaterial);
-    mainGroup.add(colMesh);
+    // USTUN VA SHAR (NAQSHLI HALQALAR BILAN)
+    const colMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.26, 4.0, 32), brightGoldMat);
+    const ring1 = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.04, 16, 32), darkGoldMat);
+    ring1.rotation.x = Math.PI / 2;
+    ring1.position.y = 0.5;
+    const topBall = new THREE.Mesh(new THREE.SphereGeometry(0.35, 32, 32), brightGoldMat);
+    topBall.position.y = 2.15;
+    mainGroup.add(colMesh, ring1, topBall);
 
-    const beamMesh = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.15, 0.15), goldMaterial);
-    beamMesh.position.y = 1.9;
+    // CHO'ZG'ICH (BUKILGAN UCHLAR)
+    const beamMesh = new THREE.Mesh(new THREE.BoxGeometry(4.4, 0.14, 0.14), brightGoldMat);
+    beamMesh.position.y = 1.85;
     mainGroup.add(beamMesh);
 
-    const plateGeo = new THREE.CylinderGeometry(1.1, 0.9, 0.1, 32);
-    const leftPlate = new THREE.Mesh(plateGeo, goldMaterial);
-    leftPlate.position.set(-2.1, 0.2, 0);
-    mainGroup.add(leftPlate);
+    // KOSALAR (CHUQUR SHAKL VA ZANJIRLAR)
+    function createBowl() {
+      const g = new THREE.Group();
+      // Chuqur kosa
+      const bowlMat = brightGoldMat;
+      const bowlGeo = new THREE.CylinderGeometry(1.1, 0.4, 0.4, 32);
+      const bowlMesh = new THREE.Mesh(bowlGeo, bowlMat);
+      g.add(bowlMesh);
 
-    const rightPlate = new THREE.Mesh(plateGeo, goldMaterial);
-    rightPlate.position.set(2.1, 0.2, 0);
-    mainGroup.add(rightPlate);
-
-    // PUNKT 3: ZARRACHALAR (GOLDEN DUST PARTICLES)
-    const particleCount = window.innerWidth < 768 ? 60 : 160; // Telefonda batareya tejash (Punkt 3 & 12)
-    const particleGeo = new THREE.BufferGeometry();
-    const particlePos = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePos[i] = (Math.random() - 0.5) * 16;
-      particlePos[i + 1] = (Math.random() - 0.5) * 12;
-      particlePos[i + 2] = (Math.random() - 0.5) * 10;
+      // 3 ta Nozik zanjir chizig'i
+      for (let i = 0; i < 3; i++) {
+        const angle = (i / 3) * Math.PI * 2;
+        const chainGeo = new THREE.CylinderGeometry(0.015, 0.015, 1.4, 8);
+        const chain = new THREE.Mesh(chainGeo, darkGoldMat);
+        chain.position.set(Math.cos(angle) * 0.95, 0.7, Math.sin(angle) * 0.95);
+        g.add(chain);
+      }
+      return g;
     }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
 
-    const particleMat = new THREE.PointsMaterial({
-      color: 0xf5b82e,
-      size: 0.06,
-      transparent: true,
-      opacity: 0.6
+    const leftBowl = createBowl();
+    leftBowl.position.set(-2.15, 0.3, 0);
+    mainGroup.add(leftBowl);
+
+    const rightBowl = createBowl();
+    rightBowl.position.set(2.15, 0.3, 0);
+    mainGroup.add(rightBowl);
+
+    // SIRTLARNING AKS ETISHI (MARBLE FLOOR REFLECTION)
+    const floorGeo = new THREE.PlaneGeometry(30, 30);
+    const floorMat = new THREE.MeshStandardMaterial({
+      color: 0x060a12, metalness: 0.8, roughness: 0.4, transparent: true, opacity: 0.7
     });
-    const particles = new THREE.Points(particleGeo, particleMat);
+    const floor = new THREE.Mesh(floorGeo, floorMat);
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -2.35;
+    scene.add(floor);
+
+    // ZARRACHALAR (GOLDEN DUST PARTICLES)
+    const pCount = 140;
+    const pGeo = new THREE.BufferGeometry();
+    const pPos = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i += 3) {
+      pPos[i] = (Math.random() - 0.5) * 16;
+      pPos[i + 1] = (Math.random() - 0.5) * 12;
+      pPos[i + 2] = (Math.random() - 0.5) * 10;
+    }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    const pMat = new THREE.PointsMaterial({ color: 0xf5b82e, size: 0.05, transparent: true, opacity: 0.6 });
+    const particles = new THREE.Points(pGeo, pMat);
     scene.add(particles);
 
-    // HARAKAT VA INTERAKTIVLIK MANTIG'I
-    let mouseX = 0, mouseY = 0;
-    let isHovered = false; // Punkt 6: Hover reaksiyasi
-    let scrollProgress = 0; // Punkt 5: Scroll bilan jonlanish
+    // FIZIKA VA INERSIYA BILAN AYLANTIRISH MANTIG'I
+    let isDragging = false;
+    let previousMouseX = 0;
+    let rotationVelocity = 0;
+    let targetRotY = 0;
     let entranceTime = 0;
 
+    wrapper.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      previousMouseX = e.clientX;
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
     window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5);
-      mouseY = (e.clientY / window.innerHeight - 0.5);
+      if (isDragging) {
+        const deltaX = e.clientX - previousMouseX;
+        rotationVelocity = deltaX * 0.005;
+        previousMouseX = e.clientX;
+      }
     });
 
-    wrapper.addEventListener('mouseenter', () => { isHovered = true; });
-    wrapper.addEventListener('mouseleave', () => { isHovered = false; });
-
-    window.addEventListener('scroll', () => {
-      scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    });
-
-    // PUNKT 12: BATAREYA TEJASH (Visibility API)
-    let isTabActive = true;
-    document.addEventListener('visibilitychange', () => {
-      isTabActive = !document.hidden;
-    });
-
-    // RENDER LOOP (60 FPS / Smooth Transition)
+    // RENDER LOOP
     function animate() {
       requestAnimationFrame(animate);
-      if (!isTabActive) return; // Tab yopiq bo'lsa hisoblash to'xtaydi
 
-      // Punkt 4: Kirish animatsiyasi (2 soniya davomida sekinlashuvchi uchib kelish)
+      // Kirish animatsiyasi (Slow EaseOut)
       if (entranceTime < 1) {
-        entranceTime += 0.012;
-        const easeOut = 1 - Math.pow(1 - entranceTime, 3); // Smooth easeOutCubic
-        mainGroup.position.x = -4 * (1 - easeOut);
-        mainGroup.position.y = 2 * (1 - easeOut);
-        mainGroup.position.z = -6 * (1 - easeOut);
+        entranceTime += 0.01;
+        const easeOut = 1 - Math.pow(1 - entranceTime, 3);
+        mainGroup.position.x = -3.5 * (1 - easeOut);
+        mainGroup.position.y = 1.5 * (1 - easeOut);
+        mainGroup.position.z = -5 * (1 - easeOut);
         mainGroup.rotation.y = -1.2 * (1 - easeOut);
       }
 
-      // Punkt 5: Scroll ta'siri (pastga tushganda o'girilishi va uzoqlashishi)
-      const scrollRotation = scrollProgress * Math.PI * 1.5;
-      const targetRotY = (mouseX * 0.4) + scrollRotation;
-      const targetRotX = (mouseY * 0.4);
+      // Inersiya harakati
+      if (!isDragging) {
+        rotationVelocity *= 0.95; // Ishqalanish natijasida sekinlashuv
+        mainGroup.rotation.y += rotationVelocity + 0.003; // Mayin doimiy aylanish
+      } else {
+        mainGroup.rotation.y += rotationVelocity;
+      }
 
-      // Punkt 6: Hover vaqtida kosalarning ko'proq tebranishi
-      const swaySpeed = isHovered ? 0.005 : 0.002;
-      const swayAmount = isHovered ? 0.16 : 0.07;
-      const time = Date.now() * swaySpeed;
+      // Kosalarning nafas oluvchi yumshoq tebranishi
+      const time = Date.now() * 0.002;
+      leftBowl.position.y = 0.3 + Math.sin(time) * 0.06;
+      rightBowl.position.y = 0.3 - Math.sin(time) * 0.06;
 
-      leftPlate.position.y = 0.2 + Math.sin(time) * swayAmount;
-      rightPlate.position.y = 0.2 - Math.sin(time) * swayAmount;
-
-      mainGroup.rotation.y += (targetRotY - mainGroup.rotation.y) * 0.05;
-      mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.05;
-
-      // Zarrachalarning mayin suzishi
-      particles.rotation.y += 0.0008;
-
+      particles.rotation.y += 0.0006;
       composer.render();
     }
     animate();
@@ -952,42 +928,23 @@ footer {
     });
   })();
 
-  // PUNKT 7: GLOW SFERALARNING PARALLAX EFFEKTI
-  (function initParallaxGlow() {
+  // PARALLAX & CURSOR GLOW
+  (function initParallaxAndGlow() {
     const s1 = document.getElementById('glowSphere1');
     const s2 = document.getElementById('glowSphere2');
-    if (!s1 || !s2) return;
-
-    window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
-      s1.style.transform = `translate(${-x}px, ${-y}px)`;
-      s2.style.transform = `translate(${x * 0.8}px, ${y * 0.8}px)`;
-    });
-  })();
-
-  // PUNKT 8: REVEAL ON SCROLL INTERSECTION OBSERVER
-  (function initScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal-on-scroll');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.15 });
-
-    reveals.forEach(el => observer.observe(el));
-  })();
-
-  // PUNKT 9: KURSOR ATROFIDAGI YORUĞLIK
-  (function initCursorGlow() {
     const glow = document.getElementById('cursorGlow');
-    if (!glow || window.innerWidth < 768) return;
 
     window.addEventListener('mousemove', (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
+      if (glow) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }
+      if (s1 && s2) {
+        const x = (e.clientX / window.innerWidth - 0.5) * 30;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+        s1.style.transform = `translate(${-x}px, ${-y}px)`;
+        s2.style.transform = `translate(${x * 0.8}px, ${y * 0.8}px)`;
+      }
     });
   })();
 
@@ -997,13 +954,8 @@ footer {
     const searchTriggerBtn = document.getElementById('searchTriggerBtn');
     const searchInput = document.getElementById('searchInput');
 
-    function openSearch() {
-      searchModal.classList.add('active');
-      setTimeout(() => searchInput.focus(), 100);
-    }
-    function closeSearch() {
-      searchModal.classList.remove('active');
-    }
+    function openSearch() { searchModal.classList.add('active'); setTimeout(() => searchInput.focus(), 100); }
+    function closeSearch() { searchModal.classList.remove('active'); }
 
     if (searchTriggerBtn) searchTriggerBtn.addEventListener('click', openSearch);
 
@@ -1012,14 +964,10 @@ footer {
         e.preventDefault();
         searchModal.classList.contains('active') ? closeSearch() : openSearch();
       }
-      if (e.key === 'Escape' && searchModal.classList.contains('active')) {
-        closeSearch();
-      }
+      if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
     });
 
-    searchModal.addEventListener('click', (e) => {
-      if (e.target === searchModal) closeSearch();
-    });
+    searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
   })();
 
   // 3D TILT CARDS
@@ -1028,7 +976,7 @@ footer {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      card.style.transform = `rotateY(${x / 12}deg) rotateX(${-y / 12}deg) translateY(-6px)`;
+      card.style.transform = `rotateY(${x / 14}deg) rotateX(${-y / 14}deg) translateY(-6px)`;
     });
 
     card.addEventListener('mouseleave', () => {
