@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uz" data-theme="dark">
+<html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,58 +13,55 @@
 <meta property="og:image" content="huquq.jpg">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
 
-<!-- Google Fonts -->
+<!-- Google Fonts & FontAwesome -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- FontAwesome Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&family=Satoshi:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- External Modul CSS -->
+<!-- External Flashcard CSS -->
 <link rel="stylesheet" href="css/flashcard.css">
 
 <style>
 /* ==========================================================================
-   EDU DESIGN SYSTEM v2.0 (Executive Gold & Glass Edition)
+   HUQUQ USTOZ — DESIGN SYSTEM V2.5 (EXECUTIVE NAVY & GOLD)
    ========================================================================== */
+
 :root {
-  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Satoshi', system-ui, -apple-system, sans-serif;
+  --font-body: 'Geist', system-ui, -apple-system, sans-serif;
   --font-quote: 'Playfair Display', serif;
 
-  --bg-canvas: #0b0f19;
-  --bg-gradient: radial-gradient(circle at 50% -20%, #1e293b 0%, #0b0f19 80%);
-  
-  --surface-card: rgba(15, 23, 42, 0.75);
-  --surface-glass: rgba(255, 255, 255, 0.03);
-  --border-card: rgba(255, 255, 255, 0.08);
-  --border-gold: rgba(245, 158, 11, 0.3);
+  /* Color Palette */
+  --bg-canvas: #080D18;
+  --surface-nav: rgba(17, 24, 39, 0.85);
+  --surface-card: #151F32;
+  --border-subtle: #263247;
+  --border-gold-glow: rgba(245, 184, 46, 0.35);
 
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-gold: #fbbf24;
+  --primary-gold: #F5B82E;
+  --primary-gold-hover: #e0a322;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
 
-  --grad-primary: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  --grad-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  --grad-gold-hover: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-
+  /* Radius & Shadows */
   --radius-card: 20px;
-  --radius-btn: 14px;
+  --radius-btn: 12px;
   --radius-pill: 9999px;
 
-  --shadow-card: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.15);
-  --shadow-btn: 0 4px 20px rgba(245, 158, 11, 0.3);
-
-  --blur-glass: blur(20px);
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 4px 20px rgba(245, 184, 46, 0.25);
+  --blur-glass: blur(16px);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  background: var(--bg-canvas);
-  background-image: var(--bg-gradient);
+  background-color: var(--bg-canvas);
   color: var(--text-main);
   font-family: var(--font-body);
   font-size: 16px;
@@ -75,114 +72,160 @@ body {
   overflow-x: hidden;
 }
 
-.container { width: 90%; max-width: 1250px; margin: auto; }
+.container {
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
 
+/* 2. NAVBAR */
 header {
   position: sticky;
   top: 0;
-  background: rgba(11, 15, 25, 0.8);
+  background: var(--surface-nav);
   backdrop-filter: var(--blur-glass);
   -webkit-backdrop-filter: var(--blur-glass);
-  border-bottom: 1px solid var(--border-card);
-  padding: 16px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 14px 0;
   z-index: 1000;
 }
 
-.nav { display: flex; justify-content: space-between; align-items: center; }
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
 
-.logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
 .logo img {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #f59e0b;
-  box-shadow: var(--shadow-glow);
+  border: 2px solid var(--primary-gold);
 }
+
 .logo h2 {
   font-family: var(--font-heading);
-  background: linear-gradient(135deg, #ffffff 30%, #f59e0b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-size: 22px;
   font-weight: 800;
+  color: var(--text-main);
   letter-spacing: -0.5px;
 }
 
-.social { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.nav-link {
-  text-decoration: none;
-  color: var(--text-main);
-  padding: 10px 16px;
-  background: var(--surface-glass);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-btn);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 600;
-  display: inline-flex;
+.nav-menu {
+  display: flex;
   align-items: center;
   gap: 8px;
-  cursor: pointer;
-}
-.nav-link i { color: var(--text-gold); }
-.nav-link:hover {
-  background: rgba(245, 158, 11, 0.08);
-  border-color: var(--border-gold);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
+  list-style: none;
 }
 
-.hero {
+.nav-menu a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+  color: var(--primary-gold);
+  background: rgba(245, 184, 46, 0.06);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  min-height: 55vh;
-  padding: 60px 20px 40px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+  color: var(--primary-gold);
+  border-color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+.sirli-btn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.sirli-btn:hover {
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+}
+
+/* 3. HERO SECTION */
+.hero {
+  padding: 90px 0 70px 0;
   position: relative;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(0,0,0,0) 70%);
-  z-index: 0;
-  pointer-events: none;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 40px;
 }
-
-.hero-card {
-  position: relative;
-  z-index: 1;
-  background: var(--surface-card);
-  border: 1px solid var(--border-card);
-  backdrop-filter: var(--blur-glass);
-  -webkit-backdrop-filter: var(--blur-glass);
-  padding: 56px 40px;
-  border-radius: var(--radius-card);
-  max-width: 880px;
-  box-shadow: var(--shadow-card);
-  transition: border-color 0.3s ease;
-}
-
-.hero-card:hover { border-color: rgba(245, 158, 11, 0.25); }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid var(--border-gold);
+  padding: 6px 14px;
+  background: rgba(245, 184, 46, 0.08);
+  border: 1px solid rgba(245, 184, 46, 0.25);
   border-radius: var(--radius-pill);
-  color: var(--text-gold);
-  font-family: var(--font-heading);
+  color: var(--primary-gold);
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 24px;
@@ -190,87 +233,254 @@ header {
 
 .hero h1 {
   font-family: var(--font-heading);
-  font-size: 44px;
-  line-height: 1.15;
+  font-size: 52px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -1.5px;
   margin-bottom: 20px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-main);
 }
 
 .hero p {
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: 18px;
   color: var(--text-muted);
+  line-height: 1.7;
   margin-bottom: 36px;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 580px;
 }
 
-.buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .btn {
   text-decoration: none;
   padding: 14px 28px;
   border-radius: var(--radius-btn);
-  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 15px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  transition: all 0.25s ease;
 }
 
-.primary { background: var(--grad-gold); color: #0b0f19; box-shadow: var(--shadow-btn); }
-.primary:hover { background: var(--grad-gold-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.45); }
-.secondary { background: var(--surface-glass); border: 1px solid var(--border-card); color: var(--text-main); }
-.secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--border-gold); transform: translateY(-2px); }
+.btn-primary {
+  background: var(--primary-gold);
+  color: #080D18;
+  box-shadow: var(--shadow-gold);
+}
 
-.about { padding: 40px 20px 60px 20px; }
-.about-card {
-  background: var(--surface-card);
-  border: 1px solid var(--border-card);
-  backdrop-filter: var(--blur-glass);
-  -webkit-backdrop-filter: var(--blur-glass);
-  border-radius: var(--radius-card);
-  padding: 48px 40px;
-  max-width: 880px;
-  margin: auto;
-  text-align: center;
+.btn-primary:hover {
+  background: var(--primary-gold-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-card-art {
+  width: 100%;
+  max-width: 380px;
+  height: 380px;
+  background: linear-gradient(145deg, #151F32 0%, #0D1424 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   box-shadow: var(--shadow-card);
 }
 
-.about h2 {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
+.hero-card-art i.main-icon {
+  font-size: 110px;
+  color: var(--primary-gold);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 20px rgba(245, 184, 46, 0.3));
+}
+
+.hero-card-art .art-badge {
+  position: absolute;
+  bottom: 24px;
+  background: rgba(8, 13, 24, 0.8);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text-main);
+  backdrop-filter: blur(8px);
+}
+
+/* 4. FEATURES SECTION (4 ta Karta) */
+.features {
+  padding: 60px 0 80px 0;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 32px 24px;
+  text-decoration: none;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-gold-glow);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(245, 184, 46, 0.08);
+  border: 1px solid rgba(245, 184, 46, 0.2);
+  color: var(--primary-gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  font-size: 22px;
+  margin-bottom: 24px;
 }
 
-.about h2 i { color: var(--text-gold); }
-.about p { line-height: 1.85; color: var(--text-muted); font-size: 16px; }
+.feature-card h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
 
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.feature-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 5. AUTHOR SECTION (Profil) */
+.author-section {
+  padding: 40px 0 90px 0;
+}
+
+.author-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.author-avatar-box {
+  text-align: center;
+}
+
+.author-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-gold);
+  margin-bottom: 16px;
+}
+
+.author-name {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.author-role {
+  color: var(--primary-gold);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.author-bio h2 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.author-bio p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* FOOTER */
 footer {
   margin-top: auto;
-  padding: 32px 0;
-  border-top: 1px solid var(--border-card);
-  background: rgba(11, 15, 25, 0.95);
+  padding: 30px 0;
+  border-top: 1px solid var(--border-subtle);
+  background: #050810;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
   color: var(--text-muted);
   font-size: 14px;
 }
@@ -278,71 +488,59 @@ footer {
 .admin-link {
   color: var(--text-muted);
   text-decoration: none;
-  transition: color 0.25s;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-heading);
-  font-weight: 500;
+  gap: 6px;
+  transition: color 0.2s;
 }
-.admin-link:hover { color: var(--text-gold); }
 
-@media(max-width: 992px) {
-  .nav { flex-direction: column; gap: 16px; }
-  .social { width: 100%; justify-content: center; flex-wrap: wrap; }
+.admin-link:hover { color: var(--primary-gold); }
+
+/* RESPONSIVE DESIGN */
+@media(max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-visual { display: none; }
 }
 
 @media(max-width: 768px) {
-  .logo h2 { font-size: 20px; }
-  .hero-card { padding: 36px 24px; }
-  .hero h1 { font-size: 32px; }
-  .hero p { font-size: 15px; }
-  .nav-link { padding: 8px 12px; font-size: 12px; }
-  .footer-content { justify-content: center; text-align: center; }
+  .nav-left .nav-menu { display: none; }
+  .author-card { grid-template-columns: 1fr; text-align: center; }
+  .features-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; }
+  .footer-content { flex-direction: column; gap: 12px; text-align: center; }
 }
 </style>
 </head>
 <body>
 
+<!-- 2. NAVBAR -->
 <header>
   <div class="container nav">
-    <a href="index.html" class="logo">
-      <img src="huquq.jpg" alt="Huquq Ustoz Logo">
-      <h2>Huquq Ustoz</h2>
-    </a>
-    <div class="social">
-      <a href="kutubxona.html" class="nav-link">
-        <i class="fa-solid fa-book-open"></i>
-        <span>Kutubxona</span>
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img src="huquq.jpg" alt="Huquq Ustoz">
+        <h2>Huquq Ustoz</h2>
       </a>
-      <a href="quiz.html" class="nav-link">
-        <i class="fa-solid fa-circle-question"></i>
-        <span>Quiz</span>
-      </a>
-      <a href="dictionary.html" class="nav-link">
-        <i class="fa-solid fa-graduation-cap"></i>
-        <span>Lug'at</span>
-      </a>
-      <a class="nav-link" id="openSirliBtn">
-        <i class="fa-solid fa-lock-open"></i>
-        <span>Sirli Sahifa</span>
-      </a>
-      <a href="jinoyat-protsessi-va-konstitutsiya-moddalar-bo-yicha-qo-llanma.html" class="nav-link">
-        <i class="fa-solid fa-book"></i>
-        <span>Qo'llanma</span>
-      </a>
-      <a href="https://youtube.com/@huququstoz?si=8aRmbYkK-CXBNtQS" class="nav-link" target="_blank">
-        <i class="fa-brands fa-youtube"></i>
-        <span>YouTube</span>
-      </a>
-      <a href="https://instagram.com/huququstoz" id="insta-link" class="nav-link" target="_blank">
-        <i class="fa-brands fa-instagram"></i>
-        <span>Instagram</span>
-      </a>
-      <a href="https://t.me/huququstoz" id="tg-link" class="nav-link" target="_blank">
-        <i class="fa-brands fa-telegram"></i>
-        <span>Telegram</span>
-      </a>
+      <ul class="nav-menu">
+        <li><a href="kutubxona.html"><i class="fa-solid fa-book-open"></i> Kutubxona</a></li>
+        <li><a href="quiz.html"><i class="fa-solid fa-circle-question"></i> Quiz</a></li>
+        <li><a href="dictionary.html"><i class="fa-solid fa-graduation-cap"></i> Lug'at</a></li>
+        <li><a href="jinoyat-protsessi-va-konstitutsiya-moddalar-bo-yicha-qo-llanma.html"><i class="fa-solid fa-book"></i> Qo'llanma</a></li>
+      </ul>
+    </div>
+    
+    <div class="nav-right">
+      <button class="sirli-btn" id="openSirliBtn">
+        <i class="fa-solid fa-lock-open"></i> Sirli Sahifa
+      </button>
+      <div class="social-icons">
+        <a href="https://t.me/huququstoz" target="_blank" class="social-btn" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://instagram.com/huququstoz" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://youtube.com/@huququstoz" target="_blank" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
     </div>
   </div>
 </header>
@@ -378,39 +576,88 @@ footer {
   </div>
 </div>
 
-<!-- HERO SECTION -->
+<!-- 3. HERO SECTION -->
 <section class="hero">
-  <div class="hero-card">
-    <div class="hero-badge">
-      <i class="fa-solid fa-shield-halved"></i> Rasmiy Ta'lim Platformasi
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-scale-balanced"></i> Huquqiy Ta'lim Platformasi
+      </div>
+      <h1>Huquqiy bilim sari birgalikda.</h1>
+      <p>O‘zbekiston qonunchiligini o‘rganing, huquqiy bilimlaringizni mustahkamlang va imtihonlarga tizimli tayyorlaning. Talabalar, abituriyentlar va huquqshunoslikka qiziquvchilar uchun yagona ta'lim platformasi.</p>
+      <div class="hero-buttons">
+        <a href="kutubxona.html" class="btn btn-primary">
+          Kutubxonaga o'tish <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="quiz.html" class="btn btn-secondary">
+          Testlarni boshlash
+        </a>
+      </div>
     </div>
-    <h1 id="hero-title">Huquqiy bilim sari birgalikda</h1>
-    <p id="hero-desc">
-      Huquqiy savodxonlikni oshirish, talabalar va abituriyentlarga yordam berish,
-      hamda O'zbekiston qonunchiligi bo'yicha sodda va tushunarli ma'lumotlarni ulashish platformasi.
-    </p>
-    <div class="buttons">
-      <a class="btn primary" href="kutubxona.html">
-        <i class="fa-solid fa-book-bookmark"></i> Elektron Kutubxona
+
+    <div class="hero-visual">
+      <div class="hero-card-art">
+        <i class="fa-solid fa-scale-balanced main-icon"></i>
+        <div class="art-badge">
+          <i class="fa-solid fa-shield-halved" style="color: #F5B82E;"></i> Bilim va Qonun Ustuvorligi
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FEATURES SECTION (4 ta Karta) -->
+<section class="features">
+  <div class="container">
+    <h2 class="section-title">Platforma imkoniyatlari</h2>
+    <p class="section-desc">Huquqshunoslikni tizimli o'rganish uchun kerakli barcha manbalar</p>
+
+    <div class="features-grid">
+      <a href="kutubxona.html" class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Elektron Kutubxona</h3>
+        <p>Huquqiy adabiyotlar, darsliklar, kodekslar va qonun hujjatlarining elektron bazasi.</p>
+        <span class="feature-link">O'tish <i class="fa-solid fa-chevron-right"></i></span>
       </a>
-      <a class="btn secondary" href="quiz.html">
-        <i class="fa-solid fa-lightbulb"></i> Quiz
+
+      <a href="dictionary.html" class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3>Yuridik Lug'at</h3>
+        <p>Murakkab huquqiy atamalar va tushunchalarning sodda, tushunarli va rasmiy izohlari.</p>
+        <span class="feature-link">Izlash <i class="fa-solid fa-chevron-right"></i></span>
+      </a>
+
+      <a href="quiz.html" class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-circle-question"></i></div>
+        <h3>Test Sinovlari</h3>
+        <p>Mavzulashtirilgan interaktiv testlar orqali o'z bilimlaringizni sinang va mustahkamlang.</p>
+        <span class="feature-link">Boshlash <i class="fa-solid fa-chevron-right"></i></span>
+      </a>
+
+      <a href="jinoyat-protsessi-va-konstitutsiya-moddalar-bo-yicha-qo-llanma.html" class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-book"></i></div>
+        <h3>Qo'llanmalar</h3>
+        <p>Konstitutsiya va kodekslar bo'yicha tayyorlangan maxsus konspektlar va o'quv qo'llanmalari.</p>
+        <span class="feature-link">O'qish <i class="fa-solid fa-chevron-right"></i></span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT SECTION -->
-<section class="about">
-  <div class="about-card">
-    <h2 id="about-title"><i class="fa-solid fa-user-graduate"></i> Men haqimda</h2>
-    <p id="about-desc">
-      Men Zokirjon. Xalqaro huquq yo'nalishida tahsil olaman.
-      Huquq Ustoz loyihasi orqali talabalar, abituriyentlar va barcha fuqarolar uchun
-      huquqiy bilimlarni sodda, tushunarli va ishonchli shaklda taqdim etaman.
-      Kelajakda ushbu saytda elektron kutubxona, qonunlar bazasi,
-      AI huquqiy yordamchi va bepul o'quv materiallari joylashtiriladi.
-    </p>
+<!-- 5. AUTHOR SECTION (Profil) -->
+<section class="author-section">
+  <div class="container">
+    <div class="author-card">
+      <div class="author-avatar-box">
+        <img src="huquq.jpg" alt="Zokirjon Komilov" class="author-img">
+        <h3 class="author-name">Zokirjon</h3>
+        <p class="author-role">Huquq Ustoz loyihasi asoschisi</p>
+      </div>
+      <div class="author-bio">
+        <h2>Men haqimda</h2>
+        <p>Men Zokirjon. Xalqaro huquq yo‘nalishida tahsil olaman. Huquq Ustoz loyihasi orqali talabalar, abituriyentlar va barcha fuqarolar uchun huquqiy bilimlarni sodda, tushunarli va ishonchli shaklda taqdim etishni maqsad qilganman. Bu loyiha huquqiy savodxonlikni oshirish va sifatli ta'lim resurslarini bir joyda jamlashga xizmat qiladi.</p>
+      </div>
+    </div>
   </div>
 </section>
 
