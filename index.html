@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huquq Ustoz — 3D Huquqiy Ta'lim Platformasi</title>
+<title>Huquq Ustoz — Huquqiy Ta'lim Ekotizimi</title>
 
 <!-- SEO & Social Meta Tags -->
 <meta name="description" content="Huquqiy savodxonlik, interaktiv quizlar, yuridik lug'at va elektron kutubxona platformasi.">
@@ -13,21 +13,21 @@
 <meta property="og:image" content="huquq.jpg">
 <link rel="icon" type="image/jpeg" href="huquq.jpg">
 
-<!-- Google Fonts & FontAwesome -->
+<!-- Google Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&family=Satoshi:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Three.js 3D Engine -->
+<!-- Three.js Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<!-- External Flashcard CSS -->
+<!-- Flashcard CSS -->
 <link rel="stylesheet" href="css/flashcard.css">
 
 <style>
 /* ==========================================================================
-   HUQUQ USTOZ — DESIGN SYSTEM V3.0 (3D EXECUTIVE NAVY & GOLD)
+   HUQUQ USTOZ — DESIGN SYSTEM V3.5 (PRO EDTECH EDITION)
    ========================================================================== */
 
 :root {
@@ -38,7 +38,7 @@
   --surface-nav: rgba(17, 24, 39, 0.85);
   --surface-card: #151F32;
   --border-subtle: #263247;
-  --border-gold-glow: rgba(245, 184, 46, 0.4);
+  --border-gold-glow: rgba(245, 184, 46, 0.45);
 
   --primary-gold: #F5B82E;
   --primary-gold-hover: #e0a322;
@@ -49,8 +49,8 @@
   --radius-btn: 12px;
   --radius-pill: 9999px;
 
-  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 4px 20px rgba(245, 184, 46, 0.25);
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-gold: 0 4px 20px rgba(245, 184, 46, 0.3);
   --blur-glass: blur(16px);
 }
 
@@ -66,9 +66,35 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  position: relative;
 }
 
-.container { width: 90%; max-width: 1240px; margin: 0 auto; }
+/* DYNAMIC AMBIENT GLOW SPHERES */
+.glow-sphere-1 {
+  position: absolute;
+  top: -100px;
+  right: -50px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(245, 184, 46, 0.12) 0%, rgba(0,0,0,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-sphere-2 {
+  position: absolute;
+  top: 40%;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(0,0,0,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container { width: 90%; max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
 
 /* NAVBAR */
 header {
@@ -92,6 +118,7 @@ header {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--primary-gold);
+  box-shadow: 0 0 15px rgba(245, 184, 46, 0.3);
 }
 .logo h2 {
   font-family: var(--font-heading);
@@ -116,10 +143,39 @@ header {
 }
 .nav-menu a:hover, .nav-menu a.active {
   color: var(--primary-gold);
-  background: rgba(245, 184, 46, 0.06);
+  background: rgba(245, 184, 46, 0.08);
 }
 
 .nav-right { display: flex; align-items: center; gap: 12px; }
+
+/* SEARCH TRIGGER BUTTON */
+.search-trigger-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+.search-trigger-btn:hover {
+  border-color: var(--primary-gold);
+  color: var(--text-main);
+}
+.search-trigger-btn kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  color: var(--primary-gold);
+}
+
 .social-icons { display: flex; align-items: center; gap: 8px; }
 .social-btn {
   width: 36px;
@@ -335,6 +391,100 @@ header {
 .author-bio h2 { font-family: var(--font-heading); font-size: 28px; font-weight: 800; margin-bottom: 16px; }
 .author-bio p { color: var(--text-muted); font-size: 15px; line-height: 1.8; }
 
+/* GLOBAL SEARCH MODAL (CTRL+K) */
+.search-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 13, 24, 0.85);
+  backdrop-filter: blur(20px);
+  z-index: 3000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.search-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-container {
+  width: 90%;
+  max-width: 650px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-gold-glow);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+.search-modal.active .search-container {
+  transform: translateY(0);
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 14px;
+}
+
+.search-header i { font-size: 20px; color: var(--primary-gold); }
+.search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-size: 16px;
+  font-family: var(--font-body);
+}
+
+.search-results {
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: background 0.2s ease;
+}
+
+.search-item:hover {
+  background: rgba(245, 184, 46, 0.08);
+}
+
+.search-item-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--primary-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-item-title { font-weight: 600; font-size: 15px; }
+.search-item-desc { font-size: 12px; color: var(--text-muted); }
+
 footer {
   margin-top: auto;
   padding: 30px 0;
@@ -364,6 +514,9 @@ footer {
 </head>
 <body>
 
+<div class="glow-sphere-1"></div>
+<div class="glow-sphere-2"></div>
+
 <!-- NAVBAR -->
 <header>
   <div class="container nav">
@@ -381,6 +534,9 @@ footer {
     </div>
     
     <div class="nav-right">
+      <button class="search-trigger-btn" id="searchTriggerBtn">
+        <i class="fa-solid fa-magnifying-glass"></i> Qidiruv <kbd>Ctrl+K</kbd>
+      </button>
       <button class="sirli-btn" id="openSirliBtn">
         <i class="fa-solid fa-lock-open"></i> Sirli Sahifa
       </button>
@@ -392,6 +548,39 @@ footer {
     </div>
   </div>
 </header>
+
+<!-- GLOBAL SEARCH MODAL -->
+<div class="search-modal" id="searchModal">
+  <div class="search-container">
+    <div class="search-header">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" class="search-input" id="searchInput" placeholder="Bo'limlar, testlar yoki moddalardan qidiring...">
+    </div>
+    <div class="search-results" id="searchResults">
+      <a href="kutubxona.html" class="search-item">
+        <div class="search-item-icon"><i class="fa-solid fa-book-open"></i></div>
+        <div>
+          <div class="search-item-title">Elektron Kutubxona</div>
+          <div class="search-item-desc">8-11 sinf darsliklari va kodekslar</div>
+        </div>
+      </a>
+      <a href="quiz.html" class="search-item">
+        <div class="search-item-icon"><i class="fa-solid fa-circle-question"></i></div>
+        <div>
+          <div class="search-item-title">Test Sinovlari (Quiz)</div>
+          <div class="search-item-desc">Mavzuli interaktiv huquqiy testlar</div>
+        </div>
+      </a>
+      <a href="dictionary.html" class="search-item">
+        <div class="search-item-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <div class="search-item-title">Yuridik Lug'at</div>
+          <div class="search-item-desc">Huquqiy atamalarning izohli bazasi</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- SIRLI SAHIFA FLASHCARD MODAL -->
 <div class="flashcard-modal" id="flashcardModal">
@@ -516,7 +705,6 @@ footer {
 <script src="data/quotes.js"></script>
 <script src="js/flashcard.js"></script>
 
-<!-- 3D SCENE & INTERACTIVE TILT SCRIPT -->
 <script>
 // 1. THREE.JS 3D SCALES OF JUSTICE INITIALIZATION
 (function init3DHero() {
@@ -531,7 +719,6 @@ footer {
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Lights
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambientLight);
 
@@ -543,35 +730,29 @@ footer {
   pointLight.position.set(-5, -5, 2);
   scene.add(pointLight);
 
-  // Group
   const group = new THREE.Group();
   scene.add(group);
 
-  // Gold Material
   const goldMaterial = new THREE.MeshStandardMaterial({
     color: 0xf5b82e,
     metalness: 0.8,
     roughness: 0.25
   });
 
-  // Pillar Base
   const baseGeo = new THREE.CylinderGeometry(1.6, 1.8, 0.3, 32);
   const baseMesh = new THREE.Mesh(baseGeo, goldMaterial);
   baseMesh.position.y = -2.2;
   group.add(baseMesh);
 
-  // Pillar Column
   const colGeo = new THREE.CylinderGeometry(0.18, 0.28, 4.2, 32);
   const colMesh = new THREE.Mesh(colGeo, goldMaterial);
   group.add(colMesh);
 
-  // Horizontal Beam
   const beamGeo = new THREE.BoxGeometry(4.2, 0.15, 0.15);
   const beamMesh = new THREE.Mesh(beamGeo, goldMaterial);
   beamMesh.position.y = 1.9;
   group.add(beamMesh);
 
-  // Left & Right Plates
   const plateGeo = new THREE.CylinderGeometry(1.1, 0.9, 0.1, 32);
   
   const leftPlate = new THREE.Mesh(plateGeo, goldMaterial);
@@ -582,7 +763,6 @@ footer {
   rightPlate.position.set(2.1, 0.2, 0);
   group.add(rightPlate);
 
-  // Mouse tilt effect
   let mouseX = 0, mouseY = 0;
   window.addEventListener('mousemove', (e) => {
     mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
@@ -595,7 +775,6 @@ footer {
     group.rotation.x += (mouseY * 0.5 - group.rotation.x) * 0.05;
     group.rotation.y += (mouseX * 0.5 - group.rotation.y) * 0.05;
 
-    // Slight sway for plates
     const time = Date.now() * 0.002;
     leftPlate.position.y = 0.2 + Math.sin(time) * 0.08;
     rightPlate.position.y = 0.2 - Math.sin(time) * 0.08;
@@ -612,7 +791,39 @@ footer {
   });
 })();
 
-// 2. CSS 3D INTERACTIVE TILT CARDS
+// 2. CTRL+K GLOBAL SEARCH LOGIC
+(function initSearch() {
+  const searchModal = document.getElementById('searchModal');
+  const searchTriggerBtn = document.getElementById('searchTriggerBtn');
+  const searchInput = document.getElementById('searchInput');
+
+  function openSearch() {
+    searchModal.classList.add('active');
+    setTimeout(() => searchInput.focus(), 100);
+  }
+
+  function closeSearch() {
+    searchModal.classList.remove('active');
+  }
+
+  if (searchTriggerBtn) searchTriggerBtn.addEventListener('click', openSearch);
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      searchModal.classList.contains('active') ? closeSearch() : openSearch();
+    }
+    if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+      closeSearch();
+    }
+  });
+
+  searchModal.addEventListener('click', (e) => {
+    if (e.target === searchModal) closeSearch();
+  });
+})();
+
+// 3. CSS 3D TILT EFFECT
 document.querySelectorAll('.feature-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
